@@ -44,7 +44,13 @@ class HuntsController < ApplicationController
 
     respond_to do |format|
       if @hunt.save
-        format.html { render :partial => 'hunt' }
+        format.html { 
+          if request.xhr?
+            render :partial => 'hunt', :locals => { "hunt" => @hunt }
+          else
+            redirect_to(@hunt) 
+          end
+        }
         format.json  { render :json => @hunt, :status => :created, :location => @hunt }
       else
         format.html { render :action => "new" }
