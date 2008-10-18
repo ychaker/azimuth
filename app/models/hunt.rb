@@ -3,17 +3,15 @@ class Hunt < ActiveRecord::Base
   
   belongs_to :pirate
   
-  # caluculate the total possible points in a hunt
+  has_many :team_entry
+  has_many :teams, :through => :team_entry
+  
+  # calculate the total possible points in a hunt
   def total_points
     points = 0
-    if self.treasures.blank?
-      return 0
-    else
-      treasures.each {
-        |treasure|
-        points += treasure.points
-      }
-    end
+
+    treasures.each {|treasure| points += treasure.points } 
+    
     points
   end
     
