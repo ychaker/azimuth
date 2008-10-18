@@ -1,5 +1,6 @@
 class SmsController < ApplicationController
-  
+  protect_from_forgery :secret => 'b0a876313f3f9195e9bd01473bc5cd06', :except => :incoming
+    
   @username_entered = false
   @zeep_response = ""
   
