@@ -1,17 +1,17 @@
 development: &non_production_settings
   site_url: http://localhost:3000
-  site_name: Bort
-  admin_email: bort@bort.com
+  site_name: Azimuth
+  admin_email: ychaker@o19s.com
   
 test:
   <<: *non_production_settings
 
 staging:
-  site_url: http://staging.example.com
+  site_url: http://li47-74.members.linode.com/
   site_name: Bort
-  admin_email: bort@bort.com  
+  admin_email: ychaker@o19s.com
   
 production:
-  site_url: http://www.example.com
-  site_name: Bort
-  admin_email: bort@bort.com
+  site_url: http://li47-74.members.linode.com/
+  site_name: Azimuth
+  admin_email: ychaker@o19s.com
