@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :sms
+#  map.resources :sms
 
   map.resources :discoveries
 

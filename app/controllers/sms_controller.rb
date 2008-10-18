@@ -1,4 +1,8 @@
 class SmsController < ApplicationController
+  
+  @username_entered = false
+  @zeep_response = ""
+  
   # GET /sms
   # GET /sms.xml
   def index
@@ -13,10 +17,14 @@ class SmsController < ApplicationController
   # GET /sms/testloop.xml
   def testloop
     
-    respond_to do |format|
-      format.html # testloop.html.erb
-      format.xml  { render :xml => @sms }
-    end
+  end
+  
+  # GET /sms/enterusername
+  # GET /sms/enterusername.xml
+  def enterusername
+    @username_entered = true
+    session[:zeepusername] = params[:sms][:username]    
+    render :action => "testloop"
   end
   
   # GET /sms/incoming
@@ -37,10 +45,11 @@ class SmsController < ApplicationController
     require 'zeep/messaging'
 
     Zeep::Base.configure_credentials("f95aed9c-4cef-4cfa-ba53-4ce19992d22b", "509c32e2ef533f0e0966ee0ad7ed446c0cac469c")
-
-    Zeep::Messaging.send_message("asime", "'Hi Lauren!'")
+    Zeep::Messaging.send_message(session[:zeepusername], params[:sendmsg][:messagebody])
     
-    render :text => "hello sms test submit"
+    @zeep_response = "Message sent to #{session[:zeepusername]}!"
+    
+    render :action => "testloop"
     
   end
   
