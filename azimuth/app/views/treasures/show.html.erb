@@ -1,0 +1,58 @@
+<p>
+  <b>Name:</b>
+  <%=h @treasure.name %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%=h @treasure.image %>
+</p>
+
+<p>
+  <b>Clue:</b>
+  <%=h @treasure.clue %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @treasure.description %>
+</p>
+
+<p>
+  <b>Hunt:</b>
+  <%=h @treasure.hunt_id %>
+</p>
+
+<p>
+  <b>Order:</b>
+  <%=h @treasure.order %>
+</p>
+
+<p>
+  <b>Lat:</b>
+  <%=h @treasure.lat %>
+</p>
+
+<p>
+  <b>Lng:</b>
+  <%=h @treasure.lng %>
+</p>
+
+<p>
+  <b>Proximity:</b>
+  <%=h @treasure.proximity %>
+</p>
+
+<p>
+  <b>Points:</b>
+  <%=h @treasure.points %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%=h @treasure.password %>
+</p>
+
+
+<%= link_to 'Edit', edit_treasure_path(@treasure) %> |
+<%= link_to 'Back', treasures_path %>

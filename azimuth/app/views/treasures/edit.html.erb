@@ -1,0 +1,56 @@
+<h1>Editing treasure</h1>
+
+<% form_for(@treasure) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :image %><br />
+    <%= f.text_field :image %>
+  </p>
+  <p>
+    <%= f.label :clue %><br />
+    <%= f.text_field :clue %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :hunt_id %><br />
+    <%= f.text_field :hunt_id %>
+  </p>
+  <p>
+    <%= f.label :order %><br />
+    <%= f.text_field :order %>
+  </p>
+  <p>
+    <%= f.label :lat %><br />
+    <%= f.text_field :lat %>
+  </p>
+  <p>
+    <%= f.label :lng %><br />
+    <%= f.text_field :lng %>
+  </p>
+  <p>
+    <%= f.label :proximity %><br />
+    <%= f.text_field :proximity %>
+  </p>
+  <p>
+    <%= f.label :points %><br />
+    <%= f.text_field :points %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @treasure %> |
+<%= link_to 'Back', treasures_path %>

@@ -1,0 +1,28 @@
+<h1>Editing discovery</h1>
+
+<% form_for(@discovery) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :treasure_id %><br />
+    <%= f.text_field :treasure_id %>
+  </p>
+  <p>
+    <%= f.label :lat %><br />
+    <%= f.text_field :lat %>
+  </p>
+  <p>
+    <%= f.label :lng %><br />
+    <%= f.text_field :lng %>
+  </p>
+  <p>
+    <%= f.label :proof_of_life %><br />
+    <%= f.text_field :proof_of_life %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @discovery %> |
+<%= link_to 'Back', discoveries_path %>

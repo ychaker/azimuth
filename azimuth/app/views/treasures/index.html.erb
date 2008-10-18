@@ -1,0 +1,40 @@
+<h1>Listing treasures</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Image</th>
+    <th>Clue</th>
+    <th>Description</th>
+    <th>Hunt</th>
+    <th>Order</th>
+    <th>Lat</th>
+    <th>Lng</th>
+    <th>Proximity</th>
+    <th>Points</th>
+    <th>Password</th>
+  </tr>
+
+<% for treasure in @treasures %>
+  <tr>
+    <td><%=h treasure.name %></td>
+    <td><%=h treasure.image %></td>
+    <td><%=h treasure.clue %></td>
+    <td><%=h treasure.description %></td>
+    <td><%=h treasure.hunt_id %></td>
+    <td><%=h treasure.order %></td>
+    <td><%=h treasure.lat %></td>
+    <td><%=h treasure.lng %></td>
+    <td><%=h treasure.proximity %></td>
+    <td><%=h treasure.points %></td>
+    <td><%=h treasure.password %></td>
+    <td><%= link_to 'Show', treasure %></td>
+    <td><%= link_to 'Edit', edit_treasure_path(treasure) %></td>
+    <td><%= link_to 'Destroy', treasure, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New treasure', new_treasure_path %>

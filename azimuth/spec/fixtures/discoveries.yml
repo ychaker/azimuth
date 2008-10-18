@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  treasure_id: 1
+  lat: 1.5
+  lng: 1.5
+  proof_of_life: MyString
+
+two:
+  treasure_id: 1
+  lat: 1.5
+  lng: 1.5
+  proof_of_life: MyString

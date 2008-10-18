@@ -1,0 +1,26 @@
+<h1>Listing discoveries</h1>
+
+<table>
+  <tr>
+    <th>Treasure</th>
+    <th>Lat</th>
+    <th>Lng</th>
+    <th>Proof of life</th>
+  </tr>
+
+<% for discovery in @discoveries %>
+  <tr>
+    <td><%=h discovery.treasure_id %></td>
+    <td><%=h discovery.lat %></td>
+    <td><%=h discovery.lng %></td>
+    <td><%=h discovery.proof_of_life %></td>
+    <td><%= link_to 'Show', discovery %></td>
+    <td><%= link_to 'Edit', edit_discovery_path(discovery) %></td>
+    <td><%= link_to 'Destroy', discovery, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New discovery', new_discovery_path %>
