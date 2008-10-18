@@ -32,7 +32,7 @@ class SmsController < ApplicationController
   # GET /sms/incoming.xml
   def incoming    
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
-    render :text => "your next clue is: golden balls"
+    render :text => "User: #{params[:user_id]}, Success!  Your next clue is: golden balls"
   end
 
   # GET /sms/send_sms
