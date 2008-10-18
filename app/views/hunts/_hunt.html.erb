@@ -1,0 +1,7 @@
+<h2><%= hunt.name %></h2>
+<ul id="treasure-list">
+  <% hunt.treasures.each do |treasure| %>
+    <li><%= treasure.name %></li>
+  <% end %>
+  Select a location on the map to hide your treasure
+</ul>

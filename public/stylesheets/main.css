@@ -15,7 +15,6 @@ div {
 }
 
 #ul {
-
 }
 
 form ul {
@@ -26,11 +25,16 @@ form ul {
 
 #map {
 	float: left;
+	border: 1px solid black;
+}
+
+#hunt-new {
+	display:none;
 }
 
 #treasures {
 	padding: 5px;
-	border: 1px solid black;
+/*	border: 1px solid black;*/
 	float: left;
 	margin-left: 10px;
 	width: 35%;
