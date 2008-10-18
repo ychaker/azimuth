@@ -75,13 +75,13 @@ describe HuntsController do
     describe "with valid params" do
       
       it "should expose a newly created hunt as @hunt" do
-        Hunt.should_receive(:new).with({'these' => 'params'}).and_return(mock_hunt(:save => true))
+        Hunt.should_receive(:new).with({'these' => 'params'}).and_return(mock_hunt(:save => true, :name => "bob", :treasures => []))
         post :create, :hunt => {:these => 'params'}
         assigns(:hunt).should equal(mock_hunt)
       end
 
       it "should redirect to the created hunt" do
-        Hunt.stub!(:new).and_return(mock_hunt(:save => true))
+        Hunt.stub!(:new).and_return(mock_hunt(:save => true, :name => "bob", :treasures => []))
         post :create, :hunt => {}
         response.should redirect_to(hunt_url(mock_hunt))
       end

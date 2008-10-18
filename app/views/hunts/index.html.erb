@@ -9,9 +9,11 @@
 <% for hunt in @hunts %>
   <tr>
     <td><%=h hunt.name %></td>
-    <td><% for each in hunt.treasures %>
+    <td>
+    <% for each in hunt.treasures %>
         <%= link_to each.name, each %><br/>
-    <% end unless hunt.treasures.blank? %></td>
+    <% end unless hunt.treasures.blank? %>
+    </td>
     <td><%= link_to 'Show', hunt %></td>
     <td><%= link_to 'Edit', edit_hunt_path(hunt) %></td>
     <td><%= link_to 'Destroy', hunt, :confirm => 'Are you sure?', :method => :delete %></td>
