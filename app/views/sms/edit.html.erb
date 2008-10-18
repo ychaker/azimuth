@@ -1,0 +1,12 @@
+<h1>Editing sms</h1>
+
+<% form_for(@sms) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @sms %> |
+<%= link_to 'Back', sms_path %>

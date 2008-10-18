@@ -64,4 +64,6 @@ config.gem "capistrano-ext", :lib => "capistrano"
 
   # Activate observers that should always be running
   config.active_record.observers = :user_observer
+  
+  config.gem "zeep-messaging", :lib => 'zeep/messaging'
 end

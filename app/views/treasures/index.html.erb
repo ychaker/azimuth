@@ -21,16 +21,27 @@
     <td><%=h treasure.image %></td>
     <td><%=h treasure.clue %></td>
     <td><%=h treasure.description %></td>
-    <td><%=h treasure.hunt_id %></td>
-    <td><%=h treasure.order %></td>
+    <td><%=h treasure.hunt.name %></td>
+    <td><%=h treasure.position %></td>
     <td><%=h treasure.lat %></td>
     <td><%=h treasure.lng %></td>
     <td><%=h treasure.proximity %></td>
     <td><%=h treasure.points %></td>
     <td><%=h treasure.password %></td>
+    <% unless treasure.first? %>
+      <td><%=link_to image_tag("up_arrow.gif", :border=>0), :action => "move_up", :id => treasure %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+    <% unless treasure.last? %>
+      <td><%=link_to image_tag("down_arrow.gif", :border=>0), :action => "move_down", :id => treasure %></td>
+    <% else %>
+      <td></td>
+    <% end %>
     <td><%= link_to 'Show', treasure %></td>
     <td><%= link_to 'Edit', edit_treasure_path(treasure) %></td>
-    <td><%= link_to 'Destroy', treasure, :confirm => 'Are you sure?', :method => :delete %></td>
+    
+    <td><%= link_to  image_tag("delete.gif", :border=>0), treasure, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

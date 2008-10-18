@@ -1,0 +1,80 @@
+require 'rake'
+require 'rake/gempackagetask'
+require 'rake/rdoctask'
+require 'rake/testtask'
+
+require 'fileutils'
+include FileUtils
+
+NAME = "zeep-messaging"
+REV = `svn info`[/Revision: (\d+)/, 1] rescue nil
+VERS = ENV['VERSION'] || "0.1" + (REV ? ".#{REV}" : "")
+PKG = "#{NAME}-#{VERS}"
+BIN = "*.{bundle,jar,so,obj,pdb,lib,def,exp}"
+RDOC_OPTS = ['--quiet', '--title', 'Zeep Mobile Messaging Cient', '--main', 'README', '--inline-source']
+PKG_FILES = %w(CHANGELOG LICENSE README Rakefile)
+SPEC = Gem::Specification.new do |spec|
+  spec.name = NAME
+  spec.version = VERS
+  spec.platform = Gem::Platform::RUBY
+  spec.has_rdoc = true
+  spec.rdoc_options += RDOC_OPTS
+  spec.extra_rdoc_files = ["README", "CHANGELOG", "LICENSE"]
+  spec.summary = "A client library for Zeep Mobile's Messaging API."
+  spec.description = spec.summary
+  spec.author = "Zeep Mobile"
+  spec.email = 'simon@zeepmobile.com'
+  spec.homepage = 'http://code.google.com/p/zeep-messaging/'
+  spec.files = FileList['lib/**/*.rb', 'test/**'].to_a + PKG_FILES
+  spec.require_paths = ["lib"] 
+  spec.bindir = "bin"
+end
+
+
+desc "Packages up zeep-messaging."
+task :package
+
+Rake::RDocTask.new do |rdoc|
+  rdoc.rdoc_dir = 'doc/rdoc'
+  rdoc.options += RDOC_OPTS
+  rdoc.main = "README"
+  rdoc.rdoc_files.add ['README', 'CHANGELOG', 'LICENSE', 'lib/**/*.rb']
+end
+
+Rake::GemPackageTask.new(SPEC) do |p|
+  p.need_tar = true
+  p.gem_spec = SPEC
+end
+
+task "lib" do
+  directory 'lib'
+end
+
+task :install do
+  sh %{rake package}
+  sh %{sudo gem install pkg/#{NAME}-#{VERS}}
+end
+
+task :uninstall => [:clean] do
+  sh %{sudo gem uninstall #{NAME}}
+end
+
+desc "Run the tests"
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
+end
+
+namespace :test do
+  desc 'Measures test coverage'
+  task :coverage do
+    rm_f "coverage"
+    rm_f "coverage.data"
+    rcov = "rcov --rails --aggregate coverage.data --text-summary -Ilib"
+    system("#{rcov} --html test/auth/*_test.rb test/messaging/*_test.rb")
+    system("open coverage/index.html") if PLATFORM['darwin']
+  end
+end
+
+

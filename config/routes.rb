@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :sms
+
   map.resources :discoveries
 
   map.resources :treasures
