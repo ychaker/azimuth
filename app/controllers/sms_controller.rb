@@ -30,7 +30,8 @@ class SmsController < ApplicationController
   
   # GET /sms/incoming
   # GET /sms/incoming.xml
-  def incoming
+  def incoming    
+    response.headers["Content-Type"] = "text/plain; charset=utf-8"
     render :text => "your next clue is: golden balls"
   end
 
