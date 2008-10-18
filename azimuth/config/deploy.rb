@@ -2,9 +2,9 @@ default_run_options[:pty] = true
 set :application, "azimuth"
 set :repository, "git@github.com:railsrumble/team-o19s.git"
 
-role :app, "li47-74.members.linode.com"
-role :web, "li47-74.members.linode.com"
-role :db, "li47-74.members.linode.com", :primary => true
+role :app, "ychaker@li47-74.members.linode.com"
+role :web, "ychaker@li47-74.members.linode.com"
+role :db, "ychaker@li47-74.members.linode.com", :primary => true
 
 set :deploy_to, "/var/www/apps/#{application}"
 set :scm, :git
