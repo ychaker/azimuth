@@ -21,11 +21,8 @@
   </p>
   <p>
     <%= f.label :hunt_id %><br />
-    <%= f.text_field :hunt_id %>
-  </p>
-  <p>
-    <%= f.label :position %><br />
-    <%= f.text_field :position %>
+    <%= f.select (:hunt_id, Hunt.find(:all).collect {|p| [ p.name, p.id ] },
+                          {:include_blank => false, :prompt => "Select a hunt"}) %>
   </p>
   <p>
     <%= f.label :lat %><br />

@@ -41,6 +41,8 @@ class TreasuresController < ApplicationController
   # POST /treasures.xml
   def create
     @treasure = Treasure.new(params[:treasure])
+    hunt = Hunt.find(@treasure.hunt_id)
+    hunt.treasures << @treasure
 
     respond_to do |format|
       if @treasure.save
