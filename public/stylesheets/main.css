@@ -75,7 +75,7 @@ h2 {
 }
 
 #header {
-    background-color: rgb(198, 207, 213);
+    background-color: #596166;
 }
 
 #top, #bottom {
@@ -147,7 +147,7 @@ label {
 .main_tabnav_content {
 	background: #FFFFFF;
 	padding: 20px;
-	border: 2px solid black;
+/*	border: 2px solid black;*/
 	border-top: none;
 	z-index: 2;
 }
