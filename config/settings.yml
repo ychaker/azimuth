@@ -1,7 +1,7 @@
 development: &non_production_settings
   site_url: http://localhost:3000
   site_name: Azimuth
-  admin_email: ychaker@o19s.com
+  admin_email: railsrumble@opensourceconnections.com
   
 test:
   <<: *non_production_settings
@@ -9,9 +9,9 @@ test:
 staging:
   site_url: http://li47-74.members.linode.com/
   site_name: Bort
-  admin_email: ychaker@o19s.com
+  admin_email: railsrumble@opensourceconnections.com
   
 production:
   site_url: http://li47-74.members.linode.com/
   site_name: Azimuth
-  admin_email: ychaker@o19s.com
+  admin_email: railsrumble@opensourceconnections.com
