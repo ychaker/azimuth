@@ -2,7 +2,7 @@ class TreasuresController < ApplicationController
   # GET /treasures
   # GET /treasures.xml
   def index
-    @treasures = Treasure.find(:all)
+    @treasures = Treasure.find(:all, :order => "position")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -80,6 +80,34 @@ class TreasuresController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(treasures_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  # Move the mapping up in the list of priorities
+  def move_up
+    @treasure = Treasure.find_by_id(params[:id])
+    @treasure.move_higher
+    respond_to do |format|
+      if @treasure.save
+        flash[:notice] = 'Treasure was successfully updated.'
+        format.html { redirect_to :action => :index}
+      else
+        format.html { render :action => "index" }
+      end
+    end
+  end
+  
+  # Move the mapping down in the list of priorities
+  def move_down
+    @treasure = Treasure.find_by_id(params[:id])
+    @treasure.move_lower
+    respond_to do |format|
+      if @treasure.save
+        flash[:notice] = 'Treasure was successfully updated.'
+        format.html { redirect_to :action => :index}
+      else
+        format.html { render :action => "index" }
+      end
     end
   end
 end
