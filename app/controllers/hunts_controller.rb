@@ -44,12 +44,11 @@ class HuntsController < ApplicationController
 
     respond_to do |format|
       if @hunt.save
-        flash[:notice] = 'Hunt was successfully created.'
-        format.html { redirect_to(@hunt) }
-        format.xml  { render :xml => @hunt, :status => :created, :location => @hunt }
+        format.html { render :partial => 'hunt' }
+        format.json  { render :json => @hunt, :status => :created, :location => @hunt }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @hunt.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @hunt.errors, :status => :unprocessable_entity }
       end
     end
   end
