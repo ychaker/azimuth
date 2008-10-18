@@ -4,12 +4,13 @@
 <div id="map" style="width: 60%; height: 100%"></div>
 
 <div id="treasures">
-  <h2>Treasures</h2>
-  <ul id="treasure-list">
-    <li>Treasure 1</li>
-    <li>Treasure 2</li>
-    <li>Treasure 3</li>
-    <li>Treasure 4</li>
-  </ul>
+  <a href="#" id="hunt-new-link">new treasure hunt</a>
+  <div id="hunt-new">
+    <label for="hunt-new-name">New Treasure Hunt's Name</label><input id="hunt-new-name">
+    <input type="button" id="hunt-new-submit" value="Create">
+  </div>
+  <div id="current-hunt">
+    <%= render(:partial => '/hunts/hunt', :locals => { :hunt => @hunt }) if @hunt %>    
+  </div>
 </div>
 <%= javascript_include_tag 'pirate' %>

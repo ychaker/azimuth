@@ -1,10 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
-#  map.resources :sms
 
+  map.resources :teams
   map.resources :discoveries
-
   map.resources :treasures
-
   map.resources :hunts
  
   # Restful Authentication Rewrites

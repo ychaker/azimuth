@@ -1,6 +1,8 @@
 class Hunt < ActiveRecord::Base
   has_many :treasures, :dependent => :destroy, :order => "position"
   
+  belongs_to :pirate
+  
   # caluculate the total possible points in a hunt
   def total_points
     points = 0
