@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :teams
+
   map.resources :sms
 
   map.resources :discoveries

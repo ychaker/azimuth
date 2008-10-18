@@ -14,6 +14,8 @@ describe TreasureHunter do
     user.should be_an_instance_of(TreasureHunter)
     
     user.type.to_s.should == "TreasureHunter"
+    
+    user.code_name.should == user.login
   end
   
   it "should not have the role of hunt_editor automatically" do
@@ -31,6 +33,18 @@ describe TreasureHunter do
     hunter = create_treasure_hunter
     hunter.has_role?('treasure_hunter').should be_true
   end  
+  
+  it "should be able to join a team" do
+    team = Team.create!(:name => "A Team")
+    
+    hunter = create_treasure_hunter
+    team.treasure_hunters << hunter
+    
+    team.save!
+    
+    hunter.team.should == team
+    
+  end
   
 protected
   def create_treasure_hunter(options = {})
