@@ -10,7 +10,6 @@ describe "/treasures/edit.html.erb" do
       :image => "value for image",
       :clue => "value for clue",
       :description => "value for description",
-      :position => "1",
       :lat => "1.5",
       :lng => "1.5",
       :proximity => "1.5",
@@ -27,7 +26,6 @@ describe "/treasures/edit.html.erb" do
       with_tag('input#treasure_image[name=?]', "treasure[image]")
       with_tag('input#treasure_clue[name=?]', "treasure[clue]")
       with_tag('input#treasure_description[name=?]', "treasure[description]")
-      with_tag('input#treasure_position[name=?]', "treasure[position]")
       with_tag('input#treasure_lat[name=?]', "treasure[lat]")
       with_tag('input#treasure_lng[name=?]', "treasure[lng]")
       with_tag('input#treasure_proximity[name=?]', "treasure[proximity]")

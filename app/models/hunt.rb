@@ -1,5 +1,5 @@
 class Hunt < ActiveRecord::Base
-  has_many :treasures, :order => "position"
+  has_many :treasures, :dependent => :destroy, :order => "position"
   
   # caluculate the total possible points in a hunt
   def total_points

@@ -9,7 +9,7 @@ describe TreasuresController do
   describe "responding to GET index" do
 
     it "should expose all treasures as @treasures" do
-      Treasure.should_receive(:find).with(:all, :order => "position").and_return([mock_treasure])
+      Treasure.should_receive(:find).with(:all, :order => "hunt_id").and_return([mock_treasure])
       get :index
       assigns[:treasures].should == [mock_treasure]
     end
@@ -18,7 +18,7 @@ describe TreasuresController do
   
       it "should render all treasures as xml" do
         request.env["HTTP_ACCEPT"] = "application/xml"
-        Treasure.should_receive(:find).with(:all, :order => "position").and_return(treasures = mock("Array of Treasures"))
+        Treasure.should_receive(:find).with(:all, :order => "hunt_id").and_return(treasures = mock("Array of Treasures"))
         treasures.should_receive(:to_xml).and_return("generated XML")
         get :index
         response.body.should == "generated XML"

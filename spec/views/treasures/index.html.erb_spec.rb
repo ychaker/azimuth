@@ -4,6 +4,11 @@ describe "/treasures/index.html.erb" do
   include TreasuresHelper
   
   before(:each) do
+    assigns[:hunts] = [
+      stub_model(Hunt,
+        :name => "Hunt"
+      )
+    ]
     assigns[:treasures] = [
       stub_model(Treasure,
         :name => "value for name",
