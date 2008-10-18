@@ -9,14 +9,41 @@ class SmsController < ApplicationController
     end
   end
 
+  # GET /sms/testloop
+  # GET /sms/testloop.xml
+  def testloop
+    
+    respond_to do |format|
+      format.html # testloop.html.erb
+      format.xml  { render :xml => @sms }
+    end
+  end
+  
+  # GET /sms/incoming
+  # GET /sms/incoming.xml
+  def incoming
+    
+    respond_to do |format|
+      format.html # incoming.html.erb
+      format.xml  { render :xml => @sms }
+    end
+  end
+
   # GET /sms/send_sms
   # GET /sms/send_sms.xml
   def send_sms
     
+    require 'rubygems' # Only required if you've installed the gem version
+    require 'zeep/messaging'
+
+    Zeep::Base.configure_credentials("f95aed9c-4cef-4cfa-ba53-4ce19992d22b", "509c32e2ef533f0e0966ee0ad7ed446c0cac469c")
+
+    Zeep::Messaging.send_message("asime", "'Hi Lauren!'")
+    
     render :text => "hello sms test submit"
     
   end
-
+  
   # GET /sms/1
   # GET /sms/1.xml
   def show
