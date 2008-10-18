@@ -1,8 +1,7 @@
 <%= title "Login", :h2 %>
 <% form_tag session_path do %>
 	<fieldset>
-		<legend>Your Details</legend>
-		<ol>
+		<ul>
 			<li>
 				<%= label_tag 'login', 'Username' %>
 				<%= text_field_tag 'login', @login %>
@@ -15,16 +14,16 @@
 				<%= label_tag 'remember_me', 'Remember me' %>
 				<%= check_box_tag 'remember_me', '1', @remember_me %>
 			</li>
-		</ol>
+		</ul>
 	</fieldset>
 	<fieldset>
 		<legend>Login with OpenID</legend>
-		<ol>
+		<ul>
 			<li>
 				<%= label_tag 'openid_url', 'OpenID URL' %>
 				<%= text_field_tag 'openid_url' %>
 			</li>
-		</ol>
+		</ul>
 	</fieldset>
 	<div class="buttons">
 		<%= submit_tag 'Login' %>

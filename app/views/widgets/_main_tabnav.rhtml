@@ -32,6 +32,31 @@ render_tabnav :main,
 
   #add_tab :name => 'Treasure Hunters', :link => {:controller=>'treasure_hunters'}
 
+  add_tab do |t|
+     t.named "Hide Treasure"
+     t.links_to :controller => 'pirate'
+  end
+
+  add_tab do |t|
+     t.named "Find Treasure"
+     t.links_to :controller => 'hunter'
+  end
+
+
+  add_tab do |t|
+     t.named "Logout"
+     t.links_to logout_path
+  end if logged_in?
+
+  add_tab do |t|
+     t.named "Login"
+     t.links_to login_path
+  end unless logged_in?
+  add_tab do |t|
+     t.named "Signup"
+     t.links_to signup_path
+  end unless logged_in?
+
   #add_tab do |t|
   #  t.named 'Home'
   #  t.titled 'Home Page'

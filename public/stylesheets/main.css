@@ -1,30 +1,12 @@
 body {
     font-family:  Georgia, "Constantia", "Times New Roman", Times, serif;
-}
-
-#d1, #d2, #d3, #d4 {
-    width: 50px;
-    height: 50px;
-}
-
-#d1 {
-    background-color: rgb(217, 225, 217);
-}
-#d2 {
-    background-color: rgb(162, 178, 177); /* green hue */
-}
-#d3 {
-    background-color: rgb(214, 200, 204);
-}
-#d4 {
-    background-color: rgb(198, 207, 213);
+	margin: 0;
 }
 
 div {
-/*    border: 1px solid black;*/
 }
 
-#top, #content, #bottom {
+#header, #content, #bottom {
     padding: 10px;
 }
 
@@ -33,26 +15,135 @@ div {
 }
 
 #ul {
-    
+
 }
 
-li {
-    
+form ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#map {
+	float: left;
+}
+
+#treasures {
+	padding: 5px;
+	border: 1px solid black;
+	float: left;
+	margin-left: 10px;
+	width: 35%;
+}
+
+#treasures ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+form ul li {
+	padding: 5px;
+}
+
+form label {
+}
+
+fieldset {
+	border: 0px;
+}
+
+legend {
+/*	border: 1px solid black;*/
 }
 
 h1 {
-    font-size: 24pt;
+    font-size: 200%;
+}
+
+h2 {
+	font-size: 150%;
 }
 
 #content {
     height: 400px;
-    background-color: rgb(217, 225, 217)
+    background-color: #D1FFCD;
 }
 
-#bottom {
+#header {
     background-color: rgb(198, 207, 213);
 }
 
 #top, #bottom {
     height: 100px;
+}
+
+form > li {
+	padding: 20px;
+}
+
+label {
+	width: 150px;
+	display: block;
+}
+
+
+
+.main_tabnav {
+	color: #000;
+	margin: 13px 0px 0px 0px;
+	padding: 0px;
+	z-index: 1;
+	padding-left: 10px }
+
+.main_tabnav ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+.main_tabnav li {
+	display: inline;
+	overflow: hidden;
+	list-style-type: none; }
+
+.main_tabnav li span.disabled {
+/*        color: #888888;*/
+        background: #948A54;
+        border-bottom: none;
+        padding: 2px 5px 0px 5px;
+        margin: 0;
+        text-decoration: none;
+}
+
+.main_tabnav a, main_tabnav a.active {
+	color: #000000;
+    background-color: rgb(217, 225, 217);
+	font-weight: bold;
+	padding: 2px 5px 0px 5px;
+	margin: 0;
+	text-decoration: none; 
+}
+
+.main_tabnav a.active {
+	background-color: #948A54;
+	color: #D1FFCD;
+}
+
+.main_tabnav a:hover {
+	color: #FFFFFF;
+	background: #CCCCCC; 
+}
+
+/*.main_tabnav a.active:hover {
+	background: #FFFFFF;
+	color: #000000; 
+}
+*/
+
+.main_tabnav_content {
+	background: #FFFFFF;
+	padding: 20px;
+	border: 2px solid black;
+	border-top: none;
+	z-index: 2;
 }
