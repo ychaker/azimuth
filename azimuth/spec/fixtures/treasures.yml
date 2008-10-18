@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  image: MyString
+  clue: MyString
+  description: MyString
+  hunt_id: 1
+  order: 1
+  lat: 1.5
+  lng: 1.5
+  proximity: 1.5
+  points: 
+  password: MyString
+
+two:
+  name: MyString
+  image: MyString
+  clue: MyString
+  description: MyString
+  hunt_id: 1
+  order: 1
+  lat: 1.5
+  lng: 1.5
+  proximity: 1.5
+  points: 
+  password: MyString

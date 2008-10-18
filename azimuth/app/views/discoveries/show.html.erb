@@ -1,0 +1,23 @@
+<p>
+  <b>Treasure:</b>
+  <%=h @discovery.treasure_id %>
+</p>
+
+<p>
+  <b>Lat:</b>
+  <%=h @discovery.lat %>
+</p>
+
+<p>
+  <b>Lng:</b>
+  <%=h @discovery.lng %>
+</p>
+
+<p>
+  <b>Proof of life:</b>
+  <%=h @discovery.proof_of_life %>
+</p>
+
+
+<%= link_to 'Edit', edit_discovery_path(@discovery) %> |
+<%= link_to 'Back', discoveries_path %>

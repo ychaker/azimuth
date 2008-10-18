@@ -1,0 +1,20 @@
+<h1>Listing hunts</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% for hunt in @hunts %>
+  <tr>
+    <td><%=h hunt.name %></td>
+    <td><%= link_to 'Show', hunt %></td>
+    <td><%= link_to 'Edit', edit_hunt_path(hunt) %></td>
+    <td><%= link_to 'Destroy', hunt, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New hunt', new_hunt_path %>
