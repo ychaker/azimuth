@@ -2,7 +2,7 @@ class TreasuresController < ApplicationController
   # GET /treasures
   # GET /treasures.xml
   def index
-    @treasures = Treasure.find(:all, :order => "position")
+    @treasures = Treasure.find(:all, :order => "hunt_id")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,8 +41,6 @@ class TreasuresController < ApplicationController
   # POST /treasures.xml
   def create
     @treasure = Treasure.new(params[:treasure])
-    hunt = Hunt.find(@treasure.hunt_id)
-    hunt.treasures << @treasure
 
     respond_to do |format|
       if @treasure.save

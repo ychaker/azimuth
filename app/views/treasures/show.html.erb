@@ -20,7 +20,7 @@
 
 <p>
   <b>Hunt:</b>
-  <%=h @treasure.hunt.name%>
+  <%=h @treasure.hunt.name unless @treasure.hunt.blank? %>
 </p>
 
 <p>

@@ -22,6 +22,18 @@ describe Hunt do
     points = hunt.total_points
     points.should == t_two.points + t_one.points
   end
+  
+  it "should delete associated treasures" do
+    hunt = hunts(:one)
+    t_one = treasures(:one)
+    t_two = treasures(:two)
+    name = t_one.name
+    hunt.treasures << t_one
+    hunt.treasures << t_two
+    hunt.save
+    hunt.destroy
+    Treasure.find_by_name(name).should be_nil
+  end
 end
 
 describe "Eric, Youssef and Ashish want to do a treasure hunt" do

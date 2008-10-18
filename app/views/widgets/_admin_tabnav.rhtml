@@ -17,13 +17,19 @@ render_tabnav :admin,
   # this generates a tab for every controller in your app
   # you'll probably want to delete this and
   # add tabs one by one as shown below
-  controller_names.each do |name|
-    add_tab do |t|
-      t.named name.camelize
-      t.titled "Go to #{name.camelize}"
-      t.links_to :controller => name
-    end
-  end 
+  add_tab :name => 'Users', :link => {:controller=>'users'}
+
+  add_tab :name => 'Hunts', :link => {:controller=>'hunts'}
+
+  add_tab :name => 'Treasures', :link => {:controller=>'treasures'}
+
+  #add_tab :name => 'SMS', :link => {:controller=>'sms'}
+
+  #add_tab :name => 'Discoveries', :link => {:controller=>'discoveries'}
+
+  #add_tab :name => 'Pirates', :link => {:controller=>'pirates'}
+
+  #add_tab :name => 'Treasure Hunters', :link => {:controller=>'treasure_hunters'}
          
   #add_tab do |t|
   #  t.named 'Home'
