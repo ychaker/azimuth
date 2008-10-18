@@ -1,0 +1,34 @@
+development:
+  
+  # Mysql Settings
+  adapter: mysql
+  encoding: utf8
+  database: azimuth_development
+  username: rails
+  password: rails
+
+test:
+  
+  # Mysql Settings
+  adapter: mysql
+  encoding: utf8
+  database: azimuth_test
+  username: rails
+  password: rails
+
+staging:
+  # Mysql Settings
+  adapter: mysql
+  encoding: utf8
+  database: azimuth_staging
+  username: rails
+  password: rails
+
+production:
+  
+  # Mysql Settings
+  adapter: mysql
+  encoding: utf8
+  database: azimuth_production
+  username: rails
+  password: rails
