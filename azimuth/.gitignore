@@ -7,3 +7,4 @@ coverage
 db/*.sqlite3tmp
 log
 config/database.yml
+db/schema.rb
