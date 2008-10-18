@@ -9,7 +9,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080929171348) do
+ActiveRecord::Schema.define(:version => 20081018034018) do
+
+  create_table "discoveries", :force => true do |t|
+    t.integer  "treasure_id"
+    t.float    "lat"
+    t.float    "lng"
+    t.string   "proof_of_life"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hunts", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
@@ -50,8 +65,24 @@ ActiveRecord::Schema.define(:version => 20080929171348) do
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "treasures", :force => true do |t|
+    t.string   "name"
+    t.string   "image"
+    t.string   "clue"
+    t.string   "description"
+    t.integer  "hunt_id"
+    t.integer  "order"
+    t.float    "lat"
+    t.float    "lng"
+    t.float    "proximity"
+    t.integer  "points"
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
