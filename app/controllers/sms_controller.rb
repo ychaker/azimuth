@@ -30,11 +30,7 @@ class SmsController < ApplicationController
   # GET /sms/incoming
   # GET /sms/incoming.xml
   def incoming
-    
-    respond_to do |format|
-      format.html # incoming.html.erb
-      format.xml  { render :xml => @sms }
-    end
+    render :text => "your next clue is: golden balls"
   end
 
   # GET /sms/send_sms
