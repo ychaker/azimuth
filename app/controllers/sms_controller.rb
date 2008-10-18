@@ -44,7 +44,7 @@ class SmsController < ApplicationController
     require 'rubygems' # Only required if you've installed the gem version
     require 'zeep/messaging'
 
-    Zeep::Base.configure_credentials("f95aed9c-4cef-4cfa-ba53-4ce19992d22b", "509c32e2ef533f0e0966ee0ad7ed446c0cac469c")
+    Zeep::Base.configure_credentials("4e26fd99-9087-481e-b5b9-62984a5cfbaf", "238f638f21c660166527dab4cd6fc958dda7b200")
     Zeep::Messaging.send_message(session[:zeepusername], params[:sendmsg][:messagebody])
     
     @zeep_response = "Message sent to #{session[:zeepusername]}!"
