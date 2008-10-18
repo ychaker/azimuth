@@ -27,6 +27,16 @@ describe Pirate do
     pirate.has_role?('admin').should be_false
   end
   
+  it "should be able to own a hunt" do
+    pirate = create_pirate
+    
+    hunt = Hunt.create(:name => "Test Hunt")
+    pirate.hunts << hunt
+    
+    pirate.save!
+    hunt.pirate.should == pirate
+  end
+  
 protected
   def create_pirate(options = {})
     record = Pirate.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))

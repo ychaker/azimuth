@@ -1,5 +1,7 @@
 class TreasureHunter < User
   
+  belongs_to :team
+  
   def code_name
     login
   end
