@@ -1,7 +1,10 @@
 class HuntersController < ApplicationController
   def index
-    @hunts = Hunt.hunting.select{ |h| h.user != current_user }
-    puts @hunts.inspect
+    @hunts = Hunt.hunting
+    
+    # THink about if we want to filter out owners....
+    #@hunts = @hunts.select{ |h| h.user != current_user }
+  
     if (session[:hunt])
       redirect_to :action => :continue
     end

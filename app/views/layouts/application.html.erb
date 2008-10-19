@@ -16,9 +16,22 @@
 	</head>
 	<body>
 		<div id="container">
+		  <% if current_user %>
+		  <div id="business_card">
+		    <%= gravatar_for(current_user, {:class => 'photo'})%>
+		    <%= current_user.login %>
+		    <%= "I have #{current_user.hunts.size} hunts: " %> <%= select("hunt", "id", current_user.hunts.collect{|h| ["#{h.name} [#{h.state.humanize}]", h.id]})%>
+		    <% if logged_in? %>
+		      <%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %>
+		    <% else %>
+		    <br/>
+		    <%= "I am competing in #{current_user.team.current_hunt.name}" if current_user.team && current_user.team.current_hunt %>
+		    
+		    <% end %>
+		  </div>
+		  <% end %>
 			<div id="header">
-        <%= tabnav :main %>
-        <%= current_user.login unless current_user.nil? %>
+        <%= tabnav :main %>        
 			</div>
 			<div id="content">
 			  <%= flash_messages %>
