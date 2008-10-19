@@ -3,7 +3,7 @@ class Treasure < ActiveRecord::Base
   belongs_to :hunt
   acts_as_list :scope => :hunt_id
   
-  validates_presence_of :name, :hunt_id, :clue, :description, :proximity, :points
+  validates_presence_of :name, :hunt_id, :clue, :proximity, :points
   validate :presence_of_position
   
   def proximate?(discovery)
