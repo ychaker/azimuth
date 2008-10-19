@@ -4,6 +4,9 @@ class SessionsController < ApplicationController
   def welcome
   end
   
+  def tour
+  end
+  
   def new
     if (request.user_agent.downcase.match /iphone/)
       redirect_to(:controller => :hunters, :action => :start_mobile)
