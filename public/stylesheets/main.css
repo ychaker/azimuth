@@ -93,9 +93,12 @@ h4 {
 }
 
 #footer {
-	background: url(/images/bottom.png) no-repeat bottom center;
-	width: 960px;
-	height: 140px;
+	background: url(/images/header-notext.png) no-repeat;
+	height: 100px;
+}
+
+#footer a{
+	color: #000000;
 }
 
 h3 {

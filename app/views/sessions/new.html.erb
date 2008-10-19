@@ -33,7 +33,7 @@
 	<div class="buttons">
 		<%= submit_tag 'Login' %>
 	</div>
-<% end -%>
+<% end unless logged_in? -%>
 </div>	
 </div>
 <!-- BEGIN ID SELECTOR -->

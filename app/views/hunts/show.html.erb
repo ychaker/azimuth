@@ -4,12 +4,28 @@
 </p>
 
 <p>
+  <b>Status:</b>
+  <%=h @hunt.state.humanize %>
+</p>
+
+<p>
+  <b>Possible Score:</b>
+  <%=h @hunt.total_points %>
+</p>
+
+<p>
   <b>Treasure Hunters:</b>
   <br/>
+  <table cellpadding=20>
+    <tr>
   <% for th in @hunt.users %>
+      <td>
     <%= gravatar_for(th, {:class => 'photo'}) unless th.email.blank? %> <%=th.login %><br/>
     Score: <%=th.score%><br/>
+      </td>
   <% end %>
+    </tr>
+  </table>
 </p>
 
 
