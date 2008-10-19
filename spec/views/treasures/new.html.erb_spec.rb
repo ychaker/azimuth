@@ -30,7 +30,7 @@ describe "/treasures/new.html.erb" do
       with_tag("input#treasure_lng[name=?]", "treasure[lng]")
       with_tag("input#treasure_proximity[name=?]", "treasure[proximity]")
       with_tag("input#treasure_points[name=?]", "treasure[points]")
-      with_tag("input#treasure_password[name=?]", "treasure[password]")
+      with_tag("input#treasure_key[name=?]", "treasure[key]")
     end
   end
 end

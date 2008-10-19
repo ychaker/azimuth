@@ -20,7 +20,7 @@ describe "/treasures/index.html.erb" do
         :lng => "1.5",
         :proximity => "1.5",
         :points => "1",
-        :password => "value for password"
+        :key => "value for password"
       ),
       stub_model(Treasure,
         :name => "value for name",
@@ -32,7 +32,7 @@ describe "/treasures/index.html.erb" do
         :lng => "1.5",
         :proximity => "1.5",
         :points => "1",
-        :password => "value for password"
+        :key => "value for password"
       )
     ]
   end

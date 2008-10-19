@@ -13,7 +13,7 @@ describe Treasure do
       :lng => "1.5",
       :proximity => "1.5",
       :points => "1",
-      :password => "value for password"
+      :key => "value for key"
     }
   end
 

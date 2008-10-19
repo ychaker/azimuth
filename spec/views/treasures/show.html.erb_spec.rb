@@ -14,7 +14,7 @@ describe "/treasures/show.html.erb" do
       :lng => "1.5",
       :proximity => "1.5",
       :points => "1",
-      :password => "value for password"
+      :key => "value for key"
     )
   end
 
@@ -29,7 +29,7 @@ describe "/treasures/show.html.erb" do
     response.should have_text(/1\.5/)
     response.should have_text(/1\.5/)
     response.should have_text(/1/)
-    response.should have_text(/value\ for\ password/)
+    response.should have_text(/value\ for\ key/)
   end
 end
 

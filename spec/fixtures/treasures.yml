@@ -11,7 +11,7 @@ one:
   lng: 1.5
   proximity: 1.5
   points: 50
-  password: MyString
+  key: MyString
 
 two:
   name: MyString
@@ -24,4 +24,4 @@ two:
   lng: 1.5
   proximity: 1.5
   points: 100
-  password: MyString
+  key: MyString
