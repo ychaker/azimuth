@@ -18,7 +18,7 @@ class Team < ActiveRecord::Base
   
   has_many :discoveries
   
-  aasm_event :hunt do
+  aasm_event :begin_hunt do
     transitions :to => :hunting, :from => [:registering]
   end
   
@@ -32,11 +32,9 @@ class Team < ActiveRecord::Base
   
   def score
     points = 0
-    discoveries_for_hunt = self.discoveries.select{ |discovery| discovery.hunt == self.current_hunt }
+    discoveries_for_hunt = self.discoveries.select{ |discovery| discovery.hunt == self.hunt }
     
-    puts "Discovery is for hunt is: #{discoveries_for_hunt.size}"
     successful_discoveries = discoveries_for_hunt.select{ |discovery| discovery.success? }
-    puts "Success Discovery is for hunt is: #{successful_discoveries.size}"
     successful_discoveries.each {|discovery| points += discovery.treasure.points } 
     
     points
@@ -46,7 +44,7 @@ class Team < ActiveRecord::Base
     self.start_treasure = treasure
     self.current_treasure = treasure
     unless self.treasure_hunters.blank? 
-      self.hunt
+      self.begin_hunt
     end
     self.save
   end

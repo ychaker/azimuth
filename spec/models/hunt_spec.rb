@@ -114,36 +114,45 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
     #sms.parse
     ya_team.hunt.should == hunt
     
-    d = Discovery.new(:treasure => ya_team.current_treasure, :lat =>62.1288, :lng => -91.5773, :hunt => hunt )
+    d = Discovery.new(:treasure => ya_team.current_treasure, :lat => 62.1278, :lng => -91.5763, :hunt => hunt, :team_id => ya_team.id)
     ya_team.discoveries << d
+    d.save
     d.team.should == ya_team
     d.hunt.should == hunt
-    d.team.current_hunt = hunt
+    d.team.hunt.should == hunt
     
     ya_team.save!
 
-    ya_team.current_hunt.should == hunt
-    d.team.current_hunt.should == hunt
+    ya_team.hunt.should == hunt
+    d.team.hunt.should == hunt
     ya_team.discoveries.size.should == 1
     
-    hunt.attempt_open_treasure_chest(d)
+    hunt.attempt_open_treasure_chest(d, ya_team)
     
     d.save!
     d.success.should be_true
-    d.team.current_treasure.should == third_treasure
+    ya_team.save!
     
-    ya_team.reload
+    ya_team.current_treasure.should == third_treasure
+    
     ya_team.discoveries.size.should == 1
     youssef.team.discoveries.size.should == 1
-    d.team.score.should == 25
+    ya_team.score.should == 25
     
     
     
-    pending("still working")
-        
-    ashish.discover(:lat => 70.1118, :lng => -85.5753, :proof_of_life => "coords").should be_false
+    failed_discovery = Discovery.new(:treasure => ya_team.current_treasure, :lat => 70.1118, :lng => -85.5753, :team_id => ya_team.id)
+    ya_team.discoveries << failed_discovery
+    failed_discovery.save
+    
+    hunt.attempt_open_treasure_chest(failed_discovery, ya_team)
+    
+    failed_discovery.success.should be_false
+    
     ya_team.score.should == 25
     ya_team.current_treasure.should == third_treasure
+    
+    pending("still working")
     ashish.discover(:lat => 70.1268, :lng => -85.5753, :proof_of_life => "coords").should be_true
     ya_team.score.should == 60
     ya_team.current_treasure.should == first_treasure
