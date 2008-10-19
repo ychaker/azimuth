@@ -24,12 +24,12 @@ render_tabnav :main,
   add_tab do |t|
      t.named "Hide Treasure"
      t.links_to :controller => 'pirate'
-  end
+  end if logged_in?
 
   add_tab do |t|
      t.named "Find Treasure"
      t.links_to :controller => 'hunters'
-  end
+  end if logged_in?
   
 #  add_tab do |t|
 #     t.named "Logout"
