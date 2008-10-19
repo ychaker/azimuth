@@ -1,37 +1,38 @@
-<% @user.password = @user.password_confirmation = nil %>
-<%= title "Signup", :h2 %>
-<% form_for @user do |f| %>
-	<%= f.error_messages %>
-	<fieldset>
-		<ul>
-			<li>
-				<%= f.label :login, 'Username' %>
-				<%= f.text_field :login %>
-			</li>
-			<li>
-				<%= f.label :email %>
-				<%= f.text_field :email %>
-			</li>
-			<li>
-				<%= f.label :password %>
-				<%= f.password_field :password %>
-			</li>
-			<li>
-				<%= f.label :password_confirmation, 'Confirm Password' %>
-				<%= f.password_field :password_confirmation %>
-			</li>
-		</ul>
-	</fieldset>
-	<fieldset>
-		<legend>Signup with OpenID</legend>
-		<ul>
-			<li>
-				<label for="openid_url">OpenID URL</label>
-				<%= text_field_tag :openid_url, params[:openid_url] || params['openid.identity'] %>
-			</li>
-		</ul>
-	</fieldset>
-	<div class="buttons">
-		<%= submit_tag 'Sign up' %>
-	</div>
-<% end %>
+<h2>Signup</h2><br>
+<div id="signup-box">
+  <% @user.password = @user.password_confirmation = nil %>
+  <% form_for @user do |f| %>
+  	<%= f.error_messages %>
+  	<fieldset>
+  		<ul>
+  			<li>
+  				<%= f.label :login, 'Username' %>
+  				<%= f.text_field :login %>
+  			</li>
+  			<li>
+  				<%= f.label :email %>
+  				<%= f.text_field :email %>
+  			</li>
+  			<li>
+  				<%= f.label :password %>
+  				<%= f.password_field :password %>
+  			</li>
+  			<li>
+  				<%= f.label :password_confirmation, 'Confirm Password' %>
+  				<%= f.password_field :password_confirmation %>
+  			</li>
+  		</ul>
+  	</fieldset>
+  	<fieldset>
+  		<ul>
+  			<li>
+  				<label for="openid_url">OpenID URL</label>
+  				<%= text_field_tag :openid_url, params[:openid_url] || params['openid.identity'] %>
+  			</li>
+  		</ul>
+  	</fieldset>
+  	<div class="buttons">
+  		<%= submit_tag 'Sign up' %>
+  	</div>
+  <% end %>
+</div>
