@@ -20,6 +20,7 @@ class HuntsController < ApplicationController
         if request.xhr?
           render :partial => 'hunt', :locals => { :hunt => @hunt } if @hunt
         end
+        
       }
       format.xml  { render :xml => @hunt }
     end
