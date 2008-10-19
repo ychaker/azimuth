@@ -181,7 +181,16 @@ h2 {
 }
 
 #business-card {
+	font-size: 70%;
 	float: right;
+	width: 350px;
+	padding: 5px;
+}
+
+#business-card a {
+	color:#000000;
+	font-weight:bolder;
+	text-decoration:none;
 }
 
 #user-choices ul {

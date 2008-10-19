@@ -116,3 +116,5 @@ GeoKit::Geocoders::geocoder_ca = false
 # various geocoders.  Make sure you read up on relevant Terms of Use for each
 # geocoder you are going to use.
 GeoKit::Geocoders::provider_order = [:yahoo,:us]
+
+AZIMUTH_DOMAIN = "http://osc.r08.railsrumble.com"

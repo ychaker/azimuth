@@ -97,6 +97,10 @@ class HuntsController < ApplicationController
     respond_to do |format|
       if @hunt.update_attributes(params[:hunt])
         # flash[:notice] = 'Hunt was successfully updated.'
+        if @hunt.aasm_current_state == :being_planned
+          flash[:error] = "Could not release the hounds, hunt wasn't ready"
+          redirect_to(:controller => :hunters, :action => :awaiting_start)
+        else
           format.html { 
             if request.xhr?
               render :text => "Released!"
@@ -105,6 +109,7 @@ class HuntsController < ApplicationController
             end
           }
           format.xml  { head :ok }          
+        end
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @hunt.errors, :status => :unprocessable_entity }
