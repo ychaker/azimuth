@@ -19,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.welcome '/welcome', :controller => "sessions", :action => "welcome"
   map.tour '/tour', :controller => "sessions", :action => "tour"
+  map.change_state '/hunts/change_state/:state', :controller => "hunts", :action=> "change_state"
   
   # Restful Authentication Resources
   map.resources :users

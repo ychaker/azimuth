@@ -13,7 +13,11 @@
 <p>
   <b>Status:</b>
   <%=h @hunt.state.humanize %>
-  <%= link_to "Cancel Sprint?", :action => "change_status", :confirm => 'Are you sure you want to cancel?'%>
+  |
+  <%= link_to "Cancel?", :action => "change_state", :state => "cancel", :id => @hunt.id, :confirm => 'Are you sure you want to cancel?'%>
+  |
+  <%= link_to "Victory?", :action => "change_state", :state => "victory", :id => @hunt.id, :confirm => 'Are you sure you want to cancel?'%>
+  |
 </p>
 
 <p>
