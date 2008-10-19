@@ -1,4 +1,9 @@
 class SmsController < ApplicationController
+  protect_from_forgery :secret => 'b0a876313f3f9195e9bd01473bc5cd06', :except => :incoming
+    
+  @username_entered = false
+  @zeep_response = ""
+  
   # GET /sms
   # GET /sms.xml
   def index
@@ -13,20 +18,21 @@ class SmsController < ApplicationController
   # GET /sms/testloop.xml
   def testloop
     
-    respond_to do |format|
-      format.html # testloop.html.erb
-      format.xml  { render :xml => @sms }
-    end
+  end
+  
+  # GET /sms/enterusername
+  # GET /sms/enterusername.xml
+  def enterusername
+    @username_entered = true
+    session[:zeepusername] = params[:sms][:username]    
+    render :action => "testloop"
   end
   
   # GET /sms/incoming
   # GET /sms/incoming.xml
-  def incoming
-    
-    respond_to do |format|
-      format.html # incoming.html.erb
-      format.xml  { render :xml => @sms }
-    end
+  def incoming    
+    response.headers["Content-Type"] = "text/plain; charset=utf-8"
+    render :text => "User: #{params[:uid]}, Body: #{params[:body]}, Success!  Your next clue is: golden balls"
   end
 
   # GET /sms/send_sms
@@ -36,11 +42,12 @@ class SmsController < ApplicationController
     require 'rubygems' # Only required if you've installed the gem version
     require 'zeep/messaging'
 
-    Zeep::Base.configure_credentials("f95aed9c-4cef-4cfa-ba53-4ce19992d22b", "509c32e2ef533f0e0966ee0ad7ed446c0cac469c")
-
-    Zeep::Messaging.send_message("asime", "'Hi Lauren!'")
+    Zeep::Base.configure_credentials("4e26fd99-9087-481e-b5b9-62984a5cfbaf", "238f638f21c660166527dab4cd6fc958dda7b200")
+    Zeep::Messaging.send_message(session[:zeepusername], params[:sendmsg][:messagebody])
     
-    render :text => "hello sms test submit"
+    @zeep_response = "Message sent to #{session[:zeepusername]}!"
+    
+    render :action => "testloop"
     
   end
   
