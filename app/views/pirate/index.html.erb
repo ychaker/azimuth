@@ -37,10 +37,10 @@
           <form>
           <ul>
             <li>
-              <label for="name">Name</label><input class="span-all" type="text" id="name">
+              <label for="name">Name*</label><input class="span-all required" type="text" id="name">
             </li>
             <li>
-              <label for="clue">Clue (<i>can be sent through sms</i>)</label><input class="span-all" type="text" id="clue">
+              <label for="clue">Clue* (<i>can be sent through sms</i>)</label><input class="span-all required" type="text" id="clue">
             </li>          
             <li class="horiz">
               <div class="unwrap">
@@ -56,13 +56,13 @@
             </li>
             <li class="horiz">
               <div class="unwrap">
-                <label for="points">Score</label><input class="span-half" type="text" id="points">
+                <label for="points">Score*</label><input class="span-half required" type="text" id="points">
               </div>
               <div class="unwrap">
-                <label for="proximity">Proximity (meters)</label><input class="span-half" type="text" id="proximity">
+                <label for="proximity">Proximity* (meters)</label><input class="span-half required" type="text" id="proximity">
               </div>
             </li>          
-            <li><input type="submit" value="add treasure" id="treasure-new-submit"></li>
+            <li><input type="submit" value="add treasure" id="treasure-new-submit"> * required</li>
           </ul>
           </form>
         </div>
@@ -73,7 +73,7 @@
         <%= image_tag '3.png', :class => "dropcap" %><h2>Add Treasure Hunters</h2>
       </div>
       <div class="right-content">
-        <p>Invite your friends to join the treasure hunt. Or Rails Rumblers can <a id="start-hunt" href="#">join the hunt here</a>.</p>
+        <p>Invite your friends to join the treasure hunt. You can <a id="start-hunt" href="#">join the hunt here</a>.</p>
       </div>
     </div>
     <div id="hounds" class="right-container">
