@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
    end
 
    aasm_event :finish_hunt do 
-     transitions :to => :active, :from => [:hunt_hunting]
+     transitions :to => :active, :from => [:hunt_hunting, :active]
    end
 
    aasm_event :cancel do 
@@ -109,7 +109,11 @@ class User < ActiveRecord::Base
     end
     
     #FIXME add validation that zeep account exists
-    Sms.send_sms(self.login, "#{self.hunt.name}: Your clue is #{self.current_treasure.clue}.")
+    message = "#{self.hunt.name}: Your clue is #{self.current_treasure.clue}."
+    
+    message = "#{message} KEY ONLY. You must find the key, there is no lat/lng defined" if self.current_treasure.key_only?
+    
+    Sms.send_sms(self.login, message)
     
     
     #if self.zeeped?

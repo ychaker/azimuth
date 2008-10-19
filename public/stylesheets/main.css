@@ -379,6 +379,17 @@ label {
 	
 }
 
+.short-callout {
+	float: right;
+	overflow: visible;
+	background: #fff;
+	border: 1px solid #ccc;
+	width: 490px;
+	margin: 10px;
+	padding: 2px;
+}
+
+
 .left {
 	float: left;
 }
