@@ -1,4 +1,4 @@
-<h2>Hunt: <%= session[:hunt].name %></h2>
+<h2>Hunt: <%= current_user.hunt.name %></h2>
 
 <h4>Your Clue</h4>
 <%= @treasure.clue %>

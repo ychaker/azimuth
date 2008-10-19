@@ -73,24 +73,28 @@ describe Sms do
   end
   
   it "should parse and process a string containing lat/lng and determine if its within proximity, expecting success" do
+    pending("Not sure if we need")
     raw = "38.012411 -78.515275"
     sms = Sms.new(:raw => raw)
     sms.parseandprocess("quentin", raw).should include("SUCCESS")
   end
   
   it "should parse and process a string containing lat/lng and determine if its within proximity, expecting failure" do
+    pending("Not sure if we need")
     raw = "38.035581 -78.503548"
     sms = Sms.new(:raw => raw)
     sms.parseandprocess("quentin", raw).should include("FAILURE")
   end
   
   it "should parse and process a string containing lat/lng and determine if its within proximity, expecting success" do
+    pending("Not sure if we need")
     raw = "newcomb"
     sms = Sms.new(:raw => raw)
     sms.parseandprocess("quentin", raw).should include("SUCCESS")
   end
   
   it "should parse and process a string containing lat/lng and determine if its within proximity, expecting failure" do
+    pending("Not sure if we need")
     raw = "baddata"
     sms = Sms.new(:raw => raw)
     sms.parseandprocess("quentin", raw).should include("FAILURE")

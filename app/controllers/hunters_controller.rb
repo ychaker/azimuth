@@ -1,9 +1,7 @@
 class HuntersController < ApplicationController
   def index
-    if (session[:hunt])
-      h = Hunt.find(session[:hunt].id)
-      puts h.aasm_current_state
-      if (h.aasm_current_state == :hunting)
+    if current_user.hunt
+      if current_user.hunt.aasm_current_state == :hunting
         redirect_to :action => :continue
       else
         redirect_to :action => :awaiting_start
@@ -13,20 +11,20 @@ class HuntersController < ApplicationController
     end
   end
   
+  def change_team
+    @hunts = Hunt.being_planned
+    render :template => "hunters/index"
+  end
+  
   def awaiting_start
-    if (session[:hunt])
-      h = Hunt.find(session[:hunt].id)
-      if (h.aasm_current_state == :hunting)
+    if current_user.hunt
+      if (current_user.hunt.aasm_current_state == :hunting)
         redirect_to :action => :continue
       end
     end
   end
   
   def reset
-    session[:hunt] = nil
-    session[:hunt_treasures] = nil
-    session[:hunt_start] = nil
-    session[:hunt_current] = nil
     redirect_to :action => :index
   end
   
@@ -35,16 +33,16 @@ class HuntersController < ApplicationController
   end
   
   def start
-    session[:hunt] = Hunt.find(params[:id])
-    session[:hunt_start] = rand(session[:hunt].treasures.size)
-    session[:hunt_current] = session[:hunt_start]
+    hunt = Hunt.find(params[:id])
+    current_user.hunt = hunt
+    current_user.register_hunt
+    current_user.save!
     redirect_to :action => :index
   end
   
   def continue
-    if (session[:hunt])
-      treasures = Hunt.find(session[:hunt].id).treasures
-      @treasure = treasures[session[:hunt_current]]
+    if current_user.hunt
+      @treasure = current_user.current_treasure
     else
       redirect_to :action => :index
     end
