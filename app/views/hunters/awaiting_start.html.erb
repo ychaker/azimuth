@@ -17,7 +17,7 @@ $(function() { // sandbox and scope!
     	console.log("/hunts/update/<%= current_user.hunt.id %>");
     	$.post("/hunts/update/<%= current_user.hunt.id %>", 
     	    { hunt_event : 'release_the_hounds', authenticity_token: window._token }, function() {
-            location.href = "/hunters/continue";
+            location.href = "/hunters/start/<%=current_user.hunt.id%>";
     	}); // ajax
     }); // click()    
   }); // document.ready

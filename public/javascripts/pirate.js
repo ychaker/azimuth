@@ -96,7 +96,14 @@ $(document).ready(function() {
 	});
 	
 	$("#hunt-release-btn").click(function() {
-		console.log("/hunts/update/" + curr_hunt);
+		if (curr_hunt == 0) {
+			alert("Please pick a hunt first.");
+			return false;
+		} else if ($("#treasure-list li").length == 0) {
+			alert("Please add at least one clue");
+			return false;
+		}
+		
 		$.ajax({
 			type: "POST",
 			url: "/hunts/update/" + curr_hunt,

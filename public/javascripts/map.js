@@ -25,8 +25,8 @@ $(document).ready(function() {
 			}
 			$("#accordion").accordion("activate",1);
 			if (latlng) {
-				$("#lat").val(latlng.lat());
-				$("#lng").val(latlng.lng());
+				$("#lat").val(latlng.lat()).effect("highlight",{duration: 1000});
+				$("#lng").val(latlng.lng()).effect("highlight",{duration: 1000});
 			}
 		});
 	}
