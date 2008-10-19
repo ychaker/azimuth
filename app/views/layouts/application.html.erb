@@ -26,7 +26,7 @@
     		  <div style="float: right">
     		    <%= "My current hunt: "%>
     		    <% if current_user.hunt %>
-    		      <%= link_to current_user.hunt.name, hunt_path(current_user.hunt) %>  | <%#= link_to "Change Hunt", :controller => 'hunters', :action => 'change_hunt' %>
+    		      <%= link_to current_user.hunt.name, hunt_path(current_user.hunt) %>  | <%= link_to "Change Hunt", :controller => 'hunters', :action => 'change_hunt' %><br>
     		    <% else %>
     		      None | 
     		    <% end %>
