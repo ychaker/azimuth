@@ -1,9 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Sms do
-  before(:each) do
-    
-  end
+  fixtures :users
 
   it "should be able to detect lat long from a string" do
     raw = "55.5555 -111.2341"
@@ -71,13 +69,9 @@ describe Sms do
   end
   
   it "should parse and process a string containing lat/lng and determine if its within proximity" do
-    #user = create_user(:id => 1, :login => "asime", :email => "asime@o19s.com", :salt => "356a192b7913b04c54574d18c28d46e6395428ab",
-    # :crypted_password => "261fd559c11e3931bd9f87fe8babb4ee8b196c56", :created_at => 5.days.ago.to_s, :remember_token_expires_at: 1.days.from_now.to_s,
-    # :remember_token => "77de68daecd823babbb58edb1c8e14d7106e83bb", :activated_at => 5.days.ago.to_s, :state => "active")
-    
     #raw = "34.555 -23.111"
     #sms = Sms.new(:raw => raw)
-    #puts(sms.parseandprocess("asime", raw))
+    #puts(sms.parseandprocess("quentin", raw))
   end
   
 end
