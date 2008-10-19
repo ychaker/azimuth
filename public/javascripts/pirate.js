@@ -99,10 +99,12 @@ $(document).ready(function() {
 		$.ajax({
 			type: "POST",
 			url: "/hunts/update/" + curr_hunt,
-			data: { hunt_event : 'release_the_hounds', authenticity_token: window._token }
+			data: { hunt_event : 'release_the_hounds', authenticity_token: window._token },
+			complete: function(data, textStatus) {
+				alert("hounds released...");
+				$(this).attr("enabled", "false");
+			}
 		});
-		
-		$(this).attr("enabled", "false");
 	});
 	
 	$("#hunt-list a.select-hunt-lnk").click(function() {
