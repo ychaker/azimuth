@@ -26,11 +26,12 @@
     		  <div style="float: right">
     		    <%= "My current hunt: "%>
     		    <% if current_user.hunt %>
-    		      <%=  "#{current_user.hunt.name} (#{current_user.hunt.state.humanize})"%> | <%#= link_to "Change Hunt", :controller => 'hunters', :action => 'change_hunt' %>
+    		      <%= link_to current_user.hunt.name, hunt_path(current_user.hunt) %>  | <%#= link_to "Change Hunt", :controller => 'hunters', :action => 'change_hunt' %>
     		    <% else %>
-    		    	None | 
+    		      None | 
     		    <% end %>
-    		    <% if logged_in? %><%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %>
+    		    <% if logged_in? %>
+    		      <%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %>
     		    <% end %>
     		    <br/><br/>
   		      <%= "I have created #{current_user.hunts.size} hunt(s)" %><br/> <%= select("hunt", "id", current_user.hunts.collect{|h| ["#{h.name} [#{h.state.humanize}]", h.id]}) unless current_user.hunts.blank?%>
@@ -48,6 +49,7 @@
 			
     	<%= request.env.inspect %>
       <div id="footer">
+<<<<<<< HEAD:app/views/layouts/application.html.erb
         <div align="center">
             <p>
               This Application was built as part of the 
@@ -56,6 +58,11 @@
               Don't forget to cast your
               <a href="http://team-o19s.vote.railsrumble.com/">vote for us!</a>
             </p>
+=======
+        <div style="padding: 20px">
+          <!-- <a href="http://www.railsrumble.com" class="left"><img alt="Badge90" src="/images/RailsRumbleBadge_90_1.png"/></a> -->
+            <p>This Application was built as part of the <a href="http://www.railsrumble.com">Rails Rumble 2008</a> Contest. Don't forget to <a href="http://team-o19s.vote.railsrumble.com/">cast your vote for us!</a></p>
+>>>>>>> 55040a7d09e99c36aa65eb60d306a8e722ebf24f:app/views/layouts/application.html.erb
         </div>
       </div>
 		</div>

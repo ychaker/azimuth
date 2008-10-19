@@ -20,24 +20,38 @@
 <div id="hunt-clue">
   <h4>Your Clue</h4>
   <%= @treasure.clue %>
+  
+  <% if @treasure.key_only? %>
+    <p><i>
+      This treasure can only be found by going to the location described and finding some sort of key to send back, there is no lat/lng coordinates!
+    </i></p>
+  <% end %>
+  
+  <div id="discovery">
+  <% form_for(@discovery, :url => { :controller => "hunters", :action => 'check_clue' } ) do |f| %>
+    <%= f.error_messages %>
 
-  <form id="discovery">
+    <% if @treasure.key_only? %>
+    <h4>Found the clue? Enter the key</h4>
+    <% else %>
     <h4>Found the clue? Enter the key or coordinates</h4>
       <div class="discovery-cell">
       Latitude:<br>
-      <input type="text" id="lat"><br>
+      <%= f.text_field :lat %><br>
       Longitude:<br>
-      <input type="text" id="lon">
+      <%= f.text_field :lng %>
     </div>
+    <% end %>
     <div class="discovery-cell">
       Key:<br>
-      <input type="text" id="password"><br><br>
-      <input type="submit">
+      <%= f.text_field :key %><br><br>
+      <%= f.submit "Attempt Open Chest" %>
     </div>
-  </form>
+  <% end %>
+  </div>
   <span id="progress"></span>
 
-  <%= javascript_include_tag 'hunter' %>
+  < javascript_include_tag 'hunter' >
 </div>
 
 

@@ -26,9 +26,10 @@ class UsersController < ApplicationController
     
     
   end
-  
+   
   def profile
     @user = current_user
+    @smstest = Sms.new(:login => @user.login, :raw => "This is a test SMS message from Azimuth.  You are configured correctly!")
   end
   
   def update
@@ -43,6 +44,15 @@ class UsersController < ApplicationController
         format.html { render :action => "profile" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
+    end
+  end
+  
+  def sendtestsms
+    Sms.send_sms(current_user.login, params[:sms][:raw])
+    flash[:notice] = 'Test SMS message sent.'
+    
+    respond_to do |format|
+      format.html { redirect_to :action => :profile}
     end
   end
   
