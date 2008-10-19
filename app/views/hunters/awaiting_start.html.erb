@@ -1,5 +1,5 @@
 <div style="text-align: center">
-<h3><%= session[:hunt].name %></h3><br>
+<h3><%= current_user.hunt.name %></h3><br>
 Your hunt will begin shortly. <br>
 
 <img src="/images/burns.png"><br>
@@ -14,8 +14,8 @@ $(function() { // sandbox and scope!
   
   $(document).ready(function() { 
     $("#release-the-hounds").click(function() {
-    	console.log("/hunts/update/<%= session[:hunt].id %>");
-    	$.post("/hunts/update/<%= session[:hunt].id %>", 
+    	console.log("/hunts/update/<%= current_user.hunt.id %>");
+    	$.post("/hunts/update/<%= current_user.hunt.id %>", 
     	    { hunt_event : 'release_the_hounds', authenticity_token: window._token }, function() {
             location.href = "/hunters/continue";
     	}); // ajax

@@ -23,7 +23,8 @@
   		    <%= current_user.login %>
   		    <%= "I have #{current_user.hunts.size} hunts: " %><br><%= select("hunt", "id", current_user.hunts.collect{|h| ["#{h.name} [#{h.state.humanize}]", h.id]})%>
   		    <% if logged_in? %>
-  		      <%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %>
+  		      <%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %> 
+  		      <%= link_to "Change Team", :controller => 'hunters', :action => 'change_team' %>
   		    <% end %>
   		    <br/>
   		    <% if current_user.hunt %>
