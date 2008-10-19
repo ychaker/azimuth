@@ -39,7 +39,7 @@ end
 
 describe "Eric and Ashish want to do a treasure hunt" do
   it "should be easy and fun" do
-    #pending "Current flushing out"
+    pending "Current flushing out"
     #create users, one own and two hunters
     eric = create_user({:name => "Eric", :login => "epughoff"})
     ashish =  create_user({:name => "Ashish", :login => "epugh", :email => "atonse@gmail.com"})
