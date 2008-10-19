@@ -40,7 +40,7 @@
               <label for="name">Name</label><input class="span-all" type="text" id="name">
             </li>
             <li>
-              <label for="clue">Clue</label><input class="span-all" type="text" id="clue">
+              <label for="clue">Clue (<i>can be sent through sms</i>)</label><input class="span-all" type="text" id="clue">
             </li>          
             <li class="horiz">
               <div class="unwrap">
@@ -50,13 +50,13 @@
                 <label for="lng">Longitude</label><input class="span-half" type="text" id="lng">
               </div>
               <div class="unwrap">
-                <label for="key">Key</label><input class="span-half" type="text" id="key">
+                <label for="key">Key (to verify clue)</label><input class="span-half" type="text" id="key">
               </div>            
            
             </li>
             <li class="horiz">
               <div class="unwrap">
-                <label for="points">Points</label><input class="span-half" type="text" id="points">
+                <label for="points">Score</label><input class="span-half" type="text" id="points">
               </div>
               <div class="unwrap">
                 <label for="proximity">Proximity (meters)</label><input class="span-half" type="text" id="proximity">
@@ -68,7 +68,6 @@
         </div>
       </div>
     </div>
-  
     <div id="treasure-hunters" class="right-container">
       <div class="right-heading">
         <%= image_tag '3.png', :class => "dropcap" %><h2>Add Treasure Hunters</h2>
@@ -77,8 +76,6 @@
         <p>Invite your friends to join the treasure hunt. Or Rails Rumblers can <a id="start-hunt" href="#">join the hunt here</a>.</p>
       </div>
     </div>
-    
-  
     <div id="hounds" class="right-container">
       <div class="right-heading">
         <%= image_tag '4.png', :class => "dropcap" %><h2>Release the Hounds</h2>

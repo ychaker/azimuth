@@ -13,6 +13,7 @@
 <p>
   <b>Status:</b>
   <%=h @hunt.state.humanize %>
+  <%= link_to "Cancel Sprint?", :action => "change_status", :confirm => 'Are you sure you want to cancel?'%>
 </p>
 
 <p>
@@ -34,5 +35,7 @@
     </tr>
   </table>
 </p>
+
+
 
 
