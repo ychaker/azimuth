@@ -52,7 +52,10 @@ class Sms < ActiveRecord::Base
         @success = false
         if smsinfo.is_geocode?
           #check their discovery to see if it is valid
-          d = Discovery.create!(:lat => smsinfo.lat, :lng => smsinfo.lng)
+          #puts("lat #{smsinfo.lat} lng #{smsinfo.lng}")
+          d = Discovery.create!(:lat => smsinfo.lat.to_f, :lng => smsinfo.lng.to_f)
+          #puts("did #{d.id}, tid #{d.treasure_id}, lat #{d.lat}, lng #{d.lng}")
+          #puts("tid #{t.id}, lat #{t.lat}, lng #{t.lng}")
           distance = Treasure.distance_between(d, t)
           if t.proximate?(d)
             @success = true
@@ -69,6 +72,7 @@ class Sms < ActiveRecord::Base
           @reply_message += "SUCCESS!  Your next clue is PARROT"
         else
           #not a valid discovery!  give the texter some feedback
+          #still save the discovery however
           @reply_message += "FAILURE.  Try again."
         end
 

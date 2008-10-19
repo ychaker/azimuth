@@ -5,3 +5,13 @@ one:
 
 two:
   name: MyString
+
+teamquentin:
+  id:                       1
+  name:                     teamquentin
+  created_at:               <%= 5.days.ago.to_s :db  %>
+  updated_at:               <%= 1.days.ago.to_s :db  %>
+  start_treasure_id:        1
+  current_treasure_id:      1
+  state:                    hunting
+  hunt_id:                  1

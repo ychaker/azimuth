@@ -6,3 +6,12 @@ one:
 
 two:
   name: secondhunt
+
+quentinshunt:
+  id:                       1
+  name:                     quentins hunt
+  created_at:               <%= 5.days.ago.to_s :db  %>
+  updated_at:               <%= 1.days.ago.to_s :db  %>
+  user_id:                  1
+  description:              testing hunt
+  state:                    hunting
