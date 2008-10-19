@@ -14,7 +14,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	$("div#add-clues div.right-heading").click(function() {
+	$("div#add-clues div.right-heading, div#treasure-hunters div.right-heading, div#hounds div.right-heading").click(function() {
 		if (curr_hunt == 0) {
 			alert("Please choose a hunt first");
 			return false;
@@ -58,7 +58,11 @@ $(document).ready(function() {
 		if (curr_hunt == 0) {
 			alert("Please choose a hunt first");
 			return false;
+		} else if ($("#treasure-list li").length == 0) {
+				alert("Please add at least one clue");
+				return false;
 		}
+		
 		location.href = "/hunters/start/" + curr_hunt;
 	});
 	
