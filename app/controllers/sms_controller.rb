@@ -42,9 +42,11 @@ class SmsController < ApplicationController
     
     if (smsinfo.is_geocode)
       @reply_message += " lat: #{smsinfo.lat} lng: #{smsinfo.lng}"
+    end
     
     if (smsinfo.is_key)
       @reply_message += " key: #{smsinfo.key}"
+    end  
       
     render :text => @reply_message
       
