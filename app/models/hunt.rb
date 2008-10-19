@@ -32,7 +32,6 @@ class Hunt < ActiveRecord::Base
   
   def attempt_open_treasure_chest(discovery, user)
     current_treasure = user.current_treasure
-    
 
     discovery.success = current_treasure.proximate?(discovery) if (discovery.lat)
     discovery.success = current_treasure.key == discovery.key if (discovery.key)

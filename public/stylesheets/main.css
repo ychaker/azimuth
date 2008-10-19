@@ -3,6 +3,32 @@ body {
 	margin: 0;
 }
 
+#accordion {
+	float: left;
+	width: 300px;
+}
+
+#business-card {
+	font-family: Lucida Sans, arial;
+	font-size: 1px;
+}
+
+.buttons {
+	text-align: center;
+}
+
+#login-box {
+	width: 250px;
+	float: right;
+	border: 1px solid #95a5c6;
+	background-color: #d8dfea;
+}
+
+.left-content {
+	width: 50%;
+	float: left;
+}
+
 #container {
 	background: url(/images/bg-repeat.png) repeat-y;
 	width: 960px;
@@ -124,7 +150,7 @@ form ul {
 	padding: 5px;
 	float: left;
 	margin-left: 10px;
-	width: 35%;
+	width: 100%;
 }
 
 .right-content, .right-content-body, .right-content-footer {

@@ -1,32 +1,40 @@
-<%= title "Login", :h2 %>
+<div class="left-content">
+<h3>  Welcome to Azimuth!</h3>
+
+  <p>Azimuth allows you to create Treasure Hunts, and have teams compete to find the treasure.</p>
+
+  <p>Once treasures are hidden, a team can interact with the system and get more clues via SMS.</p>
+</div>
+<script type="text/javascript">
+<!--
+    idselector_input_id = "openid_url";
+    // idselector_target_id = "button_container";
+-->
+</script>
+<div class="right-content">
 <% form_tag session_path do %>
-	<fieldset>
-		<ul>
-			<li>
+<div id="login-box">
+  <fieldset>
 				<%= label_tag 'login', 'Username' %>
 				<%= text_field_tag 'login', @login %>
-			</li>
-			<li>
 				<%= label_tag 'password' %>
 				<%= password_field_tag 'password', nil %>
-			</li>
-			<li>
-				<%= label_tag 'remember_me', 'Remember me' %>
-				<%= check_box_tag 'remember_me', '1', @remember_me %>
-			</li>
-		</ul>
+        Remember Me <%= check_box_tag 'remember_me', '1', @remember_me %><br>
+    		<%= link_to 'Forgotten Password', forgot_password_path %>
 	</fieldset>
-	<fieldset>
-		<legend>Login with OpenID</legend>
+  <fieldset>
 		<ul>
 			<li>
-				<%= label_tag 'openid_url', 'OpenID URL' %>
 				<%= text_field_tag 'openid_url' %>
 			</li>
 		</ul>
 	</fieldset>
 	<div class="buttons">
 		<%= submit_tag 'Login' %>
-		<%= link_to 'Forgotten Password', forgot_password_path %>
 	</div>
 <% end -%>
+</div>	
+</div>
+<!-- BEGIN ID SELECTOR -->
+<script type="text/javascript" id="__openidselector" src="https://www.idselector.com/selector/335acb70f626e892102f88a572192fd5484ab019" charset="utf-8"></script>
+<!-- END ID SELECTOR -->
