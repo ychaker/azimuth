@@ -18,8 +18,9 @@ class HuntsController < ApplicationController
     respond_to do |format|
       format.html {
         if request.xhr?
-          render :partial => 'hunt', :locals => { :hunt => @hunt } if @hunt
+          render :partial => 'hunt_show', :locals => { :hunt => @hunt } if @hunt
         end
+        
       }
       format.xml  { render :xml => @hunt }
     end

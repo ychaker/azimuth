@@ -1,14 +1,10 @@
 $(document).ready(function() {
-
-	function hunt_list_click() {
+	hunt_list_click = function(obj) {
 		$("#accordion").accordion("activate", 1);
-		id = $(this).attr("id").split("-")[2];
+		id = $(obj).attr("id").split("-")[2];
 		$("#hunt_id").attr("value", id);
-		$("div#add-clues.right-container.selected > div.right-content").css("overflow","auto").css("height","");
 		$("#add-clues div.right-content-body").load('/hunts/' + id);
 	}
-
-
 	
 	if (GBrowserIsCompatible()) {
 		var map = new GMap2(document.getElementById("map"));
@@ -25,11 +21,11 @@ $(document).ready(function() {
 				vars['hunt[' + $(this).attr('id') + ']'] = $(this).attr('value');
 			});
 		
-		// console.log(vars);
-
 		$.post('/hunts', vars, function(data) {
 			$("#hunt-list").append(data);
-			$("li.new-hunt-no-event").click(hunt_list_click);
+			$("li.new-hunt-no-event a").click(function() {
+				hunt_list_click(this);
+			});
 			$("#hunt-new").fadeOut(function() {
 				$("#accordion").fadeIn();
 			});
@@ -37,12 +33,24 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	$("#hunt-new-cancel").click(function() {
+		$("#hunt-new").fadeOut("fast", function() {
+			$("#accordion").fadeIn();
+		});
+
+		$("#hunt-new input[type='text']").each(function() {
+			$(this).attr("value","");
+		});
+	});
+
 	$("#accordion").accordion({ 
 		header: "div.right-heading",
 		clearStyle: true
 	});
 	
-	$("#hunt-list a").click(hunt_list_click);
+	$("#hunt-list a").click(function() {
+		hunt_list_click(this)
+	});
 	
 	$("#treasure-new-submit").click(function() {
 		vars = { authenticity_token: window._token };
