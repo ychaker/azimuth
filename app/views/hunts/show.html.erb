@@ -2,7 +2,14 @@
   <b>Name:</b>
   <%=h @hunt.name %>
 </p>
-
+<p>
+  <b>Desc:</b>
+  <%=h @hunt.description %>
+</p>
+<p>
+  <b>Number of Treasures to be Found:</b>
+  <%=h @hunt.treasures.size %>
+</p>
 <p>
   <b>Status:</b>
   <%=h @hunt.state.humanize %>

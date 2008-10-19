@@ -66,13 +66,14 @@ class Hunt < ActiveRecord::Base
   def announce_starting_of_hunt
     users.each do |u| 
       puts "annoucing to #{u.login} with status #{u.state}"
-      u.send_message("The Hunt: #{self.name} has Started, Good Luck!")
+      u.send_message("The Hunt #{self.name} has Started, Good Luck!")
       # HACK HACK that we start with the second item if we have it to maintaint hunt_spec, otherwise the first.
-      if self.treasures.size == 1
-        u.start_hunt self.treasures[0] #self.treasures[rand(self.treasures.size)]
-      else
-        u.start_hunt self.treasures[1] #self.treasures[rand(self.treasures.size)]
-      end
+      #if self.treasures.size == 1
+        #u.start_hunt self.treasures[0] #self.treasures[rand(self.treasures.size)]
+     # else
+        #u.start_hunt self.treasures[1] #self.treasures[rand(self.treasures.size)]
+      #end
+      u.start_hunt self.treasures.first
       u.send_next_clue
       u.save!
     end

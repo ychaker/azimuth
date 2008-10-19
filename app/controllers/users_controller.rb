@@ -77,11 +77,25 @@ class UsersController < ApplicationController
   
   def create_new_user(attributes)
     @user = User.new(attributes)
+
+    
+    # if we don't have a login, derive it from open id.
+    if @user.login.blank? and !@user.identity_url.blank?
+      s = @user.identity_url
+      
+      s = s[7..s.length] if s.starts_with?("http://")
+      s = s[0..(s.length - 2)] if s.ends_with?('/')
+      #puts s
+      @user.login = s
+    end
+    
+
     #ip = request.env['HTTP_X_CLUSTER_CLIENT_IP'].blank? ? request.remote_ip : request.env['HTTP_X_CLUSTER_CLIENT_IP']
     #begin
       #@user.set_coord_from_maxmind(ip)
     #rescue LocationNotFound
     #end
+
     if @user && @user.valid?
       if @user.not_using_openid?
         @user.register!
@@ -102,7 +116,7 @@ class UsersController < ApplicationController
     redirect_back_or_default(welcome_url)
     flash[:notice] = "Thanks for signing up!"
 #    flash[:notice] << " We're sending you an email with your activation code." if @user.not_using_openid?
-    flash[:notice] << " You can now login with your OpenID." unless @user.not_using_openid?
+#    flash[:notice] << " You can now login with your OpenID." unless @user.not_using_openid?
   end
   
   def failed_creation(message = 'Sorry, there was an error creating your account')
