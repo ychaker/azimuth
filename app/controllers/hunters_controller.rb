@@ -1,10 +1,13 @@
 class HuntersController < ApplicationController
   def index
-    @hunts = Hunt.hunting.select{ |h| h.user != current_user }
+    @hunts = Hunt.hunting# .select{ |h| h.user != current_user }
     puts @hunts.inspect
     if (session[:hunt])
       redirect_to :action => :continue
     end
+  end
+  
+  def start_mobile
     
   end
   
@@ -14,7 +17,10 @@ class HuntersController < ApplicationController
   end
   
   def continue
-    # puts current_user
-    render  :text => current_user
+    if (session[:hunt])
+      render  :text => current_user
+    else
+      redirect_to :action => :index
+    end
   end
 end
