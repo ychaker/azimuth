@@ -18,8 +18,11 @@
 		<div id="container">
 			<div id="header">
         <%= tabnav :main %>
+        <%= current_user.login unless current_user.nil? %>
 			</div>
 			<div id="content">
+			  <%= flash_messages %>
+			  
 				<%= yield :layout %>
 			</div>
       <div id="footer">

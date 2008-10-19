@@ -1,7 +1,7 @@
 <div id="accordion">
   <div id="hunt-list" class="long">
     <div class="heading">
-        <%= image_tag '1.png', :class => "dropcap" %><h2>Choose a Treasure Hunt to Start your Quest</h2>
+        <%= image_tag '1.png', :class => "dropcap" %><h2>Choose a Treasure Hunt to Start your Quest</h2><h2>&lt;--Move to Plan Hunt tab</h2>
     </div>
     <div class="content">
       <p>
@@ -9,7 +9,7 @@
         You will see the first clue and can proceed from there.
       </p>
       <ul>
-        <% Hunt.find(:all).each do |hunt| %>
+        <% @hunts.each do |hunt| %>
         <li>
           <h3><%= link_to hunt.name, :action => :start, :id => hunt.id %></h3><br>
           <%= hunt.description %>

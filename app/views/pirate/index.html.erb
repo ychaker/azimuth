@@ -9,7 +9,7 @@
     </div>
     <div class="right-content">
       <ul id="hunt-list">
-      <% Hunt.find(:all).each do |h| %>
+      <% current_user.hunts do |h| %>
         <li><a href="#" id="pick-hunt-<%=h.id%>"><%= h.name %></a></li>
       <% end %>
       </ul>
@@ -51,6 +51,7 @@
   <div class="right-heading"><h2>Choose a Treasure Hunt</h2></div>
   <div class="right-content">
     <form>
+      <input type="hidden" id="user_id" value="<%= current_user.id %>">
       <label for="hunt-new-name">New Treasure Hunt's Name</label><input id="hunt-new-name">
       <div class="btn-center">
         <input type="submit" id="hunt-new-submit" value="create">
