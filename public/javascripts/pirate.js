@@ -76,8 +76,6 @@ $(document).ready(function() {
 				vars['treasure[' + $(this).attr('id') + ']'] = $(this).attr('value');
 			});
 		
-		console.log(vars);
-		
 		$.post('/hunts/add_treasure', vars, function(data) {
 			$("#treasure-list")
 				.append(data);
