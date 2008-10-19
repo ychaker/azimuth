@@ -81,7 +81,7 @@ class UsersController < ApplicationController
     #begin
       #@user.set_coord_from_maxmind(ip)
     #rescue LocationNotFound
-    end
+    #end
     if @user && @user.valid?
       if @user.not_using_openid?
         @user.register!
