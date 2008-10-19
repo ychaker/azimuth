@@ -36,20 +36,24 @@ class SmsController < ApplicationController
     @userid = params[:uid]
     @body = params[:body]
     
-    smsinfo = Sms.new(:raw => @body)
+    if (@body == nil)
+      render :text => "page accessed directly.  should only be accessed via post after a text message"
+    else  
+      smsinfo = Sms.new(:raw => @body)
+      smsinfo.parse()
     
-    @reply_message = "User: #{@userid}, "
+      @reply_message = "User: #{@userid}, "
     
-    if (smsinfo.is_geocode)
-      @reply_message += " lat: #{smsinfo.lat} lng: #{smsinfo.lng}"
+      if (smsinfo.is_geocode?)
+        @reply_message += " lat: #{smsinfo.lat} lng: #{smsinfo.lng}"
+      end
+    
+      if (smsinfo.is_key?)
+        @reply_message += " key: #{smsinfo.key}"
+      end  
+      
+      render :text => @reply_message
     end
-    
-    if (smsinfo.is_key)
-      @reply_message += " key: #{smsinfo.key}"
-    end  
-      
-    render :text => @reply_message
-      
   end
 
   # GET /sms/send_sms
