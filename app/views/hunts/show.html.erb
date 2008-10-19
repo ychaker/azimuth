@@ -13,12 +13,18 @@
 <p>
   <b>Status:</b>
   <%=h @hunt.state.humanize %>
+
+</p>
+
+
+
+<p>  
   |
   <%= link_to "Cancel?", :action => "change_state", :state => "cancel", :id => @hunt.id, :confirm => 'Are you sure you want to cancel?'%>
   |
-  <%= link_to "Victory?", :action => "change_state", :state => "victory", :id => @hunt.id, :confirm => 'Are you sure you want to cancel?'%>
-  |
-</p>
+</p>  
+ 
+
 
 <p>
   <b>Possible Score:</b>
@@ -33,7 +39,7 @@
   <% for th in @hunt.users %>
       <td>
     <%= gravatar_for(th, {:class => 'photo'}) unless th.email.blank? %> <%=th.login %><br/>
-    Score: <%=th.score%><br/>
+    Score: <%=th.score%><br/>./s
       </td>
   <% end %>
     </tr>
