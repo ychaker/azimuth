@@ -45,7 +45,13 @@ class TreasuresController < ApplicationController
     respond_to do |format|
       if @treasure.save
         flash[:notice] = 'Treasure was successfully created.'
-        format.html { redirect_to(@treasure) }
+        format.html { 
+          if request.xhr? 
+            render :partial => 'show', :locals => { :treasure => @treasure }
+          else
+            redirect_to(@treasure) 
+          end
+        }
         format.xml  { render :xml => @treasure, :status => :created, :location => @treasure }
       else
         format.html { render :action => "new" }

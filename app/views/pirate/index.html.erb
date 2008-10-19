@@ -1,16 +1,39 @@
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAbA6V_HyNtbEogtA8ltGhpxTVn23A_oH_7n0_3g0PHDmJleqwMBQM7TxiELIcZnsty1lkjYfvFIOW3A">
-</script>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAbA6V_HyNtbEogtA8ltGhpxTVn23A_oH_7n0_3g0PHDmJleqwMBQM7TxiELIcZnsty1lkjYfvFIOW3A"></script>
 
-<div id="map" style="width: 60%; height: 100%"></div>
+<div id="map" style="width: 60%; height: 350px"></div>
 
-<div id="treasures">
-  <a href="#" id="hunt-new-link">new treasure hunt</a>
-  <div id="hunt-new">
-    <label for="hunt-new-name">New Treasure Hunt's Name</label><input id="hunt-new-name">
-    <input type="button" id="hunt-new-submit" value="Create">
+<div id="accordion">
+  <div id="hunts" class="right-container">
+    <div class="right-heading">
+      <%= image_tag '1.png', :class => "dropcap" %><h2>Choose a Treasure Hunt</h2>
+    </div>
+    <div class="right-content">
+      <ul id="hunt-list">
+      <% Hunt.find(:all).each do |h| %>
+        <li><a href="#" id="pick-hunt-<%=h.id%>"><%= h.name %></a></li>
+      <% end %>
+      </ul>
+      <div class="btn-center">
+        <input type="button" id="hunt-new-link" value="add new hunt">
+      </div>
+    </div>
   </div>
-  <div id="current-hunt">
-    <%= render(:partial => '/hunts/hunt', :locals => { :hunt => @hunt }) if @hunt %>    
+  <div id="add-clues" class="right-container">
+    <div class="right-heading">
+      <%= image_tag '2.png', :class => "dropcap" %><h2>Add Clues</h2>
+    </div>
+    <div class="right-content"></div>
+  </div>
+</div>
+<div id="hunt-new" class="right-container">
+  <div class="right-heading"><h2>Choose a Treasure Hunt</h2></div>
+  <div class="right-content">
+    <form>
+      <label for="hunt-new-name">New Treasure Hunt's Name</label><input id="hunt-new-name">
+      <div class="btn-center">
+        <input type="submit" id="hunt-new-submit" value="create">
+      </div>
+    </form>
   </div>
 </div>
 <%= javascript_include_tag 'pirate' %>
