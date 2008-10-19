@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Sms do
-  fixtures :users
+  fixtures :users, :teams, :hunts, :treasures
 
   it "should be able to detect lat long from a string" do
     raw = "55.5555 -111.2341"
@@ -68,10 +68,28 @@ describe Sms do
     sms.should_not be_is_key
   end
   
-  it "should parse and process a string containing lat/lng and determine if its within proximity" do
-    #raw = "34.555 -23.111"
-    #sms = Sms.new(:raw => raw)
-    #puts(sms.parseandprocess("quentin", raw))
+  it "should parse and process a string containing lat/lng and determine if its within proximity, expecting success" do
+    raw = "38.012411 -78.515275"
+    sms = Sms.new(:raw => raw)
+    sms.parseandprocess("quentin", raw).should include("SUCCESS")
+  end
+  
+  it "should parse and process a string containing lat/lng and determine if its within proximity, expecting failure" do
+    raw = "38.035581 -78.503548"
+    sms = Sms.new(:raw => raw)
+    sms.parseandprocess("quentin", raw).should include("FAILURE")
+  end
+  
+  it "should parse and process a string containing lat/lng and determine if its within proximity, expecting success" do
+    raw = "newcomb"
+    sms = Sms.new(:raw => raw)
+    sms.parseandprocess("quentin", raw).should include("SUCCESS")
+  end
+  
+  it "should parse and process a string containing lat/lng and determine if its within proximity, expecting failure" do
+    raw = "baddata"
+    sms = Sms.new(:raw => raw)
+    sms.parseandprocess("quentin", raw).should include("FAILURE")
   end
   
 end

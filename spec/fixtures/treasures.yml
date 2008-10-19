@@ -1,19 +1,21 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  id: 1
+  name: Icarus
   image: MyString
-  clue: MyString
-  description: MyString
+  clue: golden balls
+  description: look for the golden balls
   hunt_id: 1
   position: 1
-  lat: 1.5
-  lng: 1.5
-  proximity: 1.5
+  lat: 38.012331
+  lng: -78.514305
+  proximity: 1000
   points: 50
-  key: MyString
-
+  key: newcomb
+  
 two:
+  id: 2
   name: MyString
   image: MyString
   clue: MyString

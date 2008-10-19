@@ -11,6 +11,7 @@ quentin:
   activation_code:           
   activated_at:              <%= 5.days.ago.to_s :db %>
   state:                     active
+  team_id:                   1
       
 aaron:
   id:                        2

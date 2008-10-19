@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
   
   aasm_state :hunt_registering
   aasm_state :hunt_hunting#, :enter => :announce_start_of_hunt
-  aasm_state :hunt_complete#, :enter => :announce_hunt_completed, :enter => complete_hunt
-  aasm_state :hunt_cancelled#, :enter => :announce_team_canceled
   
   belongs_to :hunt
   has_many :hunts 
@@ -74,11 +72,11 @@ class User < ActiveRecord::Base
    end
 
    aasm_event :finish_hunt do 
-     transitions :to => :hunt_complete, :from => [:hunt_hunting]
+     transitions :to => :active, :from => [:hunt_hunting]
    end
 
    aasm_event :cancel do 
-     transitions :to => :hunt_cancelled, :from => [:hunt_registering, :hunt_hunting]
+     transitions :to => :active, :from => [:hunt_registering, :hunt_hunting]
    end
   
   def score
@@ -95,13 +93,26 @@ class User < ActiveRecord::Base
     self.start_treasure = treasure
     self.current_treasure = treasure
     self.begin_hunt
-    self.save
   end
   
   def join_hunt(hunt)
     hunt.users << self
     self.register_hunt
-    self.save
+  end
+  
+  def send_next_clue
+    puts "Trying to send clues to folks!"
+    if self.email
+      puts "Now emailing #{self.login} about clue: #{self.current_treasure.clue}"
+    end
+    
+    #if self.zeeped?
+    #  logger.error "Now sending text message about your clue: #{self.current_treasure.clue}"
+    #end
+  end
+  
+  def send_message (message)
+    puts "Sending message to #{self.login}: #{message}"
   end
   
 
