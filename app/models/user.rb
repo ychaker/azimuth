@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
    end
 
    aasm_event :finish_hunt do 
-     transitions :to => :active, :from => [:hunt_hunting, :active]
+     transitions :to => :active, :from => [:hunt_hunting, :active, :hunt_registering]
    end
 
    aasm_event :cancel do 
