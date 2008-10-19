@@ -79,13 +79,13 @@ class UsersController < ApplicationController
     @user = User.new(attributes)
 
     
+    # if we don't have a login, derive it from open id.
     if @user.login.blank? and !@user.identity_url.blank?
       s = @user.identity_url
       
       s = s[7..s.length] if s.starts_with?("http://")
-     # s = s[0..(s.length - 2)] if s.ends_with?('/')
-      
-      puts s
+      s = s[0..(s.length - 2)] if s.ends_with?('/')
+      #puts s
       @user.login = s
     end
     
@@ -116,7 +116,7 @@ class UsersController < ApplicationController
     redirect_back_or_default(welcome_url)
     flash[:notice] = "Thanks for signing up!"
 #    flash[:notice] << " We're sending you an email with your activation code." if @user.not_using_openid?
-    flash[:notice] << " You can now login with your OpenID." unless @user.not_using_openid?
+#    flash[:notice] << " You can now login with your OpenID." unless @user.not_using_openid?
   end
   
   def failed_creation(message = 'Sorry, there was an error creating your account')
