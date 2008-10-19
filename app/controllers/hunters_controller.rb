@@ -11,7 +11,7 @@ class HuntersController < ApplicationController
     end
   end
   
-  def change_team
+  def change_hunt
     @hunts = Hunt.being_planned
     render :template => "hunters/index"
   end

@@ -1,4 +1,4 @@
-<%= title "Profle", :h2 %>
+<%= title "Profile", :h2 %>
 <% form_for @user do |f| %>
 	<%= f.error_messages %>
 	<fieldset>
@@ -19,18 +19,20 @@
 				<%= f.label :password_confirmation, 'Confirm Password' %>
 				<%= f.password_field :password_confirmation %>
 			</li>
-		</ul>
-	</fieldset>
-	<fieldset>
-		<legend>Signup with OpenID</legend>
-		<ul>
 			<li>
 				<label for="openid_url">OpenID URL</label>
-				<%= text_field_tag :openid_url, params[:openid_url] || params['openid.identity'] %>
+				<%= text_field_tag :openid_url %>
 			</li>
 		</ul>
 	</fieldset>
 	<div class="buttons">
 		<%= submit_tag 'Edit Profile' %>
 	</div>
+	<br />
+	To receive text message alerts of clues, and to enable sending your discoveries back by text message, please make sure you have created a zeepmobile account below.  Ads may be inserted with your text messages, but you will not be spammed.
+	<iframe 
+	  style="width: 100%; height: 300px; border: none;" 
+	  id="zeep_mobile_settings_panel" 
+	  src="https://secure.zeepmobile.com/subscription/settings?api_key=4e26fd99-9087-481e-b5b9-62984a5cfbaf&user_id=<%= current_user.login %>">
+	</iframe>
 <% end %>

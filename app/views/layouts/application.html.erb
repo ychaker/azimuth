@@ -19,18 +19,24 @@
 			<div id="header">
   		  <% if current_user %>
   		  <div id="business-card">
-  		    <div style="float: left"><%= gravatar_for(current_user, {:class => 'photo'}) unless current_user.email.blank? %></div>
-  		    <%= current_user.login %>
-          <%= select("hunt", "id", current_user.hunts.collect{|h| ["#{h.name} [#{h.state.humanize}]", h.id]})%>
-  		    <% if logged_in? %>
-  		      <%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %> 
-  		      <%= link_to "Change Team", :controller => 'hunters', :action => 'change_team' %>
-  		    <% end %>
-  		    <br/>
-  		    <% if current_user.hunt %>
-  		      <%= "I am competing in: #{current_user.hunt.name}"%> (Currently <%= current_user.hunt.state.humanize %>)
-  		    <% end %>
-  		    
+  		    <div style="float: left">
+  		      <%= gravatar_for(current_user, {:class => 'photo'}) unless current_user.email.blank? %><br/>
+    		    <%= current_user.login %>
+    		  </div>
+    		  <div style="float: right">
+    		    <small>
+    		    <%= "My current hunt: "%>
+    		    <% if current_user.hunt %>
+    		      <%=  "#{current_user.hunt.name} (#{current_user.hunt.state.humanize})"%> | <%= link_to "Change Hunt", :controller => 'hunters', :action => 'change_hunt' %> | 
+    		    <% else %>
+    		    	None | 
+    		    <% end %>
+    		    <% if logged_in? %><%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %>
+    		    <% end %>
+    		    </small>
+    		    <br/><br/>
+  		      <%= "I have created #{current_user.hunts.size} hunt(s)" %><br/> <%= select("hunt", "id", current_user.hunts.collect{|h| ["#{h.name} [#{h.state.humanize}]", h.id]}) unless current_user.hunts.blank?%>
+		      </div>
   		  </div>
   		  <% end %>
 
