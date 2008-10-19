@@ -26,7 +26,7 @@
     		  <div style="float: right">
     		    <%= "My current hunt: "%>
     		    <% if current_user.hunt %>
-    		      <%= link_to current_user.hunt.name, hunt_path(current_user.hunt) %>  | <%#= link_to "Change Hunt", :controller => 'hunters', :action => 'change_hunt' %>
+    		      <%= link_to current_user.hunt.name, hunt_path(current_user.hunt) %>  | <%= link_to "Change Hunt", :controller => 'hunters', :action => 'change_hunt' %><br>
     		    <% else %>
     		      None | 
     		    <% end %>
@@ -37,8 +37,8 @@
   		      <%= "I have created #{current_user.hunts.size} hunt(s)" %>
   		      <br/> 
   		      <% unless current_user.hunts.blank? %>
-  		      <form action="/hunt/show/">
-  		        <select name="id" id="id" onchange="this.form.submit();">
+  		      <form action="/hunts/show/">
+  		        <select name="id" id="id" onchange="location.href = '/hunts/show/' + this.value;">
   		          <% for h in current_user.hunts %>
   		            <option value="<%=h.id%>"><%=h.name%></option>
   		          <% end %>

@@ -55,6 +55,10 @@ $(document).ready(function() {
 	});
 	
 	$("#start-hunt").click(function() {
+		if (curr_hunt == 0) {
+			alert("Please choose a hunt first");
+			return false;
+		}
 		location.href = "/hunters/start/" + curr_hunt;
 	});
 	
