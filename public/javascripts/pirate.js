@@ -1,10 +1,8 @@
 $(document).ready(function() {
 	hunt_list_click = function(obj) {
 		$("#accordion").accordion("activate", 1);
-		// console.log(obj);
 		id = $(obj).attr("id").split("-")[2];
 		$("#hunt_id").attr("value", id);
-		$("div#add-clues.right-container.selected > div.right-content").css("overflow","auto").css("height","");
 		$("#add-clues div.right-content-body").load('/hunts/' + id);
 	}
 	
@@ -35,6 +33,16 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	$("#hunt-new-cancel").click(function() {
+		$("#hunt-new").fadeOut("fast", function() {
+			$("#accordion").fadeIn();
+		});
+
+		$("#hunt-new input[type='text']").each(function() {
+			$(this).attr("value","");
+		});
+	});
+
 	$("#accordion").accordion({ 
 		header: "div.right-heading",
 		clearStyle: true
