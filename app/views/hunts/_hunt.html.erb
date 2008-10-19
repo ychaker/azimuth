@@ -1,1 +1,4 @@
-<li class="new-hunt-no-event"><a href="#" id="pick-hunt-<%=hunt.id%>"><%= hunt.name %></a></li>
+<li class="new-hunt-no-event" id="list-hunt-<%=hunt.id%>">
+  <div style="float: left; width:20px; height: 20px"><a href="#" class="delete-hunt-lnk" id="delete-hunt-<%=hunt.id%>">x</a></div>
+  <a href="#" class="select-hunt-lnk" id="pick-hunt-<%=hunt.id%>"><%= hunt.name %></a>
+</li>

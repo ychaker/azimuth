@@ -9,12 +9,6 @@ body {
 	margin: auto;
 }
 
-h3 {
-	margin: 0;
-	padding: 0;
-	font-size: 110%;
-}
-
 #header, #content {
     padding: 10px;
 }
@@ -23,6 +17,16 @@ h3 {
 	background: url(/images/bottom.png) no-repeat;
 	width: 960px;
 	height: 8px;
+}
+
+h3 {
+	margin: 0;
+	padding: 0;
+	font-size: 110%;
+}
+
+.chosen {
+	color: red;
 }
 
 .unwrap label {
