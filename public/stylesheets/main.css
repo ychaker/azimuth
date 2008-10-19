@@ -3,9 +3,13 @@ body {
 	margin: 0;
 }
 
+#map-options {
+/*	clear: left;*/
+}
+
 #right-root-container {
 	float: left;
-	width: 300px;	
+	width: 350px;	
 }
 
 .header {
@@ -101,7 +105,7 @@ h3 {
 }
 
 .chosen {
-	color: red;
+	color: #8C031C;
 }
 
 .unwrap label {
@@ -174,16 +178,23 @@ li.horiz {
 	float: left;
 }
 
+#geocode {
+	margin-top: 10px;
+	width: 300px;
+}
+
 form ul {
 	list-style: none;
 	padding: 0px;
 	margin: 0px;
 }
 
-#map_div {
+#map-container {
 	float: left;
 	border: 1px solid black;
 	margin: 10px;
+}
+#map {
 }
 
 #add-clues {
