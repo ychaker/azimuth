@@ -33,32 +33,35 @@ class SmsController < ApplicationController
   def incoming    
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
     #Read params from the text message
-    @userid = params[:uid]
-    @body = params[:body]    
     
-    sms = Sms.new(:raw => @body, :login => @userid)
+    if (params[:uid] && params[:body])
+      @userid = params[:uid]
+      @body = params[:body]    
     
-    sms.parse
+      sms = Sms.new(:raw => @body, :login => @userid)
     
-    user = User.find_by_login(sms.login)
+      sms.parse
     
-    if user.nil?
-      render :text => "User #{sms.login} couldn't be found, have you signed up at #{AZIMUTH_DOMAIN}?" 
-    else
-      hunt = user.hunt
-      if hunt.nil?
-        render :text => "User #{sms.login} doesn't appear to have signed up for a hunt.  Please sign up for one at #{AZIMUTH_DOMAIN}."
+      user = User.find_by_login(sms.login)
+    
+      if user.nil?
+        render :text => "User #{sms.login} couldn't be found, have you signed up at #{AZIMUTH_DOMAIN}?" 
       else
-        if hunt.aasm_current_state == :hunting
-          discovery = Discovery.new(:treasure => user.current_treasure, :key => sms.key, :lat => sms.lat, :lng => sms.lng, :hunt => hunt, :user => user)
-          hunt.attempt_open_treasure_chest(discovery, user)
-          user.save!
-          hunt.save!
-          discovery.save!
-      
-          render :text => ""  # don't send extra texts since the hunt will do it for us...
+        hunt = user.hunt
+        if hunt.nil?
+          render :text => "User #{sms.login} doesn't appear to have signed up for a hunt.  Please sign up for one at #{AZIMUTH_DOMAIN}."
         else
-          render :text => "The hunt #{hunt.name} is currently in #{hunt.state.humanize} state.  Please wait for the hounds to be released to get your first clue."
+          if hunt.aasm_current_state == :hunting
+            discovery = Discovery.new(:treasure => user.current_treasure, :key => sms.key, :lat => sms.lat, :lng => sms.lng, :hunt => hunt, :user => user)
+            hunt.attempt_open_treasure_chest(discovery, user)
+            user.save!
+            hunt.save!
+            discovery.save!
+      
+            render :text => ""  # don't send extra texts since the hunt will do it for us...
+          else
+            render :text => "The hunt #{hunt.name} is currently in #{hunt.state.humanize} state.  Please wait for the hounds to be released to get your first clue."
+          end
         end
       end
     end
