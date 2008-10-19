@@ -18,8 +18,13 @@ class HuntersController < ApplicationController
   
   def awaiting_start
     if current_user.hunt
-      if (current_user.hunt.aasm_current_state == :hunting)
+      if current_user.hunt.aasm_current_state == :hunting
         redirect_to :action => :continue
+      elsif current_user.hunt.aasm_current_state == :being_planned
+        
+      else
+        flash[:notice] = "The hunt #{current_user.hunt.name} has status #{current_user.hunt.state.humanize} and can't be done again."
+        redirect_to hunt_path(current_user.hunt)
       end
     end
   end
@@ -33,15 +38,24 @@ class HuntersController < ApplicationController
   end
   
   def check_clue
-    discovery = Discovery.new(:treasure => current_user.current_treasure, :key => params[:password], :hunt => current_user.hunt, :user => current_user)
-    current_user.hunt.attempt_open_treasure_chest(discovery, current_user)
-    current_user.save!
+    @discovery = Discovery.new(params[:discovery])
+    @discovery.treasure = current_user.current_treasure
+    @discovery.hunt = current_user.hunt
+    @discovery.user = current_user
     
-    if (discovery.success)
-      render :text => "Success!"
-    else
-      render :text => "Invalid Passcode"
-    end
+    current_user.hunt.attempt_open_treasure_chest(@discovery, current_user)
+    current_user.save!
+    current_user.hunt.save!
+    @discovery.save!
+    
+    respond_to do |format|
+      if @discovery.success
+        flash[:notice] = 'Treasure was successfully found!.'
+        format.html { redirect_to :action => "continue" }
+      else
+        format.html { render :action => "new" }
+      end
+    end    
   end
   
   def start
@@ -55,6 +69,7 @@ class HuntersController < ApplicationController
   def continue
     if current_user.hunt && current_user.hunt.aasm_current_state == :hunting
       @treasure = current_user.current_treasure
+      @discovery = Discovery.new
     else
       redirect_to :action => :awaiting_start
     end

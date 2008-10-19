@@ -53,6 +53,8 @@ class SmsController < ApplicationController
           discovery = Discovery.new(:treasure => user.current_treasure, :key => sms.key, :lat => sms.lat, :lng => sms.lng, :hunt => hunt, :user => user)
           hunt.attempt_open_treasure_chest(discovery, user)
           user.save!
+          hunt.save!
+          discovery.save!
       
           render :text => ""  # don't send extra texts since the hunt will do it for us...
         else

@@ -6,6 +6,15 @@ class Treasure < ActiveRecord::Base
   validates_presence_of :name, :clue, :points
   validate :presence_of_position
   validate :presence_of_proximity
+  
+  def key_only?
+    if self.lat == nil and self.lng == nil and self.key != nil
+      true
+    else
+      false  
+    end  
+  end
+  
   def proximate?(discovery)
     
     # find distance in kilometers

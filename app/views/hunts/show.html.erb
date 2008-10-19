@@ -3,6 +3,13 @@
   <%=h @hunt.name %>
 </p>
 
+<p>
+  <b>Treasure Hunters:</b>
+  <br/>
+  <% for th in @hunt.users %>
+    <%= gravatar_for(th, {:class => 'photo'}) unless th.email.blank? %> <%=th.login %><br/>
+    Score: <%=th.score%><br/>
+  <% end %>
+</p>
 
-<%= link_to 'Edit', edit_hunt_path(@hunt) %> |
-<%= link_to 'Back', hunts_path %>
+
