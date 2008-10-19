@@ -46,11 +46,19 @@ class SmsController < ApplicationController
       render :text => "User #{sms.login} couldn't be found, have you signed up at #{AZIMUTH_DOMAIN}?" 
     else
       hunt = user.hunt
-      discovery = Discovery.new(:treasure => user.current_treasure, :lat => sms.lat, :lng => sms.lng, :hunt => hunt, :user => user)
-      hunt.attempt_open_treasure_chest(discovery, user)
-      user.save!
+      if hunt.nil?
+        render :text => "User #{sms.login} doesn't appear to have signed up for a hunt.  Please sign up for one at #{AZIMUTH_DOMAIN}."
+      else
+        if hunt.aasm_current_state == :hunting
+          discovery = Discovery.new(:treasure => user.current_treasure, :key => sms.key, :lat => sms.lat, :lng => sms.lng, :hunt => hunt, :user => user)
+          hunt.attempt_open_treasure_chest(discovery, user)
+          user.save!
       
-      render :text => ""  # don't send extra texts since the hunt will do it for us...
+          render :text => ""  # don't send extra texts since the hunt will do it for us...
+        else
+          render :text => "The hunt #{hunt.name} is currently in #{hunt.state.humanize} state.  Please wait for the hounds to be released to get your first clue."
+        end
+      end
     end
   
   end

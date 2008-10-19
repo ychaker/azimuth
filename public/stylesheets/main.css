@@ -3,9 +3,9 @@ body {
 	margin: 0;
 }
 
-#accordion {
+#right-root-container {
 	float: left;
-	width: 300px;
+	width: 300px;	
 }
 
 #business-card {
@@ -17,11 +17,21 @@ body {
 	text-align: center;
 }
 
+.buttons-left {
+	text-align: left;
+}
+
 #login-box {
 	width: 250px;
 	float: right;
 	border: 1px solid #95a5c6;
 	background-color: #d8dfea;
+}
+
+#signup-box {
+	border: 1px solid #95a5c6;
+	background-color: #d8dfea;
+	width: 300px;
 }
 
 .left-content {
@@ -301,4 +311,22 @@ label {
 /*	border: 2px solid black;*/
 	border-top: none;
 	z-index: 2;
+}
+
+.sms-reminder {
+	float: right;
+	overflow: visible;
+	background: #fff url("../images/iphone.jpg") no-repeat 5px 5px;
+	border: 1px solid #ccc;
+	width: 400px;
+	margin: 10px;
+	padding: 15px 15px 15px 80px;
+}
+
+.sms-reminder h3 {
+	
+}
+
+.left {
+	float: left;
 }

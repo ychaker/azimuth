@@ -34,7 +34,7 @@ class Hunt < ActiveRecord::Base
     current_treasure = user.current_treasure
 
     discovery.success = current_treasure.proximate?(discovery) if (discovery.lat)
-    discovery.success = current_treasure.key == discovery.key if (discovery.key)
+    discovery.success = current_treasure.key.downcase == discovery.key.downcase if (discovery.key)
     
     if discovery.success?
       if current_treasure.last?
