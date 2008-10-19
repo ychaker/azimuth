@@ -1,5 +1,5 @@
 <div class="left-content">
-<h3>  Welcome to Azimuth!</h3>
+  <h3>Welcome to Azimuth!</h3>
 
   <p>Azimuth allows you to create Treasure Hunts, and have teams compete to find the treasure.</p>
 
@@ -33,9 +33,5 @@
 	<div class="buttons">
 		<%= submit_tag 'Login' %>
 	</div>
-<% end -%>
-</div>	
+<% end unless logged_in? -%>
 </div>
-<!-- BEGIN ID SELECTOR -->
-<script type="text/javascript" id="__openidselector" src="https://www.idselector.com/selector/335acb70f626e892102f88a572192fd5484ab019" charset="utf-8"></script>
-<!-- END ID SELECTOR -->

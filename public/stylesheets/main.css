@@ -31,9 +31,13 @@ body {
 	margin-bottom: 20px;
 }
 
+.discovery-cell input[type='text'] {
+	width: 145px;
+}
+
 div.discovery-cell {
 	float: left;
-	width: 175px;
+	width: 195px;
 }
 
 h4 {
@@ -59,6 +63,7 @@ h4 {
 	float: right;
 	border: 1px solid #95a5c6;
 	background-color: #d8dfea;
+	padding-bottom: 10px;
 }
 
 #hunt-progress {
@@ -74,6 +79,7 @@ h4 {
 #signup-box {
 	border: 1px solid #95a5c6;
 	background-color: #d8dfea;
+	padding-bottom: 10px;
 	width: 300px;
 }
 
@@ -94,8 +100,11 @@ h4 {
 
 #footer {
 	background: url(/images/bottom.png) no-repeat bottom center;
-	width: 960px;
-	height: 140px;
+	height: 120px;
+}
+
+#footer a{
+	color: #000000;
 }
 
 h3 {

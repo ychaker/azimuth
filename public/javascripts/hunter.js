@@ -1,9 +1,9 @@
 $(function() {
 	$(document).ready(function() {
-		$("#accordion").accordion({ 
-			header: "div.heading",
-			clearStyle: true
-		});
+		// $("#accordion").accordion({ 
+		// 	header: "div.heading",
+		// 	clearStyle: true
+		// });
 		
 		$("#discovery input[type='submit']").click(function() {
 			$("#progress").text("checking...");
