@@ -20,6 +20,13 @@ $(document).ready(function() {
 
 	$("#hunt-list").sortable({});
 
+	$("div#add-clues div.right-heading").click(function() {
+		if (curr_hunt == 0) {
+			alert("Please choose a hunt first");
+			return false;
+		}
+	});
+	
 	$("#hunt-new-submit").click(function() {
 		vars = { authenticity_token: window._token };
 		
@@ -57,6 +64,10 @@ $(document).ready(function() {
 	
 	function delete_hunt(obj) {
 		id = $(obj).attr('id').split('-')[2];
+		if (id == curr_hunt) {
+			curr_hunt = 0;
+		}
+		
 		$.ajax({
 			type: 'DELETE',
 			url: '/hunts/' + id + "?authenticity_token=" + window._token,
