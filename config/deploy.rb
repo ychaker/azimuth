@@ -8,7 +8,7 @@ role :db, "ychaker@li47-74.members.linode.com", :primary => true
 
 set :deploy_to, "/var/www/apps/#{application}"
 set :scm, :git
-set :branch, "master"
+set :branch, "railsrumble"
 
 namespace :deploy do
 	desc "restart passenger" 
