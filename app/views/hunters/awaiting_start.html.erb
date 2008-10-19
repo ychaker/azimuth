@@ -1,0 +1,25 @@
+<div style="text-align: center">
+<h3><%= session[:hunt].name %></h3><br>
+Your hunt will begin shortly. <br>
+
+<img src="/images/burns.png"><br>
+
+Please check back in when we ... <br>RELEASE THE HOUNDS!<br>
+(for now, Rails Rumblers can go <a id="release-the-hounds" href="#">release the hounds</a> yourselves)
+</div>
+
+
+<script>
+$(function() { // sandbox and scope!
+  
+  $(document).ready(function() { 
+    $("#release-the-hounds").click(function() {
+    	console.log("/hunts/update/<%= session[:hunt].id %>");
+    	$.post("/hunts/update/<%= session[:hunt].id %>", 
+    	    { hunt_event : 'release_the_hounds', authenticity_token: window._token }, function() {
+            location.href = "/hunters/continue";
+    	}); // ajax
+    }); // click()    
+  }); // document.ready
+}); // sandboxing block
+</script>

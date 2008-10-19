@@ -1,16 +1,30 @@
 class HuntersController < ApplicationController
   def index
-    @hunts = Hunt.hunting
-    
-    # THink about if we want to filter out owners....
-    #@hunts = @hunts.select{ |h| h.user != current_user }
     if (session[:hunt])
-      redirect_to :action => :continue
+      h = Hunt.find(session[:hunt].id)
+      puts h.aasm_current_state
+      if (h.aasm_current_state == :hunting)
+        redirect_to :action => :continue
+      else
+        redirect_to :action => :awaiting_start
+      end
+    else
+      @hunts = Hunt.being_planned
+    end
+  end
+  
+  def awaiting_start
+    if (session[:hunt])
+      h = Hunt.find(session[:hunt].id)
+      if (h.aasm_current_state == :hunting)
+        redirect_to :action => :continue
+      end
     end
   end
   
   def reset
     session[:hunt] = nil
+    session[:hunt_treasures] = nil
     session[:hunt_start] = nil
     session[:hunt_current] = nil
     redirect_to :action => :index
@@ -24,12 +38,13 @@ class HuntersController < ApplicationController
     session[:hunt] = Hunt.find(params[:id])
     session[:hunt_start] = rand(session[:hunt].treasures.size)
     session[:hunt_current] = session[:hunt_start]
-    redirect_to :action => :continue
+    redirect_to :action => :index
   end
   
   def continue
     if (session[:hunt])
-      @treasure = session[:hunt].treasures[session[:hunt_current]]
+      treasures = Hunt.find(session[:hunt].id).treasures
+      @treasure = treasures[session[:hunt_current]]
     else
       redirect_to :action => :index
     end

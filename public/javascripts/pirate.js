@@ -19,7 +19,7 @@ $(document).ready(function() {
 	$("#hunt-new-submit").click(function() {
 		vars = { authenticity_token: window._token };
 		
-		$("#hunt-new input[type='text'], #hunt-new input[type='hidden']")
+		$("#hunt-new input[type='text'], #hunt-new input[type='hidden'], #hunt-new textarea")
 			.each(function() {
 				vars['hunt[' + $(this).attr('id') + ']'] = $(this).attr('value');
 			});
@@ -68,7 +68,7 @@ $(document).ready(function() {
 	});
 	
 	$("#treasure-new-submit").click(function() {
-		vars = { authenticity_token: window._token, 'treasure[hunt_id]' : curr_hunt };
+		vars = { authenticity_token: window._token, 'treasure[hunt_id]' : curr_hunt, 'treasure[description]' : '--' };
 		
 		$("#treasure-new input[type='text'], #treasure-new input[type='hidden']")
 			.each(function() {

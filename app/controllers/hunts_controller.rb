@@ -68,7 +68,7 @@ class HuntsController < ApplicationController
     @treasure = Treasure.new(params[:treasure])
 
     respond_to do |format|
-      if @treasure.save
+      if @treasure.save!
         format.html { 
           if request.xhr? 
             render :partial => '/treasures/show', :locals => { :treasure => @treasure }
@@ -96,9 +96,15 @@ class HuntsController < ApplicationController
 
     respond_to do |format|
       if @hunt.update_attributes(params[:hunt])
-        flash[:notice] = 'Hunt was successfully updated.'
-        format.html { redirect_to(@hunt) }
-        format.xml  { head :ok }
+        # flash[:notice] = 'Hunt was successfully updated.'
+          format.html { 
+            if request.xhr?
+              render :text => "Released!"
+            else
+              redirect_to(@hunt) 
+            end
+          }
+          format.xml  { head :ok }          
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @hunt.errors, :status => :unprocessable_entity }
