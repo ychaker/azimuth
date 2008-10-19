@@ -19,7 +19,7 @@ render_tabnav :main,
   add_tab do |t|
     t.named "Home"
     t.links_to '/welcome'
-  end
+  end if logged_in?
   
   add_tab do |t|
      t.named "Hide Treasure"
@@ -50,7 +50,12 @@ render_tabnav :main,
   add_tab do |t|
      t.named "Profile"
      t.links_to :controller => 'users', :action => 'profile'
-  end unless !logged_in?
+  end if logged_in?
+
+  add_tab do |t|
+     t.named "Tour"
+     t.links_to :controller => 'sessions', :action => 'tour'
+  end 
 
   #add_tab do |t|
   #  t.named 'Home'
