@@ -11,7 +11,9 @@ quentin:
   activation_code:           
   activated_at:              <%= 5.days.ago.to_s :db %>
   state:                     active
-  team_id:                   1
+  current_treasure_id:       1
+  hunt_id:                   1
+  start_treasure_id:         1
       
 aaron:
   id:                        2

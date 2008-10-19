@@ -47,7 +47,7 @@ class Sms < ActiveRecord::Base
       user = User.find_by_login(userid)
       if user
         #find out the hunt that the user is working on
-        t = user.team.current_treasure 
+        t = user.current_treasure 
 
         @success = false
         if smsinfo.is_geocode?

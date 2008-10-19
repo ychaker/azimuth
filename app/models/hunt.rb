@@ -1,6 +1,8 @@
 class Hunt < ActiveRecord::Base
   include AASM
   
+  validates_presence_of :name, :user_id, :description
+  
   has_many :treasures, :dependent => :destroy, :order => "position"
   
   belongs_to :user
