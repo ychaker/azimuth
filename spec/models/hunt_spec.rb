@@ -54,23 +54,14 @@ describe Hunt do
   end
 end
 
-describe "Eric, Youssef and Ashish want to do a treasure hunt" do
+describe "Eric and Ashish want to do a treasure hunt" do
   it "should be easy and fun" do
     #pending "Current flushing out"
     #create users, one own and two hunters
     eric = create_user({:name => "Eric", :login => "epugh"})
-    youssef = create_user({:name => "Youssef", :login => "ychaker", :email => "ychaker@o19s.com"})
     ashish =  create_user({:name => "Ashish", :login => "atonse", :email => "atonse@gmail.com"})
+    ashish.activate
     ashish.save!
-    youssef.save!
-    
-    #create hunter team
-    ya_team = Team.new(:name => "YA Team")
-    ya_team.treasure_hunters << youssef
-    ya_team.treasure_hunters << ashish
-    ya_team.save
-    ya_team.treasure_hunters.size.should == 2
-    ya_team.aasm_current_state.should == :registering
     
     hunt = Hunt.create!(:name => "Eric's Hunt", :description => "A hunt around cville.")
     hunt.state.should == "being_planned"
@@ -94,91 +85,92 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
     hunt.save!
     
 
-    hunt.teams << ya_team
-    ya_team.hunt = hunt
     
-    ya_team.start_hunt(second_treasure) 
-    ya_team.current_treasure.should == second_treasure
-    ya_team.save!
-    ya_team.score.should == 0
-    ya_team.aasm_current_state.should == :hunting
     
-    ya_team.should == youssef.team
+    ashish.join_hunt(hunt)
+    ashish.hunt.should == hunt
+    ashish.aasm_current_state.should == :hunt_registering
+    
+    ashish.start_hunt(second_treasure) 
+    ashish.current_treasure.should == second_treasure
+    ashish.save!
+    ashish.score.should == 0
+    ashish.aasm_current_state.should == :hunt_hunting
+    
     
 #    pending ("Working on state machine")
     hunt.release_the_hounds
     
     hunt.aasm_current_state.should == :hunting
      
-    ya_team.current_treasure.name.should == "White Spot"
+    ashish.current_treasure.name.should == "White Spot"
     
     #sms = Sms.new(:raw => "62.1288 -91.5773")
     #sms.parse
-    ya_team.hunt.should == hunt
+    ashish.hunt.should == hunt
     
-    d = Discovery.new(:treasure => ya_team.current_treasure, :lat => 62.1278, :lng => -91.5763, :hunt => hunt, :team_id => ya_team.id)
-    ya_team.discoveries << d
+    d = Discovery.new(:treasure => ashish.current_treasure, :lat => 62.1278, :lng => -91.5763, :hunt => hunt, :user_id => ashish.id)
+    ashish.discoveries << d
     d.save
-    d.team.should == ya_team
+    d.user.should == ashish
     d.hunt.should == hunt
-    d.team.hunt.should == hunt
+    d.user.hunt.should == hunt
     
-    ya_team.save!
+    ashish.save!
 
-    ya_team.hunt.should == hunt
-    d.team.hunt.should == hunt
-    ya_team.discoveries.size.should == 1
+    ashish.hunt.should == hunt
+    d.user.hunt.should == hunt
+    ashish.discoveries.size.should == 1
     
-    hunt.attempt_open_treasure_chest(d, ya_team)
+    hunt.attempt_open_treasure_chest(d, ashish)
     
     d.save!
     d.success.should be_true
-    ya_team.save!
+    ashish.save!
     
-    ya_team.current_treasure.should == third_treasure
+    ashish.current_treasure.should == third_treasure
     
-    ya_team.discoveries.size.should == 1
-    youssef.team.discoveries.size.should == 1
-    ya_team.score.should == 25
-    
+    ashish.discoveries.size.should == 1
+    ashish.score.should == 25
     
     
-    failed_discovery = Discovery.new(:treasure => ya_team.current_treasure, :lat => 70.1118, :lng => -85.5753, :team_id => ya_team.id)
-    ya_team.discoveries << failed_discovery
+    
+    failed_discovery = Discovery.new(:treasure => ashish.current_treasure, :lat => 70.1118, :lng => -85.5753, :user_id => ashish.id)
+    ashish.discoveries << failed_discovery
     failed_discovery.save
     
-    hunt.attempt_open_treasure_chest(failed_discovery, ya_team)
+    hunt.attempt_open_treasure_chest(failed_discovery, ashish)
     
     failed_discovery.success.should be_false
     
-    ya_team.score.should == 25
-    ya_team.current_treasure.should == third_treasure
+    ashish.score.should == 25
+    ashish.current_treasure.should == third_treasure
     
-    next_discovery = Discovery.new(:treasure => ya_team.current_treasure, :lat => 70.1278, :lng => -85.5765, :hunt => hunt, :team_id => ya_team.id)
-    ya_team.discoveries << next_discovery
+    next_discovery = Discovery.new(:treasure => ashish.current_treasure, :lat => 70.1278, :lng => -85.5765, :hunt => hunt, :user_id => ashish.id)
+    ashish.discoveries << next_discovery
     next_discovery.save
     
-    hunt.attempt_open_treasure_chest(next_discovery, ya_team)
+    hunt.attempt_open_treasure_chest(next_discovery, ashish)
     
     next_discovery.success.should be_true
     
-    ya_team.score.should == 60
-    ya_team.current_treasure.should == first_treasure
+    ashish.score.should == 60
+    ashish.current_treasure.should == first_treasure
     
     
     #pending("still working")
-    last_discovery = Discovery.new(:treasure => ya_team.current_treasure, :lat => 70.2278, :lng => -85.5864, :hunt => hunt, :team_id => ya_team.id)
-    ya_team.discoveries << last_discovery
+    last_discovery = Discovery.new(:treasure => ashish.current_treasure, :lat => 70.2278, :lng => -85.5864, :hunt => hunt, :user_id => ashish.id)
+    ashish.discoveries << last_discovery
     last_discovery.save
-    ya_team.discoveries.size.should == 4
+    ashish.discoveries.size.should == 4
     
-    hunt.attempt_open_treasure_chest(last_discovery, ya_team)
+    hunt.attempt_open_treasure_chest(last_discovery, ashish)
     
     last_discovery.success.should be_true
     
-    ya_team.score.should == 75
-    ya_team.current_treasure.should == second_treasure
-    ya_team.aasm_current_state.should == :complete
+    ashish.score.should == 75
+    ashish.current_treasure.should == second_treasure
+    ashish.aasm_current_state.should == :hunt_complete
   end
   
 protected  

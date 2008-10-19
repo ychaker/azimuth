@@ -6,9 +6,19 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
   include Authorization::AasmRoles
   
-  belongs_to :team
+  aasm_state :hunt_registering
+  aasm_state :hunt_hunting#, :enter => :announce_start_of_hunt
+  aasm_state :hunt_complete#, :enter => :announce_hunt_completed, :enter => complete_hunt
+  aasm_state :hunt_cancelled#, :enter => :announce_team_canceled
   
-  has_many :hunts
+  belongs_to :hunt
+  has_many :hunts 
+
+  belongs_to :start_treasure, :class_name => "Treasure" 
+  belongs_to :current_treasure, :class_name => "Treasure"
+  
+  has_many :discoveries
+  
 
   # Validations
   validates_presence_of :login, :if => :not_using_openid?
@@ -53,6 +63,58 @@ class User < ActiveRecord::Base
   def password_required?
     new_record? ? not_using_openid? && (crypted_password.blank? || !password.blank?) : !password.blank?
   end
+  
+  ######
+  aasm_event :register_hunt do
+     transitions :to => :hunt_registering, :from => [:active]
+   end
+   
+  aasm_event :begin_hunt do
+     transitions :to => :hunt_hunting, :from => [:hunt_registering]
+   end
+
+   aasm_event :finish_hunt do 
+     transitions :to => :hunt_complete, :from => [:hunt_hunting]
+   end
+
+   aasm_event :cancel do 
+     transitions :to => :hunt_cancelled, :from => [:hunt_registering, :hunt_hunting]
+   end
+  
+  def score
+    points = 0
+    discoveries_for_hunt = self.discoveries.select{ |discovery| discovery.hunt == self.hunt }
+    
+    successful_discoveries = discoveries_for_hunt.select{ |discovery| discovery.success? }
+    successful_discoveries.each {|discovery| points += discovery.treasure.points } 
+    
+    points
+  end
+  
+  def start_hunt(treasure)
+    self.start_treasure = treasure
+    self.current_treasure = treasure
+    self.begin_hunt
+    self.save
+  end
+  
+  def join_hunt(hunt)
+    hunt.users << self
+    self.register_hunt
+    self.save
+  end
+  
+  def send_clue
+    logger.error "Trying to send clues to folks!"
+    if self.email
+      logger.error "Now sending email about your clue: #{self.current_treasure.clue}"
+    end
+    
+    #if self.zeeped?
+    #  logger.error "Now sending text message about your clue: #{self.current_treasure.clue}"
+    #end
+  end
+  
 
   protected
     

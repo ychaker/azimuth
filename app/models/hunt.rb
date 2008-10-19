@@ -5,13 +5,13 @@ class Hunt < ActiveRecord::Base
   
   belongs_to :user
   
-  has_many :teams
+  has_many :users
   
   aasm_column :state
   aasm_initial_state :being_planned
   
   aasm_state :being_planned
-  aasm_state :hunting#, :enter => :send_initial_txt_messages
+  aasm_state :hunting, :enter => :send_initial_txt_messages
   aasm_state :complete#, :enter => :announce_end_of_hunt  
   aasm_state :cancelled#, :enter => :announce_hunt_canceled 
   
@@ -28,21 +28,21 @@ class Hunt < ActiveRecord::Base
   end
   
   
-  def attempt_open_treasure_chest(discovery, team)
-    current_treasure = team.current_treasure
+  def attempt_open_treasure_chest(discovery, user)
+    current_treasure = user.current_treasure
     
     discovery.success = current_treasure.proximate?(discovery)
     
     
     if discovery.success?
       if current_treasure.last?
-        team.current_treasure = team.hunt.treasures.first
+        user.current_treasure = user.hunt.treasures.first
       else
-        team.current_treasure = team.hunt.treasures.find(current_treasure).lower_item
+        user.current_treasure = user.hunt.treasures.find(current_treasure).lower_item
       end
-      if team.current_treasure == team.start_treasure
+      if user.current_treasure == user.start_treasure
         puts "YOU ARE ALL DONE"
-        team.finish_hunt
+        user.finish_hunt
       end
     end
   end
@@ -54,6 +54,11 @@ class Hunt < ActiveRecord::Base
     treasures.each {|treasure| points += treasure.points } 
     
     points
+  end
+  
+  # bank out to the members that we are ready to go.
+  def send_initial_txt_messages
+    users.each { |u| u.send_clue}
   end
     
 end

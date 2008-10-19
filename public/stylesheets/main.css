@@ -40,6 +40,7 @@ div.unwrap {
 
 div.right-heading, div.heading {
 	overflow: auto;
+	cursor: hand;
 }
 
 .right-heading h2, .heading h2 {
@@ -173,6 +174,21 @@ h2 {
 #content {
 	overflow: auto;
 	padding: 20px;
+}
+
+#business-card {
+	float: right;
+}
+
+#user-choices ul {
+	list-style: none;
+	display: block;
+	font-size: 150%;
+}
+
+#user-choices li {
+	float: left;
+	width: 30%;
 }
 
 #header {
