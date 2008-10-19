@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
   include Authorization::AasmRoles
+  
+  belongs_to :team
+  
+  has_many :hunts
 
   # Validations
   validates_presence_of :login, :if => :not_using_openid?

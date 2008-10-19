@@ -31,29 +31,16 @@ class SmsController < ApplicationController
   # GET /sms/incoming
   # GET /sms/incoming.xml
   def incoming    
-    response.headers["Content-Type"] = "text/plain; charset=utf-8"
     
+    #Read params from the text message
     @userid = params[:uid]
-    @body = params[:body]
+    @body = params[:body]    
     
-    if (@body == nil)
-      render :text => "page accessed directly.  should only be accessed via post after a text message"
-    else  
-      smsinfo = Sms.new(:raw => @body)
-      smsinfo.parse()
+    smsinfo = Sms.new(:raw => @body)
     
-      @reply_message = "User: #{@userid}, "
-    
-      if (smsinfo.is_geocode?)
-        @reply_message += " lat: #{smsinfo.lat} lng: #{smsinfo.lng}"
-      end
-    
-      if (smsinfo.is_key?)
-        @reply_message += " key: #{smsinfo.key}"
-      end  
-      
-      render :text => @reply_message
-    end
+    response.headers["Content-Type"] = "text/plain; charset=utf-8"
+    render :text => smsinfo.parseandprocess(@userid, @body)
+  
   end
 
   # GET /sms/send_sms

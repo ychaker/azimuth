@@ -57,10 +57,20 @@ end
 describe "Eric, Youssef and Ashish want to do a treasure hunt" do
   it "should be easy and fun" do
     #pending "Current flushing out"
-    eric = create_user(Pirate,{:name => "Eric", :login => "epugh"})
-    youssef = create_user(TreasureHunter,{:name => "Youssef", :login => "ychaker", :email => "ychaker@o19s.com"})
-    ashish =  create_user(TreasureHunter,{:name => "Ashish", :login => "atonse", :email => "atonse@gmail.com"})
+    #create users, one own and two hunters
+    eric = create_user({:name => "Eric", :login => "epugh"})
+    youssef = create_user({:name => "Youssef", :login => "ychaker", :email => "ychaker@o19s.com"})
+    ashish =  create_user({:name => "Ashish", :login => "atonse", :email => "atonse@gmail.com"})
     ashish.save!
+    youssef.save!
+    
+    #create hunter team
+    ya_team = Team.new(:name => "YA Team")
+    ya_team.treasure_hunters << youssef
+    ya_team.treasure_hunters << ashish
+    ya_team.save
+    ya_team.treasure_hunters.size.should == 2
+    ya_team.aasm_current_state.should == :registering
     
     hunt = Hunt.create!(:name => "Eric's Hunt", :description => "A hunt around cville.")
     hunt.state.should == "being_planned"
@@ -68,7 +78,10 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
     
     
     eric.hunts << hunt
-    hunt.pirate.should == eric
+    hunt.user.should == eric
+    
+    eric.hunts.size.should == 1
+    
     first_treasure = Treasure.create!(:name => "Icarus Balls", :image => "http://farm4.static.flickr.com/3280/2950800503_8f00180b88_t.jpg", :points => 15, :lat => 52.1278, :lng => -81.5763, :proximity => 50, :clue => "Something Shiny")
     second_treasure = Treasure.create!(:name => "White Spot", :image => "http://www.foodhistory.com/foodnotes/road/va/ch/wh/01/03-image.jpg", :points => 25, :lat => 62.1278, :lng => -91.5763, :proximity => 30, :clue => "Best Burgers at 2 am")
     second_treasure.position.should == 2
@@ -79,19 +92,16 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
     hunt.total_points.should == 75
     hunt.treasures.size.should == 3
     hunt.save!
-    ya_team = Team.new(:name => "YA Team")
-    ya_team.treasure_hunters << youssef
-    ya_team.treasure_hunters << ashish
-    ya_team.treasure_hunters.size.should == 2
+    
 
     hunt.teams << ya_team
-    ya_team.current_hunt = hunt
-
-    ya_team.start_treasure = second_treasure
-    ya_team.current_treasure = second_treasure  # THIS LINE SUCKS< SHOULD BE DONE BY SETTING START
+    ya_team.hunt = hunt
+    
+    ya_team.start_hunt(second_treasure) 
     ya_team.current_treasure.should == second_treasure
     ya_team.save!
     ya_team.score.should == 0
+    ya_team.aasm_current_state.should == :hunting
     
     ya_team.should == youssef.team
     
@@ -104,38 +114,47 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
     
     #sms = Sms.new(:raw => "62.1288 -91.5773")
     #sms.parse
-    ya_team.current_hunt.should == hunt
+    ya_team.hunt.should == hunt
     
-    d = Discovery.new(:treasure => ya_team.current_treasure, :lat =>62.1288, :lng => -91.5773, :hunt => hunt )
+    d = Discovery.new(:treasure => ya_team.current_treasure, :lat => 62.1278, :lng => -91.5763, :hunt => hunt, :team_id => ya_team.id)
     ya_team.discoveries << d
+    d.save
     d.team.should == ya_team
     d.hunt.should == hunt
-    d.team.current_hunt = hunt
+    d.team.hunt.should == hunt
     
     ya_team.save!
 
-    ya_team.current_hunt.should == hunt
-    d.team.current_hunt.should == hunt
+    ya_team.hunt.should == hunt
+    d.team.hunt.should == hunt
     ya_team.discoveries.size.should == 1
     
-    hunt.attempt_open_treasure_chest(d)
+    hunt.attempt_open_treasure_chest(d, ya_team)
     
     d.save!
     d.success.should be_true
-    d.team.current_treasure.should == third_treasure
+    ya_team.save!
     
-    ya_team.reload
+    ya_team.current_treasure.should == third_treasure
+    
     ya_team.discoveries.size.should == 1
     youssef.team.discoveries.size.should == 1
-    d.team.score.should == 25
+    ya_team.score.should == 25
     
     
     
-    pending("still working")
-        
-    ashish.discover(:lat => 70.1118, :lng => -85.5753, :proof_of_life => "coords").should be_false
+    failed_discovery = Discovery.new(:treasure => ya_team.current_treasure, :lat => 70.1118, :lng => -85.5753, :team_id => ya_team.id)
+    ya_team.discoveries << failed_discovery
+    failed_discovery.save
+    
+    hunt.attempt_open_treasure_chest(failed_discovery, ya_team)
+    
+    failed_discovery.success.should be_false
+    
     ya_team.score.should == 25
     ya_team.current_treasure.should == third_treasure
+    
+    pending("still working")
     ashish.discover(:lat => 70.1268, :lng => -85.5753, :proof_of_life => "coords").should be_true
     ya_team.score.should == 60
     ya_team.current_treasure.should == first_treasure
@@ -147,8 +166,8 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
   end
   
 protected  
-  def create_user(clazz, options = {})
-    record = clazz.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
+  def create_user( options = {})
+    record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
     record.register! if record.valid?
     record
   end  
