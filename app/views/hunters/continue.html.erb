@@ -1,14 +1,29 @@
+<div class="header">
 <h2>Hunt: <%= current_user.hunt.name %></h2>
+</div>
+<div id="hunt-clue">
+  <h4>Your Clue</h4>
+  <%= @treasure.clue %>
 
-<h4>Your Clue</h4>
-<%= @treasure.clue %>
+  <form id="discovery">
+    <h4>Found the clue? Enter the key or coordinates</h4>
+      <div class="discovery-cell">
+      Latitude:<br>
+      <input type="text" id="lat"><br>
+      Longitude:<br>
+      <input type="text" id="lon">
+    </div>
+    <div class="discovery-cell">
+      Key:<br>
+      <input type="text" id="password"><br><br>
+      <input type="submit">
+    </div>
+  </form>
+  <span id="progress"></span>
 
-<h4>Found the clue?</h4>
-Enter the key:
-<form id="discovery">
-  <input type="text" id="password">
-  <input type="submit">
-</form>
-<span id="progress"></span>
-
-<%= javascript_include_tag 'hunter' %>
+  <%= javascript_include_tag 'hunter' %>
+</div>
+<div id="hunt-progress">
+  <h3>Progress throughout the hunt</h3>
+  
+</div>
