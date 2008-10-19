@@ -6,7 +6,7 @@ class Team < ActiveRecord::Base
   
   aasm_state :registering
   aasm_state :hunting#, :enter => :announce_start_of_hunt
-  aasm_state :complete#, :enter => :announce_hunt_completed
+  aasm_state :complete#, :enter => :announce_hunt_completed, :enter => complete_hunt
   aasm_state :cancelled#, :enter => :announce_team_canceled
   
   has_many :treasure_hunters, :class_name => "User"

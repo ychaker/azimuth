@@ -29,20 +29,17 @@ class Hunt < ActiveRecord::Base
   
   
   def attempt_open_treasure_chest(discovery, team)
-    discovery.success = discovery.team.current_treasure.proximate?(discovery)
-    discovery.save
-    
-    #team = discovery.team
     current_treasure = team.current_treasure
+    
+    discovery.success = current_treasure.proximate?(discovery)
+    
     
     if discovery.success?
       if current_treasure.last?
         team.current_treasure = team.hunt.treasures.first
       else
-        puts team.hunt.treasures.find(current_treasure).lower_item.inspect
         team.current_treasure = team.hunt.treasures.find(current_treasure).lower_item
       end
-      puts team.inspect
       if team.current_treasure == team.start_treasure
         puts "YOU ARE ALL DONE"
         team.finish_hunt

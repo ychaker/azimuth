@@ -9,8 +9,7 @@ class Treasure < ActiveRecord::Base
     distance = Treasure.distance_between(self, discovery)
     
     distance_meters = distance * 1000
-    
-    return distance_meters < self.proximity
+    return distance_meters <= self.proximity
     
     
   end
