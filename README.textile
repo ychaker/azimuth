@@ -1,27 +1,34 @@
 
 h1. Azimuth
 
-Azimuth (ˈæzɪməθ ) is a mathematical concept defined as the angle, usually measured in degrees (°), between a reference plane and a point. This concept is used in many practical applications including navigation, astronomy, mapping, mining and artillery. The word azimuth is derived from the Arabic السمت ('as-sumūt') which means the ways, referring to the ways or directions a person faces.
+Azimuth (ˈæzɪməθ ) is a mathematical concept defined as the angle, usually measured in degrees (°), between a reference plane and a point. This concept is used in many practical applications including navigation, astronomy, mapping, mining and artillery. The word azimuth is derived from the Arabic السمت ('as-sumūt') which means the ways, referring to the ways or directions a person faces. (Wikipedia)
 
-h2. Register
+h2. Why? What? Where? When? How?
 
-* Coming soon!
+Have you ever wanted to participate in a treasure hunt but did not know how? have you ever felt like sending your friends on a wild goose chase? Then Azimuth is the right thing for you.
+Azimuth is a treasure hunt creator for everyone. It is available for everyone to use, all you need is creativity and access to the internet. What's great about Azimuth is that it allows you to play whenever you want. If you feel like going in the middle of the night looking for the treasures, then do it! YOU CAN DO IT! 
+The how is easy, you can find below basic instructions on what you need to do, but our user interface is made simple and easy to use. Keeping with the 'YOU CAN DO IT!' attitude. 
+
+h2. Signup/Login
+
+Anyone can signup to the app. We happily provide an openID option as well. Ironically openID is what messed us up last year!
 
 h2. Start a Hunt
 
-Coming soon!
+Users can create a treasure hunt where they have teams compete to find all the clues. The user will have to create treasures and associate with them clues and locations. The locations will be specified using latitude and longitude coordinates. The user can also specify how close the competing teams need to be to the treasure in order for them to be able to unlock it. The hunt owner (a.k.a "Pirate") sets up an ordered list of treasures that the teams have to complete but can customize the starting point for each team. 
 
 h2. Compete in a hunt
 
-Coming soon!
+Users may choose to compete in a hunt set up by someone else. They can participate in teams of at least one person (d'oh). Each team will follow clues sent to them by the "Pirate" which will lead them to the location of the treasure. Once there they can send their location coordinates to verify that they have successfully solved the current clue. Which will allow them to receive the next clue in the hunt. The goal is to finish the hunt with the most points. 
 
 h2. Mobile Users
 
-Coming soon!
+Each user that signs in will provide their mobile number which will be used to send clues about treasures in hunts and to send back answers once the clue is solved. We use a third party service to perform these actions and we do not save the user's phone number. Instead we automatically create an account for the user with that third party company and use that username for all mobile purposes. 
 
 h2. OpenSource Connections
 
 Best company ever!
+OSC is sponsoring our team by providing the "Operations Room" (check flickr for pictures) and food and drinks. 
 
 h2. Anything else?
 
