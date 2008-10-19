@@ -7,7 +7,7 @@ describe Discovery do
       :treasure_id => "1",
       :lat => "1.5",
       :lng => "1.5",
-      :proof_of_life => "value for proof_of_life",
+      :key => "key",
       :hunt_id => hunts(:quentinshunt).id,
       :user_id => users(:quentin).id
     }

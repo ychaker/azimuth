@@ -10,7 +10,7 @@ describe UsersController do
     end.should change(User, :count).by(1)
   end
 
-  
+=begin  
   it 'signs up user in pending state' do
     create_user
     assigns(:user).reload
@@ -22,6 +22,7 @@ describe UsersController do
     assigns(:user).reload
     assigns(:user).activation_code.should_not be_nil
   end
+=end  
   it 'requires login on signup' do
     lambda do
       create_user(:login => nil)

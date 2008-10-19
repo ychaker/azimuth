@@ -21,6 +21,7 @@ describe User do
       @creating_user.should change(User, :count).by(1)
     end
 
+=begin  ERIC SKIP DUE TO JUMPING ACTIVATION CODE
     it 'initializes #activation_code' do
       @creating_user.call
       @user.reload
@@ -32,6 +33,7 @@ describe User do
       @user.reload
       @user.should be_pending
     end
+=end    
   end
 
   #
@@ -230,6 +232,7 @@ describe User do
     users(:quentin).remember_token_expires_at.between?(before, after).should be_true
   end
 
+=begin ERIC DISABLE VIA JUMPING TRANSITION STATE OVER THIS
   it 'registers passive user' do
     user = create_user(:password => nil, :password_confirmation => nil)
     user.should be_passive
@@ -237,7 +240,7 @@ describe User do
     user.register!
     user.should be_pending
   end
-
+=end
   it 'suspends user' do
     users(:quentin).suspend!
     users(:quentin).should be_suspended

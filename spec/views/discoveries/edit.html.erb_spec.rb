@@ -8,7 +8,7 @@ describe "/discoveries/edit.html.erb" do
       :new_record? => false,
       :lat => "1.5",
       :lng => "1.5",
-      :proof_of_life => "value for proof_of_life"
+      :key => "key"
     )
   end
 
@@ -18,7 +18,7 @@ describe "/discoveries/edit.html.erb" do
     response.should have_tag("form[action=#{discovery_path(@discovery)}][method=post]") do
       with_tag('input#discovery_lat[name=?]', "discovery[lat]")
       with_tag('input#discovery_lng[name=?]', "discovery[lng]")
-      with_tag('input#discovery_proof_of_life[name=?]', "discovery[proof_of_life]")
+      with_tag('input#discovery_key[name=?]', "discovery[key]")
     end
   end
 end

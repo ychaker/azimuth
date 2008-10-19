@@ -72,7 +72,7 @@ class BortMigration < ActiveRecord::Migration
     
     # Activate user
     user.register!
-    user.activate!
+#    user.activate!  ERIC REMOVED BECAUSE NOW WE DON"T SEND ACTIVIE EMAILS"
     
     # Add admin role to admin user
     user.roles << admin_role

@@ -43,7 +43,7 @@ class SmsController < ApplicationController
     user = User.find_by_login(sms.login)
     
     if user.nil?
-      render :text => "User #{sms.login} couldn't be found " 
+      render :text => "User #{sms.login} couldn't be found, have you signed up at #{AZIMUTH_DOMAIN}?" 
     else
       hunt = user.hunt
       discovery = Discovery.new(:treasure => user.current_treasure, :lat => sms.lat, :lng => sms.lng, :hunt => hunt, :user => user)
