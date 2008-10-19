@@ -29,6 +29,21 @@ class UsersController < ApplicationController
     @user = current_user
   end
   
+  def update
+    @user = current_user
+
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        flash[:notice] = 'User was successfully updated.'
+        format.html { redirect_to :action => :profile}
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "profile" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
   def activate
     logout_keeping_session!
     user = User.find_by_activation_code(params[:activation_code]) unless params[:activation_code].blank?
