@@ -1,8 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Sms do
-  fixtures :users, :teams, :hunts, :treasures
-
+  fixtures :users, :hunts, :treasures
+  before(:each) do
+    
+    @quentinshunt = hunts(:quentinshunt)
+    @quentin = users(:quentin)
+  end
   it "should be able to detect lat long from a string" do
     raw = "55.5555 -111.2341"
     sms = Sms.new(:raw => raw)

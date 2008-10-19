@@ -1,12 +1,15 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Discovery do
+  fixtures :users, :hunts
   before(:each) do
     @valid_attributes = {
       :treasure_id => "1",
       :lat => "1.5",
       :lng => "1.5",
-      :proof_of_life => "value for proof_of_life"
+      :proof_of_life => "value for proof_of_life",
+      :hunt_id => hunts(:quentinshunt).id,
+      :user_id => users(:quentin).id
     }
   end
 
