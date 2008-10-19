@@ -3,9 +3,9 @@ body {
 	margin: 0;
 }
 
-#accordion {
+#right-root-container {
 	float: left;
-	width: 300px;
+	width: 300px;	
 }
 
 #business-card {
@@ -26,6 +26,12 @@ body {
 	float: right;
 	border: 1px solid #95a5c6;
 	background-color: #d8dfea;
+}
+
+#signup-box {
+	border: 1px solid #95a5c6;
+	background-color: #d8dfea;
+	width: 300px;
 }
 
 .left-content {

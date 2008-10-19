@@ -46,7 +46,7 @@ class SmsController < ApplicationController
       render :text => "User #{sms.login} couldn't be found, have you signed up at #{AZIMUTH_DOMAIN}?" 
     else
       hunt = user.hunt
-      discovery = Discovery.new(:treasure => user.current_treasure, :lat => sms.lat, :lng => sms.lng, :hunt => hunt, :user => user)
+      discovery = Discovery.new(:treasure => user.current_treasure, :key => sms.key, :lat => sms.lat, :lng => sms.lng, :hunt => hunt, :user => user)
       hunt.attempt_open_treasure_chest(discovery, user)
       user.save!
       

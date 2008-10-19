@@ -1,98 +1,100 @@
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<%= ENV['RAILS_ENV'] == 'production' ? 'ABQIAAAAbA6V_HyNtbEogtA8ltGhpxRmqLVh6SVQCHDAVjpISk-wVFokTBQbUyagxhdEIcuMdtgVJsB7bEngvw' : 'ABQIAAAAbA6V_HyNtbEogtA8ltGhpxTVn23A_oH_7n0_3g0PHDmJleqwMBQM7TxiELIcZnsty1lkjYfvFIOW3A' %>"></script>
 <div id="map" style="width: 60%; height: 350px"></div>
-
-<div id="accordion">
-  <div id="hunts" class="right-container">
-    <div class="right-heading">
-      <%= image_tag '1.png', :class => "dropcap" %><h2>Choose a Treasure Hunt</h2>
-    </div>
-    <div class="right-content">
-      <ul id="hunt-list">
-        <%= render :partial => "/hunts/hunt", :collection => current_user.hunts.being_planned %>
-      </ul>
-      <div class="btn-center">
-        <input type="button" id="hunt-new-link" value="add new hunt">
+<div id="right-root-container">
+  <div id="accordion">
+    <div id="hunts" class="right-container">
+      <div class="right-heading">
+        <%= image_tag '1.png', :class => "dropcap" %><h2>Choose a Treasure Hunt</h2>
       </div>
-    </div>
-  </div>
-  <div id="add-clues" class="right-container">
-    <div class="right-heading">
-      <%= image_tag '2.png', :class => "dropcap" %><h2>Add Clues</h2>
-    </div>
-    <div class="right-content">
-      <div class="right-content-body">
-      </div>
-      <div id="treasure-new" class="right-content-footer">
-        <form>
-        <ul>
-          <li>
-            <label for="name">Name</label><input class="span-all" type="text" id="name">
-          </li>
-          <li>
-            <label for="clue">Clue</label><input class="span-all" type="text" id="clue">
-          </li>          
-          <li class="horiz">
-            <div class="unwrap">
-              <label for="lat">Latitude</label><input class="span-half" type="text" id="lat">
-            </div>
-            <div class="unwrap">
-              <label for="lng">Longitude</label><input class="span-half" type="text" id="lng">
-            </div>
-            <div class="unwrap">
-              <label for="key">Key</label><input class="span-half" type="text" id="key">
-            </div>            
-           
-          </li>
-          <li class="horiz">
-            <div class="unwrap">
-              <label for="points">Points</label><input class="span-half" type="text" id="points">
-            </div>
-            <div class="unwrap">
-              <label for="proximity">Proximity</label><input class="span-half" type="text" id="proximity">
-            </div>
-          </li>          
-          <li><input type="submit" value="add treasure" id="treasure-new-submit"></li>
+      <div class="right-content">
+        <ul id="hunt-list">
+          <%= render :partial => "/hunts/hunt", :collection => current_user.hunts.being_planned %>
         </ul>
+        <div class="btn-center">
+          <input type="button" id="hunt-new-link" value="add new hunt">
+        </div>
+      </div>
+    </div>
+    <div id="add-clues" class="right-container">
+      <div class="right-heading">
+        <%= image_tag '2.png', :class => "dropcap" %><h2>Add Clues</h2>
+      </div>
+      <div class="right-content">
+        <div class="right-content-body">
+        </div>
+        <div id="treasure-new" class="right-content-footer">
+          <form>
+          <ul>
+            <li>
+              <label for="name">Name</label><input class="span-all" type="text" id="name">
+            </li>
+            <li>
+              <label for="clue">Clue</label><input class="span-all" type="text" id="clue">
+            </li>          
+            <li class="horiz">
+              <div class="unwrap">
+                <label for="lat">Latitude</label><input class="span-half" type="text" id="lat">
+              </div>
+              <div class="unwrap">
+                <label for="lng">Longitude</label><input class="span-half" type="text" id="lng">
+              </div>
+              <div class="unwrap">
+                <label for="key">Key</label><input class="span-half" type="text" id="key">
+              </div>            
+           
+            </li>
+            <li class="horiz">
+              <div class="unwrap">
+                <label for="points">Points</label><input class="span-half" type="text" id="points">
+              </div>
+              <div class="unwrap">
+                <label for="proximity">Proximity</label><input class="span-half" type="text" id="proximity">
+              </div>
+            </li>          
+            <li><input type="submit" value="add treasure" id="treasure-new-submit"></li>
+          </ul>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+    <div id="treasure-hunters" class="right-container">
+      <div class="right-heading">
+        <%= image_tag '3.png', :class => "dropcap" %><h2>Add Treasure Hunters</h2>
+      </div>
+      <div class="right-content">
+        <p>Invite your friends to join the treasure hunt. Or Rails Rumblers can <a id="start-hunt" href="#">join the hunt here</a>.</p>
+      </div>
+    </div>
+    
+  
+    <div id="hounds" class="right-container">
+      <div class="right-heading">
+        <%= image_tag '4.png', :class => "dropcap" %><h2>Release the Hounds</h2>
+      </div>
+      <div class="right-content">
+        <img src="/images/burns.png" style="float: left">
+        <div class="btn-center">
+          <input type="button" id="hunt-release-btn" value="Start the Hunt">
+        </div>
+      </div>
+    </div>  
+  </div>
+  <div>
+    <div id="hunt-new" class="right-container">
+      <div class="right-heading"><%= image_tag '1.png', :class => "dropcap" %><h2>Choose a Treasure Hunt</h2></div>
+      <div class="right-content">
+        <form>
+          <input type="hidden" id="user_id" value="<%= current_user.id %>">
+          <label for="hunt-new-name" style="width: 200px">New Treasure Hunt's Name</label><input id="name">
+          <label for="hunt-new-name" style="width: 200px">Description</label><textarea id="description"></textarea>
+          <div class="btn-center">
+            <input type="submit" id="hunt-new-submit" value="create">
+            <input type="button" id="hunt-new-cancel" value="cancel">
+          </div>
         </form>
       </div>
     </div>
-  </div>
-  
-  <div id="treasure-hunters" class="right-container">
-    <div class="right-heading">
-      <%= image_tag '3.png', :class => "dropcap" %><h2>Add Treasure Hunters</h2>
-    </div>
-    <div class="right-content">
-      <p>Invite your friends to join the treasure hunt. Or Rails Rumblers can <a id="start-hunt" href="#">join the hunt here</a>.</p>
-    </div>
-  </div>
-  
-  
-  <div id="hounds" class="right-container">
-    <div class="right-heading">
-      <%= image_tag '4.png', :class => "dropcap" %><h2>Release the Hounds</h2>
-    </div>
-    <div class="right-content">
-      <img src="/images/burns.png" style="float: left">
-      <div class="btn-center">
-        <input type="button" id="hunt-release-btn" value="Start the Hunt">
-      </div>
-    </div>
-  </div>  
-</div>
-
-<div id="hunt-new" class="right-container">
-  <div class="right-heading"><%= image_tag '1.png', :class => "dropcap" %><h2>Choose a Treasure Hunt</h2></div>
-  <div class="right-content">
-    <form>
-      <input type="hidden" id="user_id" value="<%= current_user.id %>">
-      <label for="hunt-new-name" style="width: 200px">New Treasure Hunt's Name</label><input id="name">
-      <label for="hunt-new-name" style="width: 200px">Description</label><textarea id="description"></textarea>
-      <div class="btn-center">
-        <input type="submit" id="hunt-new-submit" value="create">
-        <input type="button" id="hunt-new-cancel" value="cancel">
-      </div>
-    </form>
   </div>
 </div>
 <%= javascript_include_tag 'pirate' %>
