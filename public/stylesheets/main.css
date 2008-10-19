@@ -9,6 +9,12 @@ body {
 	margin: auto;
 }
 
+h3 {
+	margin: 0;
+	padding: 0;
+	font-size: 110%;
+}
+
 #header, #content {
     padding: 10px;
 }
@@ -32,11 +38,11 @@ div.unwrap {
 	float: left;
 }
 
-div.right-heading {
+div.right-heading, div.heading {
 	overflow: auto;
 }
 
-.right-heading h2 {
+.right-heading h2, .heading h2 {
 	float: left;
 	clear: right;
 	padding: 7px;
@@ -53,8 +59,13 @@ div.right-heading {
 #treasure-list li, #hunt-list li {
 	list-style: none;
 	padding: 0;
-	background: url(/images/hr.gif) no-repeat bottom center;
+	background: url(/images/hr.gif) no-repeat bottom left;
+/*	background: #DDD url() repeat/repeat-x/repeat-y/no-repeat scroll/fixed top left/top center/top right/center left/center center/center right/bottom left/bottom center/bottom right/x-% y-%/x-pos y-pos;*/
 	padding: 10px;
+}
+
+#hunt-list.long li {
+	background: url(/images/hr-long.png) no-repeat bottom center;
 }
 
 .btn-center {
@@ -161,7 +172,7 @@ h2 {
 
 #content {
 	overflow: auto;
-	padding: 10px;
+	padding: 20px;
 }
 
 #header {
