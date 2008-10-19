@@ -38,20 +38,16 @@ class SmsController < ApplicationController
     
     smsinfo = Sms.new(:raw => @body)
     
+    smsinfo.parseandprocess(@userid, @body)
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
-    render :text => smsinfo.parseandprocess(@userid, @body)
+    render :text => ""
   
   end
 
   # GET /sms/send_sms
   # GET /sms/send_sms.xml
   def send_sms
-    
-    require 'rubygems' # Only required if you've installed the gem version
-    require 'zeep/messaging'
-
-    Zeep::Base.configure_credentials("4e26fd99-9087-481e-b5b9-62984a5cfbaf", "238f638f21c660166527dab4cd6fc958dda7b200")
-    Zeep::Messaging.send_message(session[:zeepusername], params[:sendmsg][:messagebody])
+    Sms.send_sms(session[:zeepusername], params[:sendmsg][:messagebody])
     
     @zeep_response = "Message sent to #{session[:zeepusername]}!"
     

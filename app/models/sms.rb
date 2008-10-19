@@ -1,3 +1,6 @@
+require 'rubygems' # Only required if you've installed the gem version
+require 'zeep/messaging'
+
 class Sms < ActiveRecord::Base
   
   def is_key?
@@ -28,9 +31,8 @@ class Sms < ActiveRecord::Base
   
   def parseandprocess(userid, body)
     
-    if (body == nil)
-      return "page accessed directly.  should only be accessed via post after a text message"
-    else  
+    if (body != nil)
+      #return "page accessed directly.  should only be accessed via post after a text message"  
       
       #parse the content of the text message
       smsinfo = Sms.new(:raw => body)
@@ -54,6 +56,9 @@ class Sms < ActiveRecord::Base
           #check their discovery to see if it is valid
           #puts("lat #{smsinfo.lat} lng #{smsinfo.lng}")
           d = Discovery.create!(:lat => smsinfo.lat.to_f, :lng => smsinfo.lng.to_f)
+          user.hunt.attempt_open_treasure_chest(d, user)
+        end
+=begin
           #puts("did #{d.id}, tid #{d.treasure_id}, lat #{d.lat}, lng #{d.lng}")
           #puts("tid #{t.id}, lat #{t.lat}, lng #{t.lng}")
           distance = Treasure.distance_between(d, t)
@@ -65,8 +70,7 @@ class Sms < ActiveRecord::Base
           if t.key == smsinfo.key
             @success = true
           end
-        end
-        
+        end 
         if (@success)
           #save the discovery and let texter know their next clue
           @reply_message += "SUCCESS!  Your next clue is PARROT"
@@ -78,11 +82,18 @@ class Sms < ActiveRecord::Base
 
         #display reply message to send back to texter
         return @reply_message
+=end
       else
-        return "Invalid userid: #{userid}.  Please contact your pirate to sign up before you can hunt for treasure."
+        Sms.send_sms(user, "Invalid userid: #{userid}.  Please contact your pirate to sign up before you can hunt for treasure.")
       end  
       
     end
+  end
+  
+  
+  def self.send_sms(userid, body)
+    Zeep::Base.configure_credentials("4e26fd99-9087-481e-b5b9-62984a5cfbaf", "238f638f21c660166527dab4cd6fc958dda7b200")
+    Zeep::Messaging.send_message(userid, body)
   end
   
 end

@@ -66,6 +66,7 @@ class Hunt < ActiveRecord::Base
   def announce_starting_of_hunt
     users.each do |u| 
       puts "annoucing to #{u.login} with status #{u.state}"
+      Sms.send_sms(u.login, "The hunt: #{self.name} has begun! You will shortly receive your next clue")
       u.start_hunt self.treasures[1] #self.treasures[rand(self.treasures.size)]
       u.send_next_clue
       u.save!
