@@ -8,12 +8,12 @@ describe "/discoveries/index.html.erb" do
       stub_model(Discovery,
         :lat => "1.5",
         :lng => "1.5",
-        :proof_of_life => "value for proof_of_life"
+        :key => "key"
       ),
       stub_model(Discovery,
         :lat => "1.5",
         :lng => "1.5",
-        :proof_of_life => "value for proof_of_life"
+        :key => "key"
       )
     ]
   end
@@ -22,7 +22,7 @@ describe "/discoveries/index.html.erb" do
     render "/discoveries/index.html.erb"
     response.should have_tag("tr>td", "1.5", 2)
     response.should have_tag("tr>td", "1.5", 2)
-    response.should have_tag("tr>td", "value for proof_of_life", 2)
+    response.should have_tag("tr>td", "key", 2)
   end
 end
 

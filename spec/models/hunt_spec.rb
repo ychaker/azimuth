@@ -35,23 +35,6 @@ describe Hunt do
     Treasure.find_by_name(name).should be_nil
   end
   
-  it "should return a true/false for the event open_treasure_chest depending if it works or now" do
-    hunt = hunts(:one)
-    hunt.aasm_current_state.should == :being_planned
-    hunt.release_the_hounds
-    hunt.aasm_current_state.should == :hunting
-#    hunt.open_treasure_chest.should raise_error(RuntimeError)
-
-#putser = Proc.new {|x| puts x}
-#    begin
-#    hunt.attemptopen_treasure_chest putser
-#    rescue Exception => e
-#      puts "resucing from error"
-#      puts "e: #{e.class.to_s}"
-#      puts "ex text: #{e.to_s}"
-#    end
-    
-  end
 end
 
 describe "Eric and Ashish want to do a treasure hunt" do
