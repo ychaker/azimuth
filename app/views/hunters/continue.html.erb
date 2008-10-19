@@ -1,6 +1,22 @@
 <div class="header">
 <h2>Hunt: <%= current_user.hunt.name %></h2>
 </div>
+
+
+
+<div class="sms-reminder">
+	<h3>Reminder: To text your discoveries:</h3>
+	<ol>
+		<li>Make sure you have signed up for zeep </li>
+		<li>Send a text message to 88147</li>
+		<li>IMPORTANT: Prefix your message with "azimuth1 " (no quotes, but include the trailing space)</li>
+		<li>Include your key or the latitude/longitude coordinates.  For example: </li>
+	</ol>
+	<i>azimuth1 38.012411 -78.515275</i><br />
+	OR<br />
+	<i>azimuth1 treasurekey</i>
+</div>
+
 <div id="hunt-clue">
   <h4>Your Clue</h4>
   <%= @treasure.clue %>
@@ -23,7 +39,11 @@
 
   <%= javascript_include_tag 'hunter' %>
 </div>
+
+
+
 <div id="hunt-progress">
   <h3>Progress throughout the hunt</h3>
   
 </div>
+
