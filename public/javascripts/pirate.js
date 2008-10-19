@@ -1,4 +1,15 @@
 $(document).ready(function() {
+
+	function hunt_list_click() {
+		$("#accordion").accordion("activate", 1);
+		id = $(this).attr("id").split("-")[2];
+		$("#hunt_id").attr("value", id);
+		$("div#add-clues.right-container.selected > div.right-content").css("overflow","auto").css("height","");
+		$("#add-clues div.right-content-body").load('/hunts/' + id);
+	}
+
+
+	
 	if (GBrowserIsCompatible()) {
 		var map = new GMap2(document.getElementById("map"));
 		map.setCenter(new GLatLng(37.4419, -122.1419), 13);
@@ -7,11 +18,21 @@ $(document).ready(function() {
 	$("#hunt-list").sortable({});
 
 	$("#hunt-new-submit").click(function() {
-		$.post('/hunts', { "hunt[name]": $("#hunt-new-name").attr('value'), authenticity_token: window._token }, function(data) {
-			$("#hunt-new").hide(function() {
+		vars = { authenticity_token: window._token };
+		
+		$("#hunt-new input[type='text'], #hunt-new input[type='hidden']")
+			.each(function() {
+				vars['hunt[' + $(this).attr('id') + ']'] = $(this).attr('value');
+			});
+		
+		// console.log(vars);
+
+		$.post('/hunts', vars, function(data) {
+			$("#hunt-list").append(data);
+			$("li.new-hunt-no-event").click(hunt_list_click);
+			$("#hunt-new").fadeOut(function() {
 				$("#accordion").fadeIn();
 			});
-			// $("#add-clues div.right-content").html(data).fadeIn();
 		}, "html");
 		return false;
 	});
@@ -21,13 +42,7 @@ $(document).ready(function() {
 		clearStyle: true
 	});
 	
-	$("#hunt-list a").click(function() {
-		$("#accordion").accordion("activate", 1);
-		id = $(this).attr("id").split("-")[2];
-		$("#hunt_id").attr("value", id);
-		$("div#add-clues.right-container.selected > div.right-content").css("overflow","auto").css("height","");
-		$("#add-clues div.right-content-body").load('/hunts/' + id);
-	});
+	$("#hunt-list a").click(hunt_list_click);
 	
 	$("#treasure-new-submit").click(function() {
 		vars = { authenticity_token: window._token };
@@ -50,7 +65,6 @@ $(document).ready(function() {
 			$("#treasure-new").find("input[type='text']").each(function() {
 				$(this).attr("value","");
 			});
-				
 		}, "html");
 		
 		return false;
