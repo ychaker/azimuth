@@ -15,7 +15,12 @@ render_tabnav :main,
               :generate_css => false do 
     
   # Note you must use the full controller and action versus a Named Route to get the highlighting of tabs to work.
-
+  
+  add_tab do |t|
+    t.named "Home"
+    t.links_to '/welcome'
+  end
+  
   add_tab do |t|
      t.named "Hide Treasure"
      t.links_to :controller => 'pirate'
