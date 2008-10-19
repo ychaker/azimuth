@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   
   ######
   aasm_event :register_hunt do
-     transitions :to => :hunt_registering, :from => [:active, :hunt_registering]
+     transitions :to => :hunt_registering, :from => [:active, :hunt_registering, :hunt_hunting]
    end
    
   aasm_event :begin_hunt do
