@@ -40,6 +40,7 @@ div.unwrap {
 
 div.right-heading, div.heading {
 	overflow: auto;
+	cursor: hand;
 }
 
 .right-heading h2, .heading h2 {
