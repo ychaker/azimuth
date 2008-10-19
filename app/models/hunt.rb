@@ -5,7 +5,7 @@ class Hunt < ActiveRecord::Base
   
   belongs_to :user
   
-  has_many :teams
+  has_many :users
   
   aasm_column :state
   aasm_initial_state :being_planned
@@ -28,21 +28,21 @@ class Hunt < ActiveRecord::Base
   end
   
   
-  def attempt_open_treasure_chest(discovery, team)
-    current_treasure = team.current_treasure
+  def attempt_open_treasure_chest(discovery, user)
+    current_treasure = user.current_treasure
     
     discovery.success = current_treasure.proximate?(discovery)
     
     
     if discovery.success?
       if current_treasure.last?
-        team.current_treasure = team.hunt.treasures.first
+        user.current_treasure = user.hunt.treasures.first
       else
-        team.current_treasure = team.hunt.treasures.find(current_treasure).lower_item
+        user.current_treasure = user.hunt.treasures.find(current_treasure).lower_item
       end
-      if team.current_treasure == team.start_treasure
+      if user.current_treasure == user.start_treasure
         puts "YOU ARE ALL DONE"
-        team.finish_hunt
+        user.finish_hunt
       end
     end
   end
