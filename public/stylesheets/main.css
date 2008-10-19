@@ -402,3 +402,12 @@ label {
 .left {
 	float: left;
 }
+
+img.screenshot {
+	border: 1px solid #666;
+	background: #fff;
+	padding: 5px;
+	display: block;
+	margin: 10px auto;
+}
+}

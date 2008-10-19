@@ -1,13 +1,17 @@
 class HuntersController < ApplicationController
   def index
-    if current_user.hunt
-      if current_user.hunt.aasm_current_state == :hunting
-        redirect_to :action => :continue
-      else
-        redirect_to :action => :awaiting_start
-      end
+    unless logged_in? 
+      redirect_to :controller => :session, :action => :new
     else
-      @hunts = Hunt.being_planned
+      if current_user.hunt
+        if current_user.hunt.aasm_current_state == :hunting
+          redirect_to :action => :continue
+        else
+          redirect_to :action => :awaiting_start
+        end
+      else
+        @hunts = Hunt.being_planned
+      end
     end
   end
   
