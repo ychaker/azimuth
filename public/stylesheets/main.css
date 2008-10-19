@@ -3,9 +3,42 @@ body {
 	margin: 0;
 }
 
+#map-options {
+/*	clear: left;*/
+}
+
 #right-root-container {
 	float: left;
-	width: 300px;	
+	width: 350px;	
+}
+
+.header {
+	padding-bottom: 10px;
+	border-bottom: 2px solid #cecece;
+	margin-bottom: 20px;
+}
+
+#discovery {
+	margin-top: 20px;
+	padding: 10px;
+	border: 1px solid black;
+	overflow: auto;
+	border: 1px solid #95a5c6;
+	background-color: #d8dfea;
+}
+
+#discovery h4 {
+	margin-bottom: 20px;
+}
+
+div.discovery-cell {
+	float: left;
+	width: 175px;
+}
+
+h4 {
+	margin: 0;
+	padding: 0;
 }
 
 #business-card {
@@ -26,6 +59,16 @@ body {
 	float: right;
 	border: 1px solid #95a5c6;
 	background-color: #d8dfea;
+}
+
+#hunt-progress {
+	float: left;
+	width: 40%;
+}
+
+#hunt-clue {
+	width: 45%;
+	float: left;
 }
 
 #signup-box {
@@ -62,7 +105,7 @@ h3 {
 }
 
 .chosen {
-	color: red;
+	color: #8C031C;
 }
 
 .unwrap label {
@@ -135,16 +178,23 @@ li.horiz {
 	float: left;
 }
 
+#geocode {
+	margin-top: 10px;
+	width: 300px;
+}
+
 form ul {
 	list-style: none;
 	padding: 0px;
 	margin: 0px;
 }
 
-#map {
+#map-container {
 	float: left;
 	border: 1px solid black;
 	margin: 10px;
+}
+#map {
 }
 
 #add-clues {
@@ -241,7 +291,7 @@ h2 {
 }
 
 #header {
-    background: url(/images/header.png) no-repeat;
+    background: url(/images/header-notext.png) no-repeat;
 	height: 85px;
 }
 
@@ -316,11 +366,11 @@ label {
 .sms-reminder {
 	float: right;
 	overflow: visible;
-	background: #fff url("../images/iphone.jpg") no-repeat 5px 5px;
+	background: #fff url(/images/iphone.jpg) no-repeat 5px 5px;
 	border: 1px solid #ccc;
-	width: 400px;
+	width: 40%;
 	margin: 10px;
-	padding: 15px 15px 15px 80px;
+	padding: 10px 10px 10px 80px;
 }
 
 .sms-reminder h3 {

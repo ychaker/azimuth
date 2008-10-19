@@ -1,4 +1,6 @@
 require 'digest/sha1'
+require 'net/http'
+require 'open-uri'
 
 class User < ActiveRecord::Base
   include Authentication
@@ -121,6 +123,23 @@ class User < ActiveRecord::Base
     
   end
   
+  def set_coord_from_maxmind ip_address
+    original_url = "http://geoip1.maxmind.com/b?l=N1mjXsYRCZNF&i="
+    lat = ""
+    lng = ""
+    url = original_url + "#{ip_address}"
+    page = open(url)
+    text = page.read
+    info = text.split(',')
+    lat = info[3]
+    lng = info[4]
+    if lat.blank? or lng.blank?
+      raise LocationNotFound
+    end
+    user.lat = lat
+    user.lng - lng
+    user.save!
+  end
 
   protected
     
@@ -135,3 +154,6 @@ class User < ActiveRecord::Base
     errors.add_to_base("Invalid OpenID URL")
   end
 end
+
+
+class LocationNotFound < Exception; end
