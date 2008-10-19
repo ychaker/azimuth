@@ -3,7 +3,7 @@ class Hunt < ActiveRecord::Base
   
   has_many :treasures, :dependent => :destroy, :order => "position"
   
-  belongs_to :pirate
+  belongs_to :user
   
   has_many :teams
   

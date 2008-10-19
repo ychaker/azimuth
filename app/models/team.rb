@@ -9,7 +9,7 @@ class Team < ActiveRecord::Base
   aasm_state :complete#, :enter => :announce_hunt_completed
   aasm_state :cancelled#, :enter => :announce_team_canceled
   
-  has_many :treasure_hunters
+  has_many :treasure_hunters, :class_name => "User"
   
   belongs_to :hunt 
 

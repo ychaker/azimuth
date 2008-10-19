@@ -78,7 +78,9 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
     
     
     eric.hunts << hunt
-    hunt.pirate.should == eric
+    hunt.user.should == eric
+    
+    eric.hunts.size.should == 1
     
     first_treasure = Treasure.create!(:name => "Icarus Balls", :image => "http://farm4.static.flickr.com/3280/2950800503_8f00180b88_t.jpg", :points => 15, :lat => 52.1278, :lng => -81.5763, :proximity => 50, :clue => "Something Shiny")
     second_treasure = Treasure.create!(:name => "White Spot", :image => "http://www.foodhistory.com/foodnotes/road/va/ch/wh/01/03-image.jpg", :points => 25, :lat => 62.1278, :lng => -91.5763, :proximity => 30, :clue => "Best Burgers at 2 am")
