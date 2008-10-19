@@ -97,8 +97,8 @@ h4 {
 }
 
 #footer {
-	background: url(/images/header-notext.png) no-repeat;
-	height: 100px;
+	background: url(/images/bottom.png) no-repeat bottom center;
+	height: 120px;
 }
 
 #footer a{
