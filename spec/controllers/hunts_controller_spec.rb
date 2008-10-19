@@ -116,17 +116,7 @@ describe HuntsController do
         put :update, :id => "37", :hunt => {:these => 'params'}
       end
 
-      it "should expose the requested hunt as @hunt" do
-        Hunt.stub!(:find).and_return(mock_hunt(:update_attributes => true))
-        put :update, :id => "1"
-        assigns(:hunt).should equal(mock_hunt)
-      end
 
-      it "should redirect to the hunt" do
-        Hunt.stub!(:find).and_return(mock_hunt(:update_attributes => true))
-        put :update, :id => "1"
-        response.should redirect_to(hunt_url(mock_hunt))
-      end
 
     end
     
@@ -160,12 +150,6 @@ describe HuntsController do
       Hunt.should_receive(:find).with("37").and_return(mock_hunt)
       mock_hunt.should_receive(:destroy)
       delete :destroy, :id => "37"
-    end
-  
-    it "should redirect to the hunts list" do
-      Hunt.stub!(:find).and_return(mock_hunt(:destroy => true))
-      delete :destroy, :id => "1"
-      response.should redirect_to(hunts_url)
     end
 
   end

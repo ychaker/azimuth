@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   def successful_creation(user)
     redirect_back_or_default(root_path)
     flash[:notice] = "Thanks for signing up!"
-    flash[:notice] << " We're sending you an email with your activation code." if @user.not_using_openid?
+#    flash[:notice] << " We're sending you an email with your activation code." if @user.not_using_openid?
     flash[:notice] << " You can now login with your OpenID." unless @user.not_using_openid?
   end
   
