@@ -64,7 +64,6 @@ module Zeep
       
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = (uri.scheme == "https")
-      
       http_response = http.start {|http| http.request(request)}
       
       # TODO: Extract message guid

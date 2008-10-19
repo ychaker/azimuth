@@ -55,8 +55,13 @@ class Sms < ActiveRecord::Base
         if smsinfo.is_geocode?
           #check their discovery to see if it is valid
           #puts("lat #{smsinfo.lat} lng #{smsinfo.lng}")
-          d = Discovery.create!(:lat => smsinfo.lat.to_f, :lng => smsinfo.lng.to_f)
-          user.hunt.attempt_open_treasure_chest(d, user)
+          
+          
+          #d = Discovery.create!(:lat => smsinfo.lat.to_f, :lng => smsinfo.lng.to_f, :user => user, :hunt => user.current_treasure.hunt, :treasure => user.current_treasure)
+          #user.hunt.attempt_open_treasure_chest(d, user)
+          
+          
+          
         end
 =begin
           #puts("did #{d.id}, tid #{d.treasure_id}, lat #{d.lat}, lng #{d.lng}")
