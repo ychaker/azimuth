@@ -21,16 +21,14 @@
   		  <div id="business-card">
   		    <div style="float: left"><%= gravatar_for(current_user, {:class => 'photo'}) unless current_user.email.blank? %></div>
   		    <%= current_user.login %>
-  		    <%= "I have #{current_user.hunts.size} hunts: " %><br><%= select("hunt", "id", current_user.hunts.collect{|h| ["#{h.name} [#{h.state.humanize}]", h.id]})%>
+          <%= select("hunt", "id", current_user.hunts.collect{|h| ["#{h.name} [#{h.state.humanize}]", h.id]})%>
   		    <% if logged_in? %>
   		      <%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %> 
   		      <%= link_to "Change Team", :controller => 'hunters', :action => 'change_team' %>
   		    <% end %>
   		    <br/>
   		    <% if current_user.hunt %>
-  		      <%= "I am competing in hunt #{current_user.hunt.name}"%>
-  		      <br/>
-  		      <%= current_user.hunt.name %> is currently <%= current_user.hunt.state.humanize %>  		    
+  		      <%= "I am competing in: #{current_user.hunt.name}"%> (Currently <%= current_user.hunt.state.humanize %>)
   		    <% end %>
   		    
   		  </div>

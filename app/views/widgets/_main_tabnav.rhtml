@@ -47,6 +47,11 @@ render_tabnav :main,
      t.links_to :controller => 'users', :action => 'new'
   end unless logged_in?
 
+  add_tab do |t|
+     t.named "Profile"
+     t.links_to :controller => 'users', :action => 'profile'
+  end unless !logged_in?
+
   #add_tab do |t|
   #  t.named 'Home'
   #  t.titled 'Home Page'

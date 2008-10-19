@@ -25,6 +25,10 @@ class UsersController < ApplicationController
     end
   end
   
+  def profile
+    @user = current_user
+  end
+  
   def activate
     logout_keeping_session!
     user = User.find_by_activation_code(params[:activation_code]) unless params[:activation_code].blank?

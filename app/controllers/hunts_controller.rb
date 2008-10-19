@@ -121,11 +121,10 @@ class HuntsController < ApplicationController
   # DELETE /hunts/1.xml
   def destroy
     @hunt = Hunt.find(params[:id])
-    @hunt.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(hunts_url) }
-      format.xml  { head :ok }
+    if @hunt.destroy
+      render :text => "destroyed"
+    else
+      render :text => "error"
     end
   end
 end

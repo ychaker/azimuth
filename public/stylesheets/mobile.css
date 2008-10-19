@@ -1,0 +1,33 @@
+body, div {
+    font-family:  Georgia, "Constantia", "Times New Roman", Times, serif;
+	margin: 0;
+	font-size: 18px;
+}
+
+input {
+	font-size: 18px;
+}
+
+#header {
+	padding: 8px;
+	font-size: 120%;
+	background-color: #3B5998;
+	color: white;
+	font-weight: bolder;
+	text-align: center;
+}
+
+#container {
+}
+
+#content {
+	padding: 5px;
+}
+
+#footer {
+	
+}
+
+#quest-code {
+	text-align: center;
+}
