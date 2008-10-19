@@ -1,11 +1,11 @@
-function createMarker(point) {
+function createMarker(point, barname) {
   var marker = new GMarker(point);
 	GEvent.addListener(marker, "click", function() {
 		// $("#accordion").accordion("activate",1);
 		$("#lat").val(marker.getLatLng().lat());
 		$("#lng").val(marker.getLatLng().lng());
-	    // var myHtml = "<b>" + barname + "</b><br/>" + deal;
-	    // map.openInfoWindowHtml(point, myHtml);
+	    var myHtml = "<b>" + barname + "</b><br/>" + deal;
+	    map.openInfoWindowHtml(point, myHtml);
 	  });
   return marker;
 }

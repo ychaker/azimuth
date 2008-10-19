@@ -1,4 +1,4 @@
-<p>
+<div style="float: left; width: 450px"><p>
   <b>Name:</b>
   <%=h @hunt.name %>
 </p>
@@ -44,8 +44,25 @@
   <% end %>
     </tr>
   </table>
-</p>
+</p></div>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<%= ENV['RAILS_ENV'] == 'production' ? 'ABQIAAAAbA6V_HyNtbEogtA8ltGhpxRmqLVh6SVQCHDAVjpISk-wVFokTBQbUyagxhdEIcuMdtgVJsB7bEngvw' : 'ABQIAAAAbA6V_HyNtbEogtA8ltGhpxTVn23A_oH_7n0_3g0PHDmJleqwMBQM7TxiELIcZnsty1lkjYfvFIOW3A' %>"></script>
 
+<div id="map" style="float: left; width: 400px; height: 300px"></div>
+<% if @hunt.state == "complete" %>
+<%=javascript_include_tag 'jquery', 'huntmap'%>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+  	if (GBrowserIsCompatible()) {
+  	    map = new GMap2(document.getElementById("map"));
+  	    map.enableContinuousZoom();
 
+  	    map.setCenter(new GLatLng(38.90653,-77.035446), 11); // center on dc
+  	    map.addControl(new GLargeMapControl());
 
-
+        <% @hunt.treasures.select { |item| item.lat && item.lng }.each do |tr| %>
+        map.addOverlay(createMarker(new GLatLng(<%=tr.lat%>, <%=tr.lng%>)));
+        <% end %>
+  	}
+  });
+</script>
+<% end %>
