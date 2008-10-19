@@ -35,16 +35,16 @@ class HuntersController < ApplicationController
   def start
     hunt = Hunt.find(params[:id])
     current_user.hunt = hunt
-    current_user.register_hunt
+    current_user.register_hunt 
     current_user.save!
     redirect_to :action => :index
   end
   
   def continue
-    if current_user.hunt
+    if current_user.hunt && current_user.hunt.aasm_current_state == :hunting
       @treasure = current_user.current_treasure
     else
-      redirect_to :action => :index
+      redirect_to :action => :awaiting_start
     end
   end
 end

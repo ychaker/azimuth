@@ -8,11 +8,17 @@
         Welcome! To start a treasure hunt, choose one of the hunts already created by your peers. 
         You will see the first clue and can proceed from there.
       </p>
+      
+      <% if @hunts.empty? %>
+      <p>
+        Currently there are no hunts being planned, everybody is out there looking for treasure!  Why don't you <%= link_to "Create a new Hunt", :controller => :pirate %>?   
+      </p>
+      <% end %>
+      
       <ul>
         <% @hunts.each do |hunt| %>
         <li>
-          <h3><%= link_to hunt.name, :action => :start, :id => hunt.id %></h3><br>
-          <%= hunt.description %>
+          <%= link_to hunt.name, :action => :start, :id => hunt.id %>: <%= hunt.description %>
         </li>
         <% end %>
       </ul>
