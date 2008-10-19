@@ -11,7 +11,7 @@ class Hunt < ActiveRecord::Base
   aasm_initial_state :being_planned
   
   aasm_state :being_planned
-  aasm_state :hunting#, :enter => :send_initial_txt_messages
+  aasm_state :hunting, :enter => :send_initial_txt_messages
   aasm_state :complete#, :enter => :announce_end_of_hunt  
   aasm_state :cancelled#, :enter => :announce_hunt_canceled 
   
@@ -54,6 +54,11 @@ class Hunt < ActiveRecord::Base
     treasures.each {|treasure| points += treasure.points } 
     
     points
+  end
+  
+  # bank out to the members that we are ready to go.
+  def send_initial_txt_messages
+    users.each { |u| u.send_clue}
   end
     
 end
