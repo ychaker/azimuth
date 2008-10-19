@@ -8,4 +8,4 @@ db/*.sqlite3tmp
 log
 config/database.yml
 db/schema.rb
-db/*
+db/*.sqlite3
