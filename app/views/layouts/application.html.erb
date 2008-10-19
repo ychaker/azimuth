@@ -19,7 +19,7 @@
 			<div id="header">
   		  <% if current_user %>
   		  <div id="business-card">
-  		    <div style="float: left"><%= gravatar_for(current_user, {:class => 'photo'})%></div>
+  		    <div style="float: left"><%= gravatar_for(current_user, {:class => 'photo'}) unless current_user.email.blank? %></div>
   		    <%= current_user.login %>
   		    <%= "I have #{current_user.hunts.size} hunts: " %><br><%= select("hunt", "id", current_user.hunts.collect{|h| ["#{h.name} [#{h.state.humanize}]", h.id]})%>
   		    <% if logged_in? %>
