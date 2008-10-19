@@ -1,7 +1,11 @@
-<div id="user-choices">
-  <ul>
-    <li>Profile</li>
-    <li><%= link_to "Create a Hunt", :controller => :pirate %><br>for your friends</li>
-    <li><%= link_to "Take a hunt", :controller => :hunters %><br>setup for you</li>
-  </ul>
-</div>
+
+<% if logged_in? %>
+  <div id="user-choices">
+    <ul>
+      <li><%= link_to "Create a Hunt", :controller => :pirate %><br>for your friends</li>
+      <li><%= link_to "Take a hunt", :controller => :hunters %><br>setup for you</li>
+    </ul>
+  </div>
+<% else %> 
+  <img src="/images/screen_shot.png", width="700">
+<% end %>
