@@ -39,7 +39,9 @@
   		      <% unless current_user.hunts.blank? %>
   		      <form action="/hunts/show/">
   		        <select name="id" id="id" onchange="location.href = '/hunts/show/' + this.value;">
+  		          <option/>
   		          <% for h in current_user.hunts %>
+  
   		            <option value="<%=h.id%>"><%=h.name%></option>
   		          <% end %>
   		        </select>
