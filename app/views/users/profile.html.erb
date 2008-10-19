@@ -22,10 +22,10 @@
 			</li>
 			<li>
 				<label for="openid_url">OpenID URL</label>
-				<%= text_field_tag :openid_url %>
+				<%= f.text_field :identity_url %>
 			</li>
 			<li class="buttons-left">
-				<%= submit_tag 'Edit Profile' %>
+				<%= submit_tag 'Update Profile' %>
 			</li>
 		</ul>
 		<% end %>
