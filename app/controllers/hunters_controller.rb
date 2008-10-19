@@ -33,7 +33,15 @@ class HuntersController < ApplicationController
   end
   
   def check_clue
-    render :text => params[:password]
+    discovery = Discovery.new(:treasure => current_user.current_treasure, :key => params[:password], :hunt => current_user.hunt, :user => current_user)
+    current_user.hunt.attempt_open_treasure_chest(discovery, current_user)
+    current_user.save!
+    
+    if (discovery.success)
+      render :text => "Success!"
+    else
+      render :text => "Invalid Passcode"
+    end
   end
   
   def start
