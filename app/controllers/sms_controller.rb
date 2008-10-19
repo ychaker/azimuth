@@ -31,12 +31,11 @@ class SmsController < ApplicationController
   # GET /sms/incoming
   # GET /sms/incoming.xml
   def incoming    
-    response.headers["Content-Type"] = "text/plain; charset=utf-8"
-    
     @userid = params[:uid]
     @body = params[:body]
     
     if (@body == nil)
+      response.headers["Content-Type"] = "text/plain; charset=utf-8"
       render :text => "page accessed directly.  should only be accessed via post after a text message"
     else  
       smsinfo = Sms.new(:raw => @body)
@@ -52,6 +51,7 @@ class SmsController < ApplicationController
         @reply_message += " key: #{smsinfo.key}"
       end  
       
+      response.headers["Content-Type"] = "text/plain; charset=utf-8"
       render :text => @reply_message
     end
   end

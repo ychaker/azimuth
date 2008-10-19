@@ -22,7 +22,29 @@
     <div class="right-heading">
       <%= image_tag '2.png', :class => "dropcap" %><h2>Add Clues</h2>
     </div>
-    <div class="right-content"></div>
+    <div class="right-content">
+      <div class="right-content-body">
+      </div>
+      <div id="treasure-new" class="right-content-footer">
+        <form>
+        <ul>
+          <input type="hidden" id="hunt_id" value="">
+          <li>
+            <label for="name">Name</label><input class="span-all" type="text" id="name">
+          </li>
+          <li class="horiz">
+            <div class="unwrap">
+              <label for="lat">Latitude</label><input class="span-half" type="text" id="lat">
+            </div>
+            <div class="unwrap">
+              <label for="lng">Longitude</label><input class="span-half" type="text" id="lng">
+            </div>
+          </li>
+          <li><input type="submit" value="add treasure" id="treasure-new-submit"></li>
+        </ul>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 <div id="hunt-new" class="right-container">
