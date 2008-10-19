@@ -1,1 +1,0 @@
-ExceptionNotifier.exception_recipients = "railsrumble@opensourceconnections.com"
