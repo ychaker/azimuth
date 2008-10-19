@@ -1,6 +1,8 @@
 class Hunt < ActiveRecord::Base
   include AASM
   
+  validates_presence_of :name, :user_id, :description
+  
   has_many :treasures, :dependent => :destroy, :order => "position"
   
   belongs_to :user
@@ -11,9 +13,9 @@ class Hunt < ActiveRecord::Base
   aasm_initial_state :being_planned
   
   aasm_state :being_planned
-  aasm_state :hunting, :enter => :send_initial_txt_messages
-  aasm_state :complete#, :enter => :announce_end_of_hunt  
-  aasm_state :cancelled#, :enter => :announce_hunt_canceled 
+  aasm_state :hunting, :enter => :announce_starting_of_hunt
+  aasm_state :complete, :enter => :announce_end_of_hunt  
+  aasm_state :cancelled, :enter => :announce_hunt_cancelled 
   
   aasm_event :release_the_hounds do
     transitions :to => :hunting, :from => [:being_planned]
@@ -40,9 +42,13 @@ class Hunt < ActiveRecord::Base
       else
         user.current_treasure = user.hunt.treasures.find(current_treasure).lower_item
       end
+      
       if user.current_treasure == user.start_treasure
         puts "YOU ARE ALL DONE"
+        self.victory
         user.finish_hunt
+      else
+        user.send_next_clue
       end
     end
   end
@@ -56,9 +62,29 @@ class Hunt < ActiveRecord::Base
     points
   end
   
-  # bank out to the members that we are ready to go.
-  def send_initial_txt_messages
-    users.each { |u| u.send_clue}
+  # bang out to the members that we are ready to go.
+  def announce_starting_of_hunt
+    users.each do |u| 
+      puts "annoucing to #{u.login} with status #{u.state}"
+      u.start_hunt self.treasures[1] #self.treasures[rand(self.treasures.size)]
+      u.send_next_clue
+      u.save!
+    end
+  end
+  
+  def announce_end_of_hunt
+    users.each do |u|
+      puts "We've about to finish the hunt, user #{u.login} has state #{u.aasm_current_state}"
+      u.finish_hunt
+      puts "We've just finished the hunt, user #{u.login} has state #{u.aasm_current_state}"
+      u.send_message "The Hunt has ended!"
+      u.save!
+    end
+  end
+  
+  def announce_hunt_cancelled
+    
+    users.each { |u| u.send_message "The Hunt has been cancelled!"}
   end
     
 end

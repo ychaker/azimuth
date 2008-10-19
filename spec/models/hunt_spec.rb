@@ -90,18 +90,20 @@ describe "Eric and Ashish want to do a treasure hunt" do
     ashish.join_hunt(hunt)
     ashish.hunt.should == hunt
     ashish.aasm_current_state.should == :hunt_registering
+    ashish.save!
     
-    ashish.start_hunt(second_treasure) 
+
+  
+    hunt.release_the_hounds
+    hunt.aasm_current_state.should == :hunting
+
+    ashish.reload
     ashish.current_treasure.should == second_treasure
     ashish.save!
     ashish.score.should == 0
     ashish.aasm_current_state.should == :hunt_hunting
     
-    
-#    pending ("Working on state machine")
-    hunt.release_the_hounds
-    
-    hunt.aasm_current_state.should == :hunting
+
      
     ashish.current_treasure.name.should == "White Spot"
     
@@ -151,7 +153,7 @@ describe "Eric and Ashish want to do a treasure hunt" do
     next_discovery.save
     
     hunt.attempt_open_treasure_chest(next_discovery, ashish)
-    
+    ashish.aasm_current_state.should == :hunt_hunting
     next_discovery.success.should be_true
     
     ashish.score.should == 60
@@ -168,9 +170,14 @@ describe "Eric and Ashish want to do a treasure hunt" do
     
     last_discovery.success.should be_true
     
+    hunt.aasm_current_state.should == :complete
+    
+
     ashish.score.should == 75
     ashish.current_treasure.should == second_treasure
-    ashish.aasm_current_state.should == :hunt_complete
+    
+#    hunt.victory
+    ashish.aasm_current_state.should == :active
   end
   
 protected  

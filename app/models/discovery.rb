@@ -4,6 +4,7 @@ class Discovery < ActiveRecord::Base
   belongs_to :treasure
   belongs_to :hunt
   
+  validates_presence_of :treasure_id, :lat, :lng, :user_id, :hunt_id
   
   # Good for find locations http://itouchmap.com/latlong.html
 end
