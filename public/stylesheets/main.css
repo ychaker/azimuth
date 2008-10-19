@@ -25,6 +25,10 @@ h3 {
 	font-size: 110%;
 }
 
+.chosen {
+	color: red;
+}
+
 .unwrap label {
 }
 

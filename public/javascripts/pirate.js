@@ -1,7 +1,11 @@
 $(document).ready(function() {
 	curr_hunt = 0;
 
+	$("li.new-hunt-no-event").removeClass("new-hunt-no-event");
+
 	hunt_list_click = function(obj) {
+		$(".chosen").removeClass("chosen");
+		$(obj).addClass("chosen");
 		id = $(obj).attr("id").split("-")[2];
 		curr_hunt = id;
 		$("#add-clues div.right-content-body").load('/hunts/' + id, function() { 
@@ -26,16 +30,43 @@ $(document).ready(function() {
 		
 		$.post('/hunts', vars, function(data) {
 			$("#hunt-list").append(data);
-			$("li.new-hunt-no-event a").click(function() {
+			$("li.new-hunt-no-event a.select-hunt-lnk").click(function() {
 				hunt_list_click(this);
 			});
-			$("li.new-hunt-no-event").removeClass("new-hunt-no-event");
+
+			$("li.new-hunt-no-event a.delete-hunt-lnk").click(function() {
+				delete_hunt(this);
+			});
+			
+			curr_hunt = $("li.new-hunt-no-event").attr("id").split("-")[2];
+			$("li.new-hunt-no-event").addClass("chosen").removeClass("new-hunt-no-event");
 			$("#hunt-new").fadeOut(function() {
-				$("#accordion").fadeIn();
+				$("#accordion").fadeIn().accordion("activate", 1);
 			});
 		}, "html");
 		return false;
 	});
+	
+	$("a.delete-hunt-lnk").click(function() {
+		delete_hunt(this);
+	});
+	
+	$("#start-hunt").click(function() {
+		location.href = "/hunters/start/" + curr_hunt;
+	});
+	
+	function delete_hunt(obj) {
+		id = $(obj).attr('id').split('-')[2];
+		$.ajax({
+			type: 'DELETE',
+			url: '/hunts/' + id + "?authenticity_token=" + window._token,
+			complete: function(data, textStatus) {
+				$("li#list-hunt-" + id).fadeOut(function() {
+					$(this).remove();
+				})
+			}
+		})
+	}
 	
 	$("#hunt-new-cancel").click(function() {
 		$("#hunt-new").fadeOut("fast", function() {
@@ -63,7 +94,7 @@ $(document).ready(function() {
 		$(this).attr("enabled", "false");
 	});
 	
-	$("#hunt-list a").click(function() {
+	$("#hunt-list a.select-hunt-lnk").click(function() {
 		hunt_list_click(this);
 	});
 	
