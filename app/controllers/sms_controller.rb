@@ -57,8 +57,12 @@ class SmsController < ApplicationController
             user.save!
             hunt.save!
             discovery.save!
-      
-            render :text => ""  # don't send extra texts since the hunt will do it for us...
+        
+            if discovery.success?
+              render :text => ""  # don't send extra texts since the hunt will do it for us...
+            else
+              render :text = "What you texted didn't open the treasure chest :-(.  Coords: #{sms.lat} #{sms.lng}.  Key: #{sms.key}"
+            end
           else
             render :text => "The hunt #{hunt.name} is currently in #{hunt.state.humanize} state.  Please wait for the hounds to be released to get your first clue."
           end
