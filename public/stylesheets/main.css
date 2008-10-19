@@ -145,8 +145,8 @@ div.right-heading, div.heading {
 	clear: both;
 }
 
-#treasure-new {
-/*	display:none;*/
+#treasure-new label {
+	width: 150px;
 }
 
 #treasure-list li, #hunt-list li {
