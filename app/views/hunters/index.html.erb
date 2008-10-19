@@ -18,7 +18,7 @@
       <ul>
         <% @hunts.each do |hunt| %>
         <li>
-          <%= link_to hunt.name, :action => :start, :id => hunt.id %>: <%= hunt.description %>
+          <%= link_to hunt.name, :action => :start, :id => hunt.id %> [<%= hunt.treasures.size %> treasures]: <%= hunt.description %>
         </li>
         <% end %>
       </ul>
