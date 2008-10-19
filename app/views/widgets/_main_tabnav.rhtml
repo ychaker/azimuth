@@ -14,9 +14,7 @@
 render_tabnav :main, 
               :generate_css => false do 
     
-  # this generates a tab for every controller in your app
-  # you'll probably want to delete this and
-  # add tabs one by one as shown below
+  # Note you must use the full controller and action versus a Named Route to get the highlighting of tabs to work.
 
   add_tab do |t|
      t.named "Hide Treasure"
@@ -27,20 +25,21 @@ render_tabnav :main,
      t.named "Find Treasure"
      t.links_to :controller => 'hunters'
   end
-
-  add_tab do |t|
-     t.named "Logout"
-     t.links_to logout_path
-  end if logged_in?
+  
+#  add_tab do |t|
+#     t.named "Logout"
+#     t.links_to :controller => 'sessions', :action => 'destroy'
+#  end if logged_in?
 
   add_tab do |t|
      t.named "Login"
-     t.links_to login_path
+     t.links_to :controller => 'sessions', :action => 'new'
   end unless logged_in?
 
   add_tab do |t|
      t.named "Signup"
-     t.links_to signup_path
+     #t.links_to signup_path
+     t.links_to :controller => 'users', :action => 'new'
   end unless logged_in?
 
   #add_tab do |t|
