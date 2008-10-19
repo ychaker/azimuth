@@ -34,7 +34,18 @@
     		      <%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %>
     		    <% end %>
     		    <br/><br/>
-  		      <%= "I have created #{current_user.hunts.size} hunt(s)" %><br/> <%= select("hunt", "id", current_user.hunts.collect{|h| ["#{h.name} [#{h.state.humanize}]", h.id]}) unless current_user.hunts.blank?%>
+  		      <%= "I have created #{current_user.hunts.size} hunt(s)" %>
+  		      <br/> 
+  		      <% unless current_user.hunts.blank? %>
+  		      <form action="/hunt/show/">
+  		        <select name="id" id="id" onchange="this.form.submit();">
+  		          <% for h in current_user.hunts %>
+  		            <option value="<%=h.id%>"><%=h.name%></option>
+  		          <% end %>
+  		        </select>
+  		      </form>
+  		      <% end %>
+  		      
 		      </div>
   		  </div>
   		  <% end %>
