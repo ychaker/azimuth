@@ -20,4 +20,24 @@ describe Treasure do
   it "should create a new instance given valid attributes" do
     Treasure.create!(@valid_attributes)
   end
+  
+  it "should be able to detect if a Discovery took place within a radius of a Treasure" do
+    t = Treasure.create!(:name => "Cool Treasure", :clue => "where Eric Pugh Lives", :lat => 38.012331, :lng => -78.514305, :proximity => 1000)
+    
+    d = Discovery.create!(:lat => 38.012411, :lng => -78.515275)
+    
+    distance = Treasure.distance_between(d, t)
+    
+    t.proximate?(d).should be_true
+    
+    rotunda = Discovery.create!(:lat => 38.035581, :lng => -78.503548)
+    
+    t.proximate?(rotunda).should be_false
+    
+    
+    
+    
+    
+    
+  end
 end
