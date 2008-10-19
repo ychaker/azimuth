@@ -77,10 +77,10 @@ class UsersController < ApplicationController
   
   def create_new_user(attributes)
     @user = User.new(attributes)
-    ip = request.env['HTTP_X_CLUSTER_CLIENT_IP'].blank? ? request.remote_ip : request.env['HTTP_X_CLUSTER_CLIENT_IP']
-    begin
-      @user.set_coord_from_maxmind(ip)
-    rescue LocationNotFound
+    #ip = request.env['HTTP_X_CLUSTER_CLIENT_IP'].blank? ? request.remote_ip : request.env['HTTP_X_CLUSTER_CLIENT_IP']
+    #begin
+      #@user.set_coord_from_maxmind(ip)
+    #rescue LocationNotFound
     end
     if @user && @user.valid?
       if @user.not_using_openid?
