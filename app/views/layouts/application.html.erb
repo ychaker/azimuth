@@ -33,7 +33,7 @@
     		    <% if logged_in? %>
     		      <%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %>
     		    <% end %>
-    		    <br/><br/>
+    		    <br/>
   		      <%= "I have created #{current_user.hunts.size} hunt(s)" %>
   		      <br/> 
   		      <% unless current_user.hunts.blank? %>
