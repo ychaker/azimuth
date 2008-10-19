@@ -28,22 +28,26 @@ class Hunt < ActiveRecord::Base
   end
   
   
-  def attempt_open_treasure_chest(discovery)
-    discovery.success = true
+  def attempt_open_treasure_chest(discovery, team)
+    discovery.success = discovery.team.current_treasure.proximate?(discovery)
+    discovery.save
+    
+    #team = discovery.team
+    current_treasure = team.current_treasure
     
     if discovery.success?
-      if discovery.team.current_treasure.last?
-        discovery.team.current_treasure = discovery.team.hunt.treasures.first
+      if current_treasure.last?
+        team.current_treasure = team.hunt.treasures.first
       else
-        discovery.team.current_treasure = discovery.team.hunt.treasures.find(discovery.team.current_treasure).lower_item
+        puts team.hunt.treasures.find(current_treasure).lower_item.inspect
+        team.current_treasure = team.hunt.treasures.find(current_treasure).lower_item
       end
-    
-      if discovery.team.current_treasure == discovery.team.start_treasure
+      puts team.inspect
+      if team.current_treasure == team.start_treasure
         puts "YOU ARE ALL DONE"
-        discovery.team.finish_hunt
+        team.finish_hunt
       end
     end
-    
   end
   
   # calculate the total possible points in a hunt
