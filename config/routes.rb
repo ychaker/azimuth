@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.open_id_create '/opencreate', :controller => "users", :action => "create", :requirements => { :method => :get }
   
   map.welcome '/welcome', :controller => "sessions", :action => "welcome"
+  map.welcome '/tour', :controller => "sessions", :action => "tour"
   
   # Restful Authentication Resources
   map.resources :users
@@ -25,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   
   # Home Page
-  map.root :controller => 'sessions', :action => 'new'
+  map.root :controller => 'sessions', :action => 'welcome'
 
   # Install the default routes as the lowest priority.
   map.connect ':controller/:action/:id'
