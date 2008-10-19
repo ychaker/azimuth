@@ -176,6 +176,21 @@ h2 {
 	padding: 20px;
 }
 
+#business-card {
+	float: right;
+}
+
+#user-choices ul {
+	list-style: none;
+	display: block;
+	font-size: 150%;
+}
+
+#user-choices li {
+	float: left;
+	width: 30%;
+}
+
 #header {
     background: url(/images/header.png) no-repeat;
 	height: 85px;
