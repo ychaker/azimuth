@@ -51,10 +51,15 @@ class HuntersController < ApplicationController
     respond_to do |format|
       if @discovery.success
         flash[:notice] = 'Treasure was successfully found!.'
-        format.html { redirect_to :action => "continue" }
       else
-        format.html { render :action => "new" }
+        if (params[:discovery][:key] != "")
+          flash[:notice] = 'Invalid Key! Please try again.'
+        elsif (params[:discovery][:lat] && params[:discovery][:lng])
+          flash[:notice] = 'You are not close enough! Please try again.'
+        end
       end
+      
+      format.html { redirect_to :action => "continue" }
     end    
   end
   
