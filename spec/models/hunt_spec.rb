@@ -57,10 +57,20 @@ end
 describe "Eric, Youssef and Ashish want to do a treasure hunt" do
   it "should be easy and fun" do
     #pending "Current flushing out"
+    #create users, one pirate and two hunters
     eric = create_user(Pirate,{:name => "Eric", :login => "epugh"})
     youssef = create_user(TreasureHunter,{:name => "Youssef", :login => "ychaker", :email => "ychaker@o19s.com"})
     ashish =  create_user(TreasureHunter,{:name => "Ashish", :login => "atonse", :email => "atonse@gmail.com"})
     ashish.save!
+    youssef.save!
+    
+    #create hunter team
+    ya_team = Team.new(:name => "YA Team")
+    ya_team.treasure_hunters << youssef
+    ya_team.treasure_hunters << ashish
+    ya_team.save
+    ya_team.treasure_hunters.size.should == 2
+    ya_team.aasm_current_state.should == :registering
     
     hunt = Hunt.create!(:name => "Eric's Hunt", :description => "A hunt around cville.")
     hunt.state.should == "being_planned"
@@ -79,19 +89,16 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
     hunt.total_points.should == 75
     hunt.treasures.size.should == 3
     hunt.save!
-    ya_team = Team.new(:name => "YA Team")
-    ya_team.treasure_hunters << youssef
-    ya_team.treasure_hunters << ashish
-    ya_team.treasure_hunters.size.should == 2
+    
 
     hunt.teams << ya_team
-    ya_team.current_hunt = hunt
-
-    ya_team.start_treasure = second_treasure
-    ya_team.current_treasure = second_treasure  # THIS LINE SUCKS< SHOULD BE DONE BY SETTING START
+    ya_team.hunt = hunt
+    
+    ya_team.start_hunt(second_treasure) 
     ya_team.current_treasure.should == second_treasure
     ya_team.save!
     ya_team.score.should == 0
+    ya_team.aasm_current_state.should == :hunting
     
     ya_team.should == youssef.team
     
@@ -104,7 +111,7 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
     
     #sms = Sms.new(:raw => "62.1288 -91.5773")
     #sms.parse
-    ya_team.current_hunt.should == hunt
+    ya_team.hunt.should == hunt
     
     d = Discovery.new(:treasure => ya_team.current_treasure, :lat =>62.1288, :lng => -91.5773, :hunt => hunt )
     ya_team.discoveries << d

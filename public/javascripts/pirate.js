@@ -16,17 +16,22 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$("#accordion").accordion({ header: "div.right-heading" });
+	$("#accordion").accordion({ 
+		header: "div.right-heading",
+		clearStyle: true
+	});
 	
 	$("#hunt-list a").click(function() {
 		$("#accordion").accordion("activate", 1);
 		id = $(this).attr("id").split("-")[2];
-		$("#add-clues div.right-content").load('/hunts/' + id);
+		$("#hunt_id").attr("value", id);
+		$("div#add-clues.right-container.selected > div.right-content").css("overflow","auto").css("height","");
+		$("#add-clues div.right-content-body").load('/hunts/' + id);
 	});
 	
 	$("#treasure-new-submit").click(function() {
 		vars = { authenticity_token: window._token };
-
+		
 		$("#treasure-new input[type='text'], #treasure-new input[type='hidden']")
 			.each(function() {
 				vars['treasure[' + $(this).attr('id') + ']'] = $(this).attr('value');
@@ -41,11 +46,10 @@ $(document).ready(function() {
 			$('.new-treasure')
 				.effect("highlight", {}, 500)
 				.removeClass('new-treasure');
-
-			$("#treasure-new").fadeOut()
-				.find("input[type='text']").each(function() {
-					$(this).attr("value","");
-				});
+		
+			$("#treasure-new").find("input[type='text']").each(function() {
+				$(this).attr("value","");
+			});
 				
 		}, "html");
 		

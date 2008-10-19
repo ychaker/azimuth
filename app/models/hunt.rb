@@ -5,16 +5,15 @@ class Hunt < ActiveRecord::Base
   
   belongs_to :pirate
   
-  has_many :team_entry
-  has_many :teams, :through => :team_entry
+  has_many :teams
   
   aasm_column :state
   aasm_initial_state :being_planned
   
   aasm_state :being_planned
-  aasm_state :hunting
-  aasm_state :complete
-  aasm_state :cancelled
+  aasm_state :hunting#, :enter => :send_initial_txt_messages
+  aasm_state :complete#, :enter => :announce_end_of_hunt  
+  aasm_state :cancelled#, :enter => :announce_hunt_canceled 
   
   aasm_event :release_the_hounds do
     transitions :to => :hunting, :from => [:being_planned]
@@ -34,13 +33,14 @@ class Hunt < ActiveRecord::Base
     
     if discovery.success?
       if discovery.team.current_treasure.last?
-        discovery.team.current_treasure = discovery.team.current_hunt.treasures.first
+        discovery.team.current_treasure = discovery.team.hunt.treasures.first
       else
-        discovery.team.current_treasure = discovery.team.current_hunt.treasures.find(discovery.team.current_treasure).lower_item
+        discovery.team.current_treasure = discovery.team.hunt.treasures.find(discovery.team.current_treasure).lower_item
       end
     
       if discovery.team.current_treasure == discovery.team.start_treasure
         puts "YOU ARE ALL DONE"
+        discovery.team.finish_hunt
       end
     end
     
