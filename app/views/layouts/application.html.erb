@@ -23,10 +23,10 @@
   		      <%= gravatar_for(current_user, {:class => 'photo'}) unless current_user.email.blank? %><br/>
     		    <%= current_user.login %>
     		  </div>
-    		  <div>
+    		  <div style="float: right">
     		    <%= "My current hunt: "%>
     		    <% if current_user.hunt %>
-    		      <%=  "#{current_user.hunt.name} (#{current_user.hunt.state.humanize})"%> | <%= link_to "Change Hunt", :controller => 'hunters', :action => 'change_hunt' %> | 
+    		      <%=  "#{current_user.hunt.name} (#{current_user.hunt.state.humanize})"%> | <%#= link_to "Change Hunt", :controller => 'hunters', :action => 'change_hunt' %>
     		    <% else %>
     		    	None | 
     		    <% end %>
