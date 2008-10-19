@@ -63,6 +63,7 @@ h4 {
 	float: right;
 	border: 1px solid #95a5c6;
 	background-color: #d8dfea;
+	padding-bottom: 10px;
 }
 
 #hunt-progress {
@@ -78,6 +79,7 @@ h4 {
 #signup-box {
 	border: 1px solid #95a5c6;
 	background-color: #d8dfea;
+	padding-bottom: 10px;
 	width: 300px;
 }
 
