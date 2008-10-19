@@ -3,18 +3,81 @@ body {
 	margin: 0;
 }
 
-div {
+#container {
+	background: url(/images/bg-repeat.png) repeat-y;
+	width: 960px;
+	margin: auto;
+	overflow: hidden;
 }
 
-#header, #content, #bottom {
+#header, #content {
     padding: 10px;
 }
 
-#top {
-    background-color: rgb(162, 178, 177)
+#footer {
+	background: url(/images/bottom.png) no-repeat;
+	width: 960px;
+	height: 8px;
 }
 
-#ul {
+.unwrap label {
+}
+
+a {
+	color: #3e4e70;
+	text-decoration: none;
+	font-weight: bolder;
+}
+
+div.unwrap {
+	float: left;
+}
+
+div.right-heading {
+	overflow: auto;
+}
+
+.right-heading h2 {
+	float: left;
+	clear: right;
+	padding: 7px;
+}
+
+#treasure-list {
+	clear: both;
+}
+
+#treasure-list li, #hunt-list li {
+	list-style: none;
+	padding: 0;
+	background: url(/images/hr.gif) no-repeat bottom center;
+	padding: 10px;
+}
+
+.btn-center {
+	width: 175px;
+	height: 35px;
+	float: right;
+	padding-top: 10px;
+	text-align: center;
+/*	background: url(/images/btncenter.gif) no-repeat;*/
+}
+
+.btn-center input {
+	background-color:#3B5998;
+	border-color:#D9DFEA #0E1F5B #0E1F5B #D9DFEA;
+	border-style:solid;
+	border-width:1px;
+	color:#FFFFFF;
+	padding: 5px;
+}
+
+
+input.span-all { width: 300px;}
+input.span-half { width: 90px; }
+
+li.horiz {
+	float: left;
 }
 
 form ul {
@@ -26,21 +89,43 @@ form ul {
 #map {
 	float: left;
 	border: 1px solid black;
+	margin: 10px;
+}
+
+#add-clues {
+	float: left;
 }
 
 #hunt-new {
+	float: left;
 	display:none;
+}
+
+.right-container {
+	padding: 5px;
+	float: left;
+	margin-left: 10px;
+	width: 35%;
+	overflow: auto;
+}
+
+.right-content {
+	overflow: auto;
 }
 
 #treasures {
 	padding: 5px;
-/*	border: 1px solid black;*/
 	float: left;
 	margin-left: 10px;
 	width: 35%;
 }
 
-#treasures ul {
+.acc-selected {
+	color: black;
+}
+
+#hunts ul, #add-clues ul {
+	padding-top: 20px;
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -48,9 +133,6 @@ form ul {
 
 form ul li {
 	padding: 5px;
-}
-
-form label {
 }
 
 fieldset {
@@ -65,21 +147,24 @@ h1 {
     font-size: 200%;
 }
 
+.dropcap {
+	margin: 0;
+	float: left;
+}
+
 h2 {
-	font-size: 150%;
+	font-size: 125%;
+	margin: 0px;
 }
 
 #content {
-    height: 400px;
-    background-color: #D1FFCD;
+	overflow: auto;
+	padding: 10px;
 }
 
 #header {
-    background-color: #596166;
-}
-
-#top, #bottom {
-    height: 100px;
+    background: url(/images/header.png) no-repeat;
+	height: 85px;
 }
 
 form > li {
@@ -91,11 +176,9 @@ label {
 	display: block;
 }
 
-
-
 .main_tabnav {
 	color: #000;
-	margin: 13px 0px 0px 0px;
+	margin-top: 71px;
 	padding: 0px;
 	z-index: 1;
 	padding-left: 10px }
@@ -112,11 +195,11 @@ label {
 
 .main_tabnav li span.disabled {
 /*        color: #888888;*/
-        background: #948A54;
-        border-bottom: none;
-        padding: 2px 5px 0px 5px;
-        margin: 0;
-        text-decoration: none;
+	background: #948A54;
+	border-bottom: none;
+	padding: 2px 5px 0px 5px;
+	margin: 0;
+	text-decoration: none;
 }
 
 .main_tabnav a, main_tabnav a.active {
