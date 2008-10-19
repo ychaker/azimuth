@@ -64,7 +64,18 @@ class HuntsController < ApplicationController
     end
   end
   
-  def change_status 
+  def change_state
+    puts params[:state]
+    @hunt = Hunt.find(params[:id])
+    if params[:state] == "cancel"
+      @hunt.cancel
+    elsif params[:state] == "victory"
+      @hunt.victory
+    end
+    
+    @hunt.save!
+    
+    redirect_to(@hunt) 
     
   end
   
