@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  hunt_id: 1
+  code: 1
+
+two:
+  user_id: 1
+  hunt_id: 1
+  code: 1

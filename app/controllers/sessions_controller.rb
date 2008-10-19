@@ -2,10 +2,12 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create
   
   def welcome
-    
   end
   
   def new
+    if (request.user_agent.downcase.match /iphone/)
+      redirect_to(:controller => :hunters, :action => :start_mobile)
+    end
   end
 
   def create

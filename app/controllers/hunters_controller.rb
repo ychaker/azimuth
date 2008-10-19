@@ -31,7 +31,11 @@ class HuntersController < ApplicationController
   end
   
   def start_mobile
-    
+    render :layout => 'mobile'
+  end
+  
+  def check_clue
+    render :text => params[:password]
   end
   
   def start

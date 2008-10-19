@@ -2,3 +2,13 @@
 
 <h4>Your Clue</h4>
 <%= @treasure.clue %>
+
+<h4>Found the clue?</h4>
+Enter the key:
+<form id="discovery">
+  <input type="text" id="password">
+  <input type="submit">
+</form>
+<span id="progress"></span>
+
+<%= javascript_include_tag 'hunter' %>
