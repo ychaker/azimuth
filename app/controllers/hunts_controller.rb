@@ -64,6 +64,10 @@ class HuntsController < ApplicationController
     end
   end
   
+  def change_status 
+    
+  end
+  
   def add_treasure
     @treasure = Treasure.new(params[:treasure])
 
