@@ -48,6 +48,14 @@ $(document).ready(function() {
 		clearStyle: true
 	});
 	
+	$("#hunt-release-btn").click(function() {
+		$.ajax({
+			type: "POST",
+			url: "/hunts/update/" + $("#hunt_id").attr('value'),
+			data: { hunt_event : 'release_the_hounds', authenticity_token: window._token }
+		});
+	});
+	
 	$("#hunt-list a").click(function() {
 		hunt_list_click(this)
 	});
