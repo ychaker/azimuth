@@ -9,9 +9,7 @@
     </div>
     <div class="right-content">
       <ul id="hunt-list">
-      <% Hunt.find(:all).each do |h| %>
-        <li><a href="#" id="pick-hunt-<%=h.id%>"><%= h.name %></a></li>
-      <% end %>
+        <%= render :partial => "/hunts/hunt", :collection => Hunt.find(:all) %>
       </ul>
       <div class="btn-center">
         <input type="button" id="hunt-new-link" value="add new hunt">
@@ -51,7 +49,7 @@
   <div class="right-heading"><h2>Choose a Treasure Hunt</h2></div>
   <div class="right-content">
     <form>
-      <label for="hunt-new-name">New Treasure Hunt's Name</label><input id="hunt-new-name">
+      <label for="hunt-new-name">New Treasure Hunt's Name</label><input id="name">
       <div class="btn-center">
         <input type="submit" id="hunt-new-submit" value="create">
       </div>
