@@ -93,9 +93,9 @@ h4 {
 }
 
 #footer {
-	background: url(/images/bottom.png) no-repeat;
+	background: url(/images/bottom.png) no-repeat bottom center;
 	width: 960px;
-	height: 8px;
+	height: 140px;
 }
 
 h3 {
@@ -291,7 +291,7 @@ h2 {
 }
 
 #header {
-    background: url(/images/header-notext.png) no-repeat;
+    background: url(/images/header.png) no-repeat;
 	height: 85px;
 }
 
@@ -319,11 +319,12 @@ label {
 .main_tabnav li {
 	display: inline;
 	overflow: hidden;
-	list-style-type: none; }
+	list-style-type: none; 
+}
 
 .main_tabnav li span.disabled {
 /*        color: #888888;*/
-	background: #948A54;
+/*	background: #948A54;*/
 	border-bottom: none;
 	padding: 2px 5px 0px 5px;
 	margin: 0;
@@ -332,7 +333,8 @@ label {
 
 .main_tabnav a, main_tabnav a.active {
 	color: #000000;
-    background-color: rgb(217, 225, 217);
+	background-color: #bdc7d8;
+/*    background-color: rgb(217, 225, 217);*/
 	font-weight: bold;
 	padding: 2px 5px 0px 5px;
 	margin: 0;
@@ -340,13 +342,13 @@ label {
 }
 
 .main_tabnav a.active {
-	background-color: #948A54;
-	color: #D1FFCD;
+	background-color: #;
+	color: #;
 }
 
 .main_tabnav a:hover {
 	color: #FFFFFF;
-	background: #CCCCCC; 
+	background-color: #bdc7d8; 
 }
 
 /*.main_tabnav a.active:hover {
