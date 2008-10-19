@@ -68,6 +68,8 @@ class SmsController < ApplicationController
           end
         end
       end
+    else
+      render :text => ""
     end
   
   end
