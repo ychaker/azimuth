@@ -18,7 +18,6 @@ $(function() {
 				url: '/hunters/check_clue', 
 				data: vars, 
 				complete: function(data, textStatus) {
-					$("#progress").html(textStatus);
 				}
 			});
 			

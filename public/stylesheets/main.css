@@ -8,6 +8,35 @@ body {
 	width: 300px;	
 }
 
+.header {
+	padding-bottom: 10px;
+	border-bottom: 2px solid #cecece;
+	margin-bottom: 20px;
+}
+
+#discovery {
+	margin-top: 20px;
+	padding: 10px;
+	border: 1px solid black;
+	overflow: auto;
+	border: 1px solid #95a5c6;
+	background-color: #d8dfea;
+}
+
+#discovery h4 {
+	margin-bottom: 20px;
+}
+
+div.discovery-cell {
+	float: left;
+	width: 175px;
+}
+
+h4 {
+	margin: 0;
+	padding: 0;
+}
+
 #business-card {
 	font-family: Lucida Sans, arial;
 	font-size: 1px;
@@ -26,6 +55,16 @@ body {
 	float: right;
 	border: 1px solid #95a5c6;
 	background-color: #d8dfea;
+}
+
+#hunt-progress {
+	float: left;
+	width: 40%;
+}
+
+#hunt-clue {
+	width: 50%;
+	float: left;
 }
 
 #signup-box {
@@ -141,7 +180,7 @@ form ul {
 	margin: 0px;
 }
 
-#map {
+#map_div {
 	float: left;
 	border: 1px solid black;
 	margin: 10px;
