@@ -87,6 +87,12 @@ class HuntsController < ApplicationController
   # PUT /hunts/1.xml
   def update
     @hunt = Hunt.find(params[:id])
+    
+    if params['hunt_event']
+      if params['hunt_event'] == "release_the_hounds"
+        @hunt.release_the_hounds
+      end
+    end
 
     respond_to do |format|
       if @hunt.update_attributes(params[:hunt])

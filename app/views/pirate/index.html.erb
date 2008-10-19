@@ -9,7 +9,7 @@
     </div>
     <div class="right-content">
       <ul id="hunt-list">
-        <%= render :partial => "/hunts/hunt", :collection => current_user.hunts %>
+        <%= render :partial => "/hunts/hunt", :collection => current_user.hunts.being_planned %>
       </ul>
       <div class="btn-center">
         <input type="button" id="hunt-new-link" value="add new hunt">

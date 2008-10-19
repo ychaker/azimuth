@@ -104,6 +104,17 @@ class User < ActiveRecord::Base
     self.save
   end
   
+  def send_clue
+    logger.error "Trying to send clues to folks!"
+    if self.email
+      logger.error "Now sending email about your clue: #{self.current_treasure.clue}"
+    end
+    
+    #if self.zeeped?
+    #  logger.error "Now sending text message about your clue: #{self.current_treasure.clue}"
+    #end
+  end
+  
 
   protected
     
