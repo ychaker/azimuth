@@ -16,7 +16,6 @@ class Treasure < ActiveRecord::Base
   end
   
   def proximate?(discovery)
-    return false unless self.proximity
     # find distance in kilometers
     distance = Treasure.distance_between(self, discovery)
     
