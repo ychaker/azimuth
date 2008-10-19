@@ -34,10 +34,16 @@ describe Treasure do
     
     t.proximate?(rotunda).should be_false
     
+  end
+  
+  it "should be able to detect if a Discovery took place within a radius of a Treasure part deux" do
+    t = Treasure.create!(:name => "Cool Treasure", :clue => "where Eric Pugh Lives", :lat => 70.2278, :lng => -85.5864, :proximity => 1000)
     
+    d = Discovery.create!(:lat => 70.2278, :lng => -85.5864)
     
+    distance = Treasure.distance_between(d, t)
     
-    
+    t.proximate?(d).should be_true
     
   end
 end

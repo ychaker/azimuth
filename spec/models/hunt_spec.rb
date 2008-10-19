@@ -82,7 +82,7 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
     
     eric.hunts.size.should == 1
     
-    first_treasure = Treasure.create!(:name => "Icarus Balls", :image => "http://farm4.static.flickr.com/3280/2950800503_8f00180b88_t.jpg", :points => 15, :lat => 52.1278, :lng => -81.5763, :proximity => 50, :clue => "Something Shiny")
+    first_treasure = Treasure.create!(:name => "Icarus Balls", :image => "http://farm4.static.flickr.com/3280/2950800503_8f00180b88_t.jpg", :points => 15, :lat => 70.2278, :lng => -85.5865, :proximity => 50, :clue => "Something Shiny")
     second_treasure = Treasure.create!(:name => "White Spot", :image => "http://www.foodhistory.com/foodnotes/road/va/ch/wh/01/03-image.jpg", :points => 25, :lat => 62.1278, :lng => -91.5763, :proximity => 30, :clue => "Best Burgers at 2 am")
     second_treasure.position.should == 2
     third_treasure = Treasure.create!(:name => "Rotunda", :image => "http://www.hankinsphotography.com/images/photo_full/MF_20050422_2_12.jpg", :points => 35, :lat => 70.1278, :lng => -85.5763, :proximity => 20, :clue => "Big Round, TJ built it!")
@@ -154,15 +154,31 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
     ya_team.score.should == 25
     ya_team.current_treasure.should == third_treasure
     
-    pending("still working")
-    ashish.discover(:lat => 70.1268, :lng => -85.5753, :proof_of_life => "coords").should be_true
+    next_discovery = Discovery.new(:treasure => ya_team.current_treasure, :lat => 70.1278, :lng => -85.5765, :hunt => hunt, :team_id => ya_team.id)
+    ya_team.discoveries << next_discovery
+    next_discovery.save
+    
+    hunt.attempt_open_treasure_chest(next_discovery, ya_team)
+    
+    next_discovery.success.should be_true
+    
     ya_team.score.should == 60
     ya_team.current_treasure.should == first_treasure
-    ashish.discover(:lat => 52.1278, :lng => -81.5763, :proof_of_life => "coords").should be_true
-    hunt.state.should == "Done"
     
-    youssef.team.score.should == 75
+    
+    #pending("still working")
+    last_discovery = Discovery.new(:treasure => ya_team.current_treasure, :lat => 70.2278, :lng => -85.5864, :hunt => hunt, :team_id => ya_team.id)
+    ya_team.discoveries << last_discovery
+    last_discovery.save
+    ya_team.discoveries.size.should == 4
+    
+    hunt.attempt_open_treasure_chest(last_discovery, ya_team)
+    
+    last_discovery.success.should be_true
+    
     ya_team.score.should == 75
+    ya_team.current_treasure.should == second_treasure
+    ya_team.aasm_current_state.should == :complete
   end
   
 protected  
