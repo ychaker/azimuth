@@ -124,6 +124,17 @@ $(document).ready(function() {
 	});
 	
 	$("#treasure-new-submit").click(function() {
+		valid = true;
+		$("input.required").each(function() {
+			console.log($(this).val());
+			if ($(this).val() == "") {
+				$(this).effect("highlight",{duration:1000});
+				valid = false;
+			}
+		});
+		
+		if (!valid) return false;
+		
 		vars = { authenticity_token: window._token, 'treasure[hunt_id]' : curr_hunt, 'treasure[description]' : '--' };
 		
 		$("#treasure-new input[type='text'], #treasure-new input[type='hidden']")
