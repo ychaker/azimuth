@@ -3,9 +3,13 @@ body {
 	margin: 0;
 }
 
+#map-options {
+/*	clear: left;*/
+}
+
 #right-root-container {
 	float: left;
-	width: 300px;	
+	width: 350px;	
 }
 
 .header {
@@ -63,7 +67,7 @@ h4 {
 }
 
 #hunt-clue {
-	width: 50%;
+	width: 45%;
 	float: left;
 }
 
@@ -101,7 +105,7 @@ h3 {
 }
 
 .chosen {
-	color: red;
+	color: #8C031C;
 }
 
 .unwrap label {
@@ -174,16 +178,23 @@ li.horiz {
 	float: left;
 }
 
+#geocode {
+	margin-top: 10px;
+	width: 300px;
+}
+
 form ul {
 	list-style: none;
 	padding: 0px;
 	margin: 0px;
 }
 
-#map_div {
+#map-container {
 	float: left;
 	border: 1px solid black;
 	margin: 10px;
+}
+#map {
 }
 
 #add-clues {
@@ -280,7 +291,7 @@ h2 {
 }
 
 #header {
-    background: url(/images/header.png) no-repeat;
+    background: url(/images/header-notext.png) no-repeat;
 	height: 85px;
 }
 
@@ -355,16 +366,27 @@ label {
 .sms-reminder {
 	float: right;
 	overflow: visible;
-	background: #fff url("../images/iphone.jpg") no-repeat 5px 5px;
+	background: #fff url(/images/iphone.jpg) no-repeat 5px 5px;
 	border: 1px solid #ccc;
-	width: 400px;
+	width: 40%;
 	margin: 10px;
-	padding: 15px 15px 15px 80px;
+	padding: 10px 10px 10px 80px;
 }
 
 .sms-reminder h3 {
 	
 }
+
+.short-callout {
+	float: right;
+	overflow: visible;
+	background: #fff;
+	border: 1px solid #ccc;
+	width: 490px;
+	margin: 10px;
+	padding: 2px;
+}
+
 
 .left {
 	float: left;

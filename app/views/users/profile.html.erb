@@ -1,8 +1,8 @@
 <%= title "Profile", :h2 %>
-<% form_for @user do |f| %>
-	<%= f.error_messages %>
 	<div class="left">
 	<fieldset>
+		<% form_for @user do |f| %>
+		<%= f.error_messages %>
 		<ul>
 			<li>
 				<%= f.label :login, 'Username' %>
@@ -24,15 +24,24 @@
 				<label for="openid_url">OpenID URL</label>
 				<%= text_field_tag :openid_url %>
 			</li>
+			<li class="buttons-left">
+				<%= submit_tag 'Edit Profile' %>
+			</li>
 		</ul>
+		<% end %>
 	</fieldset>
+	</div>
+	<div class="short-callout">
+		 <% form_for :sms, @smstest, :url => { :action => "sendtestsms" } do |s| %>
+			<%= submit_tag 'Send test Text message'%><%= s.text_field :raw %>
+		<% end %>
 	</div>
 	<div class="sms-reminder">
 		<h3>Reminder: To text your discoveries:</h3>
 		<ol>
 			<li>Make sure you have signed up for zeep (see below)</li>
 			<li>Send a text message to 88147</li>
-			<li>IMPORTANT: Prefix your message with "azimuth1 " (no quotes, trailing space)</li>
+			<li>IMPORTANT: Prefix your message with "azimuth1 " (no quotes, but include the trailing space)</li>
 			<li>Include your key or the latitude/longitude coordinates.  For example: </li>
 		</ol>
 		<i>azimuth1 38.012411 -78.515275</i><br />
@@ -40,9 +49,6 @@
 		<i>azimuth1 treasurekey</i>
 	</div>
 	<div class="left">
-	<div class="buttons-left">
-		<%= submit_tag 'Edit Profile' %>
-	</div>
 	To receive text message alerts of clues, and to enable sending your discoveries back by text message, please make sure you have created a zeepmobile account below (widget may take a few seconds to load).  Ads may be inserted with your text messages, but you will not be spammed.
 	</div>
 	<iframe 
@@ -50,4 +56,3 @@
 	  id="zeep_mobile_settings_panel" 
 	  src="https://secure.zeepmobile.com/subscription/settings?api_key=4e26fd99-9087-481e-b5b9-62984a5cfbaf&user_id=<%= current_user.login %>">
 	</iframe>
-<% end %>

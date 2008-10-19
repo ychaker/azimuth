@@ -8,18 +8,12 @@ $(document).ready(function() {
 		$(obj).addClass("chosen");
 		id = $(obj).attr("id").split("-")[2];
 		curr_hunt = id;
+		$("#map").addClass("hunt-chosen");
 		$("#add-clues div.right-content-body").load('/hunts/' + id, function() { 
 			$("#accordion").accordion("activate", 1);	
 		});
 	}
 	
-	if (GBrowserIsCompatible()) {
-		var map = new GMap2(document.getElementById("map"));
-		map.setCenter(new GLatLng(37.4419, -122.1419), 13);
-	}
-
-	$("#hunt-list").sortable({});
-
 	$("div#add-clues div.right-heading").click(function() {
 		if (curr_hunt == 0) {
 			alert("Please choose a hunt first");
@@ -40,13 +34,15 @@ $(document).ready(function() {
 			$("li.new-hunt-no-event a.select-hunt-lnk").click(function() {
 				hunt_list_click(this);
 			});
+			
+			$("#map").addClass("hunt-chosen");
 
 			$("li.new-hunt-no-event a.delete-hunt-lnk").click(function() {
 				delete_hunt(this);
 			});
 			
 			curr_hunt = $("li.new-hunt-no-event").attr("id").split("-")[2];
-			$("li.new-hunt-no-event").addClass("chosen").removeClass("new-hunt-no-event");
+			$("li.new-hunt-no-event").removeClass("new-hunt-no-event").find("a.select-hunt-lnk").addClass("chosen");
 			$("#hunt-new").fadeOut(function() {
 				$("#accordion").fadeIn().accordion("activate", 1);
 			});
@@ -66,6 +62,7 @@ $(document).ready(function() {
 		id = $(obj).attr('id').split('-')[2];
 		if (id == curr_hunt) {
 			curr_hunt = 0;
+			$("#map").removeClass("hunt-chosen");
 		}
 		
 		$.ajax({

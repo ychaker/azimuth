@@ -1,5 +1,11 @@
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<%= ENV['RAILS_ENV'] == 'production' ? 'ABQIAAAAbA6V_HyNtbEogtA8ltGhpxRmqLVh6SVQCHDAVjpISk-wVFokTBQbUyagxhdEIcuMdtgVJsB7bEngvw' : 'ABQIAAAAbA6V_HyNtbEogtA8ltGhpxTVn23A_oH_7n0_3g0PHDmJleqwMBQM7TxiELIcZnsty1lkjYfvFIOW3A' %>"></script>
-<div id="map" style="width: 60%; height: 350px"></div>
+<div id="map-container" style="width: 50%; height: 350px">
+  <div id="map" style="width: 100%; height: 350px"></div>
+  <div id="map-options">
+      <input id="geocode">
+      <input type="button" id="go-geocode" value="locate on map">
+  </div>
+</div>
 <div id="right-root-container">
   <div id="accordion">
     <div id="hunts" class="right-container">
@@ -86,8 +92,8 @@
       <div class="right-content">
         <form>
           <input type="hidden" id="user_id" value="<%= current_user.id %>">
-          <label for="hunt-new-name" style="width: 200px">New Treasure Hunt's Name</label><input id="name">
-          <label for="hunt-new-name" style="width: 200px">Description</label><textarea id="description"></textarea>
+          <label for="name" style="width: 300px">New Treasure Hunt's Name</label><input style="width: 300px" id="name">
+          <label for="description" style="width: 300px">Description</label><textarea style="width: 300px; height: 75px" id="description"></textarea>
           <div class="btn-center">
             <input type="submit" id="hunt-new-submit" value="create">
             <input type="button" id="hunt-new-cancel" value="cancel">
@@ -97,4 +103,4 @@
     </div>
   </div>
 </div>
-<%= javascript_include_tag 'pirate' %>
+<%= javascript_include_tag 'pirate', 'map' %>

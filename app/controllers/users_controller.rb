@@ -26,9 +26,10 @@ class UsersController < ApplicationController
     
     
   end
-  
+   
   def profile
     @user = current_user
+    @smstest = Sms.new(:login => @user.login, :raw => "This is a test SMS message from Azimuth.  You are configured correctly!")
   end
   
   def update
@@ -43,6 +44,15 @@ class UsersController < ApplicationController
         format.html { render :action => "profile" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
+    end
+  end
+  
+  def sendtestsms
+    Sms.send_sms(current_user.login, params[:sms][:raw])
+    flash[:notice] = 'Test SMS message sent.'
+    
+    respond_to do |format|
+      format.html { redirect_to :action => :profile}
     end
   end
   
@@ -67,6 +77,11 @@ class UsersController < ApplicationController
   
   def create_new_user(attributes)
     @user = User.new(attributes)
+    ip = request.env['HTTP_X_CLUSTER_CLIENT_IP'].nil? ? request.remote_ip : request.env['HTTP_X_CLUSTER_CLIENT_IP']
+    begin
+      @user.set_coord_from_maxmind ip
+    rescue LocationNotFound
+    end
     if @user && @user.valid?
       if @user.not_using_openid?
         @user.register!
