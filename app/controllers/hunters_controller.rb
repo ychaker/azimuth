@@ -14,6 +14,7 @@ class HuntersController < ApplicationController
   end
   
   def continue
-    render  :text => current_user.team
+    # puts current_user
+    render  :text => current_user
   end
 end

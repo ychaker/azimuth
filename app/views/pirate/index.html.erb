@@ -9,9 +9,7 @@
     </div>
     <div class="right-content">
       <ul id="hunt-list">
-      <% current_user.hunts do |h| %>
-        <li><a href="#" id="pick-hunt-<%=h.id%>"><%= h.name %></a></li>
-      <% end %>
+        <%= render :partial => "/hunts/hunt", :collection => current_user.hunts %>
       </ul>
       <div class="btn-center">
         <input type="button" id="hunt-new-link" value="add new hunt">
@@ -52,7 +50,7 @@
   <div class="right-content">
     <form>
       <input type="hidden" id="user_id" value="<%= current_user.id %>">
-      <label for="hunt-new-name">New Treasure Hunt's Name</label><input id="hunt-new-name">
+      <label for="hunt-new-name">New Treasure Hunt's Name</label><input id="name">
       <div class="btn-center">
         <input type="submit" id="hunt-new-submit" value="create">
       </div>
