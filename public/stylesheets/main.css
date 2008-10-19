@@ -31,9 +31,13 @@ body {
 	margin-bottom: 20px;
 }
 
+.discovery-cell input[type='text'] {
+	width: 145px;
+}
+
 div.discovery-cell {
 	float: left;
-	width: 175px;
+	width: 195px;
 }
 
 h4 {
