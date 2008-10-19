@@ -17,14 +17,13 @@
 	<body>
 		<div id="container">
 			<div id="header">
-			  <h1>Azimuth -></h1>
-			  <%= tabnav :main %>
+        <%= tabnav :main %>
 			</div>
-			
 			<div id="content">
-				<%= flash_messages %>
 				<%= yield :layout %>
 			</div>
+      <div id="footer">
+      </div>
 		</div>
 	</body>
 </html>

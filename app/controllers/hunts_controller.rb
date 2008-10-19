@@ -16,7 +16,11 @@ class HuntsController < ApplicationController
     @hunt = Hunt.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {
+        if request.xhr?
+          render :partial => 'hunt', :locals => { :hunt => @hunt } if @hunt
+        end
+      }
       format.xml  { render :xml => @hunt }
     end
   end
@@ -55,6 +59,25 @@ class HuntsController < ApplicationController
       else
         format.html { render :action => "new" }
         format.json  { render :json => @hunt.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
+  def add_treasure
+    @treasure = Treasure.new(params[:treasure])
+
+    respond_to do |format|
+      if @treasure.save
+        format.html { 
+          if request.xhr? 
+            render :partial => '/treasures/show', :locals => { :treasure => @treasure }
+          else
+            redirect_to(@treasure) 
+          end
+        }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @treasure.errors, :status => :unprocessable_entity }
       end
     end
   end

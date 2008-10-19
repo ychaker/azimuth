@@ -1,0 +1,20 @@
+<%  
+# this partial renders a tabnav, you can call it in your views with:
+#   <%= tabnav :hunt % > (just the tabnav) 
+# or, if you want a boxed tabnav:
+#   <% tabnav :hunt do % >
+#     your html here
+#   <% end % >
+# (remove the space between % and >, we don't want to mess up your brand new tabnav :-))
+#
+# you can pass render_tabnav a few options:
+#   :generate_css => true|false #=> generates a default inline css for the tabnav, defaults to false
+#   :html => aHash #=> sets html options for the tabnav's div (es :html => {:class=> 'myCssClass', :id=>'myCssId'}) 
+#     
+render_tabnav :hunt, 
+              :generate_css => true do
+
+  add_tab :name => 'List Hunts'
+
+end 
+%>
