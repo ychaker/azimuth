@@ -109,6 +109,7 @@ class User < ActiveRecord::Base
     #FIXME add validation that zeep account exists
     Sms.send_sms(self.login, "#{self.hunt.name}: Your clue is #{self.current_treasure.clue}.")
     
+    
     #if self.zeeped?
     #  logger.error "Now sending text message about your clue: #{self.current_treasure.clue}"
     #end
@@ -116,6 +117,8 @@ class User < ActiveRecord::Base
   
   def send_message (message)
     puts "Sending message to #{self.login}: #{message}"
+    Sms.send_sms(self.login, message)
+    
   end
   
 

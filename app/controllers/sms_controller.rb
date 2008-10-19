@@ -31,16 +31,27 @@ class SmsController < ApplicationController
   # GET /sms/incoming
   # GET /sms/incoming.xml
   def incoming    
-    
+    response.headers["Content-Type"] = "text/plain; charset=utf-8"
     #Read params from the text message
     @userid = params[:uid]
     @body = params[:body]    
     
-    smsinfo = Sms.new(:raw => @body)
+    sms = Sms.new(:raw => @body, :login => @userid)
     
-    smsinfo.parseandprocess(@userid, @body)
-    response.headers["Content-Type"] = "text/plain; charset=utf-8"
-    render :text => ""
+    sms.parse
+    
+    user = User.find_by_login(sms.login)
+    
+    if user.nil?
+      render :text => "User #{sms.login} couldn't be found " 
+    else
+      hunt = user.hunt
+      discovery = Discovery.new(:treasure => user.current_treasure, :lat => sms.lat, :lng => sms.lng, :hunt => hunt, :user => user)
+      hunt.attempt_open_treasure_chest(discovery, user)
+      user.save!
+      
+      render :text => ""  # don't send extra texts since the hunt will do it for us...
+    end
   
   end
 
