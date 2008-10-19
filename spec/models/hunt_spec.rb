@@ -57,10 +57,10 @@ end
 describe "Eric, Youssef and Ashish want to do a treasure hunt" do
   it "should be easy and fun" do
     #pending "Current flushing out"
-    #create users, one pirate and two hunters
-    eric = create_user(Pirate,{:name => "Eric", :login => "epugh"})
-    youssef = create_user(TreasureHunter,{:name => "Youssef", :login => "ychaker", :email => "ychaker@o19s.com"})
-    ashish =  create_user(TreasureHunter,{:name => "Ashish", :login => "atonse", :email => "atonse@gmail.com"})
+    #create users, one own and two hunters
+    eric = create_user({:name => "Eric", :login => "epugh"})
+    youssef = create_user({:name => "Youssef", :login => "ychaker", :email => "ychaker@o19s.com"})
+    ashish =  create_user({:name => "Ashish", :login => "atonse", :email => "atonse@gmail.com"})
     ashish.save!
     youssef.save!
     
@@ -79,6 +79,7 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
     
     eric.hunts << hunt
     hunt.pirate.should == eric
+    
     first_treasure = Treasure.create!(:name => "Icarus Balls", :image => "http://farm4.static.flickr.com/3280/2950800503_8f00180b88_t.jpg", :points => 15, :lat => 52.1278, :lng => -81.5763, :proximity => 50, :clue => "Something Shiny")
     second_treasure = Treasure.create!(:name => "White Spot", :image => "http://www.foodhistory.com/foodnotes/road/va/ch/wh/01/03-image.jpg", :points => 25, :lat => 62.1278, :lng => -91.5763, :proximity => 30, :clue => "Best Burgers at 2 am")
     second_treasure.position.should == 2
@@ -154,8 +155,8 @@ describe "Eric, Youssef and Ashish want to do a treasure hunt" do
   end
   
 protected  
-  def create_user(clazz, options = {})
-    record = clazz.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
+  def create_user( options = {})
+    record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
     record.register! if record.valid?
     record
   end  
