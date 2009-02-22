@@ -93,5 +93,13 @@ class Hunt < ActiveRecord::Base
     
     users.each { |u| u.send_message "The Hunt has been cancelled!"}
   end
+  
+  def short_name
+    if self.name.length > 25
+      self.name.slice(0..25) + "..."
+    else
+      self.name
+    end
+  end
     
 end

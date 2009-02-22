@@ -1,15 +1,7 @@
+/* Genera; */
 body {
     font-family:  Georgia, "Constantia", "Times New Roman", Times, serif;
 	margin: 0;
-}
-
-#map-options {
-/*	clear: left;*/
-}
-
-#right-root-container {
-	float: left;
-	width: 350px;	
 }
 
 .header {
@@ -18,36 +10,14 @@ body {
 	margin-bottom: 20px;
 }
 
-#discovery {
-	margin-top: 20px;
-	padding: 10px;
-	border: 1px solid black;
-	overflow: auto;
-	border: 1px solid #95a5c6;
-	background-color: #d8dfea;
-}
-
-#discovery h4 {
-	margin-bottom: 20px;
-}
-
-.discovery-cell input[type='text'] {
-	width: 145px;
-}
-
-div.discovery-cell {
-	float: left;
-	width: 195px;
-}
-
 h4 {
 	margin: 0;
 	padding: 0;
 }
 
-#business-card {
-	font-family: Lucida Sans, arial;
-	font-size: 1px;
+#right-root-container {
+	float: left;
+	width: 350px;	
 }
 
 .buttons {
@@ -56,31 +26,6 @@ h4 {
 
 .buttons-left {
 	text-align: left;
-}
-
-#login-box {
-	width: 250px;
-	float: right;
-	border: 1px solid #95a5c6;
-	background-color: #d8dfea;
-	padding-bottom: 10px;
-}
-
-#hunt-progress {
-	float: left;
-	width: 40%;
-}
-
-#hunt-clue {
-	width: 45%;
-	float: left;
-}
-
-#signup-box {
-	border: 1px solid #95a5c6;
-	background-color: #d8dfea;
-	padding-bottom: 10px;
-	width: 300px;
 }
 
 .left-content {
@@ -101,6 +46,8 @@ h4 {
 #footer {
 	background: url(/images/bottom.png) no-repeat bottom center;
 	height: 120px;
+	width: 960px;
+	margin: auto;
 }
 
 #footer a{
@@ -141,45 +88,6 @@ div.right-heading, div.heading {
 	padding: 7px;
 }
 
-#treasure-list {
-	clear: both;
-}
-
-#treasure-new label {
-	width: 150px;
-}
-
-#treasure-list li, #hunt-list li {
-	list-style: none;
-	padding: 0;
-	background: url(/images/hr.gif) no-repeat bottom left;
-/*	background: #DDD url() repeat/repeat-x/repeat-y/no-repeat scroll/fixed top left/top center/top right/center left/center center/center right/bottom left/bottom center/bottom right/x-% y-%/x-pos y-pos;*/
-	padding: 10px;
-}
-
-#hunt-list.long li {
-	background: url(/images/hr-long.png) no-repeat bottom center;
-}
-
-.btn-center {
-	width: 175px;
-	height: 35px;
-	float: right;
-	padding-top: 10px;
-	text-align: center;
-/*	background: url(/images/btncenter.gif) no-repeat;*/
-}
-
-.btn-center input {
-	background-color:#3B5998;
-	border-color:#D9DFEA #0E1F5B #0E1F5B #D9DFEA;
-	border-style:solid;
-	border-width:1px;
-	color:#FFFFFF;
-	padding: 5px;
-}
-
-
 input.span-all { width: 300px;}
 input.span-half { width: 90px; }
 
@@ -187,32 +95,10 @@ li.horiz {
 	float: left;
 }
 
-#geocode {
-	margin-top: 10px;
-	width: 300px;
-}
-
 form ul {
 	list-style: none;
 	padding: 0px;
 	margin: 0px;
-}
-
-#map-container {
-	float: left;
-	border: 1px solid black;
-	margin: 10px;
-}
-#map {
-}
-
-#add-clues {
-	float: left;
-}
-
-#hunt-new {
-	float: left;
-	display:none;
 }
 
 .right-container {
@@ -226,22 +112,31 @@ form ul {
 	overflow: hidden;
 }
 
-#treasures {
+.left { float: left;
+}
+
+.right { float: right;}
+
+img.screenshot {
+	border: 1px solid #666;
+	background: #fff;
 	padding: 5px;
-	float: left;
-	margin-left: 10px;
-	width: 35%;
+	display: block;
+	margin: 10px auto;
 }
 
-.acc-selected {
-	color: black;
+#header {
+  background: url(/images/header.png) no-repeat;
+	height: 85px;
 }
 
-#hunts ul, #add-clues ul {
-	padding-top: 20px;
-	list-style: none;
-	margin: 0;
-	padding: 0;
+form > li {
+	padding: 20px;
+}
+
+label {
+	width: 150px;
+	display: block;
 }
 
 form ul li {
@@ -270,22 +165,42 @@ h2 {
 	margin: 0px;
 }
 
-#content {
+#content{
 	overflow: auto;
 	padding: 20px;
 }
 
+.acc-selected {
+	color: black;
+}
+
+/* End General */
+
+/* User */
 #business-card {
+	font-family: Lucida Sans, arial;
+	font-size: 1px;
 	font-size: 70%;
 	float: right;
 	width: 300px;
 	padding: 5px;
 }
 
+#business-card #card-icon{
+	float: left;
+	padding: 0 10px 0 10px;
+}
+#business-card #hunter-info{
+}
+
 #business-card a {
 	color:#000000;
 	font-weight:bolder;
 	text-decoration:none;
+}
+
+#business-card #gravatar img {
+	border: 0;
 }
 
 #user-choices ul {
@@ -299,20 +214,161 @@ h2 {
 	width: 30%;
 }
 
-#header {
-    background: url(/images/header.png) no-repeat;
-	height: 85px;
+#login-box {
+	width: 250px;
+	float: right;
+	border: 1px solid #95a5c6;
+	background-color: #d8dfea;
+	padding-bottom: 10px;
+}
+#signup-box, #forgot-pass-box{
+	border: 1px solid #95a5c6;
+	background-color: #d8dfea;
+	padding-bottom: 10px;
+	width: 300px;
+	margin: auto;
 }
 
-form > li {
-	padding: 20px;
+table#users {
+}
+table#users  th{
+	text-align: center;
+	padding: 10px;
+}
+table#users td{
+	text-align: left;
+	padding: 10px;
+	border-top: 2px dotted #CCCCCC;
 }
 
-label {
+.short-callout {
+	float: right;
+	overflow: visible;
+	background: #fff;
+	border: 1px solid #ccc;
+	width: 490px;
+	margin: 10px;
+	padding: 2px;
+}
+/* End User */
+
+/* Hunt */
+#discovery {
+	margin-top: 20px;
+	padding: 10px;
+	border: 1px solid black;
+	overflow: auto;
+	border: 1px solid #95a5c6;
+	background-color: #d8dfea;
+}
+
+#discovery h4 {
+	margin-bottom: 20px;
+}
+
+.discovery-cell input[type='text'] {
+	width: 145px;
+}
+
+div.discovery-cell {
+	float: left;
+	width: 195px;
+}
+
+#hunt-progress {
+	float: left;
+	width: 40%;
+}
+
+#hunt-clue {
+	width: 45%;
+	float: left;
+}
+
+#treasure-list {
+	clear: both;
+}
+
+#treasure-new label {
 	width: 150px;
-	display: block;
 }
 
+#treasure-list li, #hunt-list li {
+	list-style: none;
+	padding: 0;
+	background: url(/images/hr.gif) no-repeat bottom left;
+/*	background: #DDD url() repeat/repeat-x/repeat-y/no-repeat scroll/fixed top left/top center/top right/center left/center center/center right/bottom left/bottom center/bottom right/x-% y-%/x-pos y-pos;*/
+	padding: 10px;
+}
+
+#hunt-list.long li {
+	background: url(/images/hr-long.png) no-repeat bottom center;
+}
+
+#add-clues {
+	float: left;
+}
+
+#hunt-new {
+	float: left;
+	display:none;
+}
+
+#treasures {
+	padding: 5px;
+	float: left;
+	margin-left: 10px;
+	width: 35%;
+}
+
+#hunts ul, #add-clues ul {
+	padding-top: 20px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.btn-center {
+	width: 175px;
+	height: 35px;
+	float: right;
+	padding-top: 10px;
+	text-align: center;
+/*	background: url(/images/btncenter.gif) no-repeat;*/
+}
+
+
+.btn-center input {
+	background-color:#3B5998;
+	border-color:#D9DFEA #0E1F5B #0E1F5B #D9DFEA;
+	border-style:solid;
+	border-width:1px;
+	color:#FFFFFF;
+	padding: 5px;
+}
+/* End Hunt */
+
+/* Map */
+#map-options {
+/*	clear: left;*/
+}
+
+#geocode {
+	margin-top: 10px;
+	width: 300px;
+}
+
+#map-container {
+	float: left;
+	border: 1px solid black;
+	margin: 10px;
+}
+#map {
+}
+
+/* End Map */
+
+/* Nav */
 .main_tabnav {
 	color: #000;
 	margin-top: 71px;
@@ -374,6 +430,9 @@ label {
 	z-index: 2;
 }
 
+/* End Nav */
+
+/* SMS */
 .sms-reminder {
 	float: right;
 	overflow: visible;
@@ -388,26 +447,6 @@ label {
 	
 }
 
-.short-callout {
-	float: right;
-	overflow: visible;
-	background: #fff;
-	border: 1px solid #ccc;
-	width: 490px;
-	margin: 10px;
-	padding: 2px;
-}
+/* End SMS */
 
 
-.left {
-	float: left;
-}
-
-img.screenshot {
-	border: 1px solid #666;
-	background: #fff;
-	padding: 5px;
-	display: block;
-	margin: 10px auto;
-}
-}

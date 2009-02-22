@@ -1,10 +1,15 @@
+#notice {
+	overflow: auto;
+	padding: 0 15px 0 15px;
+}
+
 /* === FLASH MESSAGES === */
 div#flash-notice {
 	border: 1px solid #dd3c10;
 	background-color: #ffcac8;
 	padding: 10px;
 	font-weight: bolder;
-	margin-bottom: 20px;
+	margin: 10px 0 10px 0;
 }
 
 div#flash-warning {
@@ -12,12 +17,21 @@ div#flash-warning {
 }
 
 div#flash-error {
-	
+	border: 1px solid #dd3c10;
+	background-color: #ffcac8;
+	padding: 10px;
+	font-weight: bolder;
+	margin: 10px 0 10px 0;
 }
 
 /* === ERROR MESSAGES === */
 div#errorExplanation {
-	
+	border: 1px solid #dd3c10;
+	background-color: #ffcac8;
+	font-family:Georgia,"Constantia","Times New Roman",Times,serif;
+	font-size:12px;
+	margin: 5px;
+	padding: 5px;
 }
 
 div#errorExplanation h2 {
@@ -29,11 +43,14 @@ div#errorExplanation p {
 }
 
 div#errorExplanation ul {
-	
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:disc;
+	margin-left:15px;
 }
 
 div#errorExplanation ul li {
-	
+	padding: 0;
 }
 
 /* === FORMS === */

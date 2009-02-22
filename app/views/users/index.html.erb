@@ -1,8 +1,9 @@
 <h1>Listing users</h1>
 
-<table>
+<table id = "users" >
   <tr>
     <th>Name</th>
+    <th>Username</th>
     <th>Email</th>
     <th>State</th>
   </tr>
@@ -10,10 +11,11 @@
 <% for user in @users %>
   <tr>
     <td><%=h user.name %></td>
+    <td><%=h user.login %></td>
     <td><%=h user.email %></td>
     <td><%=h user.state %></td>
     
-    <td><%= link_to  image_tag("delete.gif", :border=>0), user, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to  image_tag("delete.ico", :border=>0, :alt => 'delete', :title => 'delete'), user, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

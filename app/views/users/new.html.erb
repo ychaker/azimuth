@@ -1,37 +1,43 @@
-<h2>Signup</h2><br>
+<h2>Signup</h2>
 <div id="signup-box">
   <% @user.password = @user.password_confirmation = nil %>
-  <% form_for @user do |f| %>
+  <% form_for( :user, @user, :url => { :controller => "users", :action => "create" } ) do |f| %>
   	<%= f.error_messages %>
-  	<fieldset>
-  		<ul>
-  			<li>
-  				<%= f.label :login, 'Username' %>
-  				<%= f.text_field :login %>
-  			</li>
-  			<li>
-  				<%= f.label :email %>
-  				<%= f.text_field :email %>
-  			</li>
-  			<li>
-  				<%= f.label :password %>
-  				<%= f.password_field :password %>
-  			</li>
-  			<li>
-  				<%= f.label :password_confirmation, 'Confirm Password' %>
-  				<%= f.password_field :password_confirmation %>
-  			</li>
-  		</ul>
-  	</fieldset>
-  	<center><strong>OR</strong></center>
-  	<fieldset>
-  		<ul>
-  			<li>
-  				<label for="openid_url">OpenID URL</label>
-  				<%= text_field_tag :openid_url, params[:openid_url] || params['openid.identity'] %>
-  			</li>
-  		</ul>
-  	</fieldset>
+  	<% unless params[:using_open_id] %>
+    	<fieldset>
+    		<ul>
+    			<li>
+    				<%= f.label :login, 'Username' %>
+    				<%= f.text_field :login %>
+    				<small><%= f.label "at least 6 characters long" %></small>
+    			</li>
+    			<li>
+    				<%= f.label :email %>
+    				<%= f.text_field :email %>
+    			</li>
+    			<li>
+    				<%= f.label :password %>
+    				<%= f.password_field :password %>
+    				<small><%= f.label "at least 6 characters long" %></small>
+    			</li>
+    			<li>
+    				<%= f.label :password_confirmation, 'Confirm Password' %>
+    				<%= f.password_field :password_confirmation %>
+    			</li>
+    		</ul>
+    	</fieldset>
+    	<p style="padding-left: 20px; margin-top:-10px;">Sign up using <%= link_to 'OpenId', :controller => :users, :action => :new, :using_open_id => true %>.</p>
+  	<% else %>
+    	<fieldset>
+    		<ul>
+    			<li>
+    				<label for="openid_url">OpenID URL</label>
+    				<%= text_field_tag :openid_url, params[:openid_url] || params['openid.identity'] %>
+    			</li>
+    		</ul>
+    	</fieldset>
+    		<p style="padding-left: 20px; margin-top:-10px;">Sign up with a <%= link_to 'username/pass', :controller => :users, :action => :new, :using_open_id => false %>.</p>
+  	<% end %>
   	<div class="buttons">
   		<%= submit_tag 'Sign up' %>
   	</div>

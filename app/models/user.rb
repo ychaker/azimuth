@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   # Validations
   validates_presence_of :login, :if => :not_using_openid?
-  validates_length_of :login, :within => 3..40, :if => :not_using_openid?
+  validates_length_of :login, :within => 6..40, :if => :not_using_openid?
   validates_uniqueness_of :login, :case_sensitive => false, :if => :not_using_openid?
   validates_format_of :login, :with => RE_LOGIN_OK, :message => MSG_LOGIN_BAD, :if => :not_using_openid?
   validates_format_of :name, :with => RE_NAME_OK, :message => MSG_NAME_BAD, :allow_nil => true
@@ -67,19 +67,27 @@ class User < ActiveRecord::Base
   ######
   aasm_event :register_hunt do
      transitions :to => :hunt_registering, :from => [:active, :hunt_registering, :hunt_hunting]
-   end
+  end
    
   aasm_event :begin_hunt do
      transitions :to => :hunt_hunting, :from => [:hunt_registering]
-   end
+  end
 
-   aasm_event :finish_hunt do 
+  aasm_event :finish_hunt do 
      transitions :to => :active, :from => [:hunt_hunting, :active, :hunt_registering]
-   end
+  end
 
-   aasm_event :cancel do 
-     transitions :to => :active, :from => [:hunt_registering, :hunt_hunting]
-   end
+  aasm_event :cancel do 
+    transitions :to => :active, :from => [:hunt_registering, :hunt_hunting]
+  end
+  
+  def short_login
+    if self.login.length > 12
+      self.login.slice(0..9) + "..."
+    else
+      self.login
+    end
+  end
   
   def score
     points = 0

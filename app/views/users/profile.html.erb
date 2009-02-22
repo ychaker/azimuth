@@ -1,4 +1,4 @@
-<%= title "Profile", :h2 %>
+<h2>Profile</h2>
 	<div class="left">
 	<fieldset>
 		<% form_for @user do |f| %>
@@ -7,6 +7,10 @@
 			<li>
 				<%= f.label :login, 'Username' %>
 				<%= f.text_field :login %>
+			</li>
+			<li>
+				<%= f.label :name %>
+				<%= f.text_field :name %>
 			</li>
 			<li>
 				<%= f.label :email %>

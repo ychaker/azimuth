@@ -17,7 +17,7 @@ class UsersController < ApplicationController
         if result.successful?
           create_new_user(:identity_url => identity_url, :login => registration['nickname'], :email => registration['email'])
         else
-          failed_creation(result.message || "Sorry, something went wrong")
+          failed_creation(using_open_id?, result.message || "Sorry, something went wrong")
         end
       end
     else
@@ -77,7 +77,6 @@ class UsersController < ApplicationController
   
   def create_new_user(attributes)
     @user = User.new(attributes)
-
     
     # if we don't have a login, derive it from open id.
     if @user.login.blank? and !@user.identity_url.blank?
@@ -89,7 +88,8 @@ class UsersController < ApplicationController
       @user.login = s
     end
     
-
+    open_id = @user.identity_url.blank? ? false : true
+    
     #ip = request.env['HTTP_X_CLUSTER_CLIENT_IP'].blank? ? request.remote_ip : request.env['HTTP_X_CLUSTER_CLIENT_IP']
     #begin
       #@user.set_coord_from_maxmind(ip)
@@ -107,20 +107,25 @@ class UsersController < ApplicationController
     if @user.errors.empty?
       successful_creation(@user)
     else
-      failed_creation
+      failed_creation(open_id)
     end
   end
   
   def successful_creation(user)
     self.current_user = user
     redirect_back_or_default(welcome_url)
+    #redirect_back_or_default(:controller => :users, :action => :profile)
     flash[:notice] = "Thanks for signing up!"
 #    flash[:notice] << " We're sending you an email with your activation code." if @user.not_using_openid?
 #    flash[:notice] << " You can now login with your OpenID." unless @user.not_using_openid?
   end
   
-  def failed_creation(message = 'Sorry, there was an error creating your account')
+  def failed_creation(open_id, message = 'Sorry, there was an error creating your account')
     flash[:error] = message
-    render :action => :new
+    if open_id
+      redirect_to :action => :new, :using_open_id => open_id
+    else
+      render :action => :new, :using_open_id => open_id
+    end
   end
 end
